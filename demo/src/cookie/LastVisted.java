@@ -37,7 +37,7 @@ public class LastVisted extends HttpServlet {
 		c.setMaxAge(60);
 		response.addCookie(c);
 		out.print(sb.toString());
-		
+		out.close();
 	}
 	
 }
