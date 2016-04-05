@@ -21,6 +21,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    This is my JSP page. <br>
+  <% 
+  	Cookie[] cookies = request.getCookies();
+  	String user = "";
+  	String password = "";
+  	if (cookies != null) {
+  		for (Cookie c : cookies) {
+  			String cName = c.getName();
+  			if ("user".equalsIgnoreCase(cName)) user = c.getValue();
+  			if ("password".equalsIgnoreCase(cName)) password = c.getValue();
+  		}
+  	}
+  %>
+   <form action="/demo/login/login" method="post">
+ 		USER:<input type="text" name="user" value="<%=user%>" /><br />
+ 		PASS:<input type="text" name="password" value="<%=password%>" /><br />
+ 		<input type="checkbox" name="keep" />keep<br />
+ 		<input type="submit" />
+   </form>
   </body>
 </html>
