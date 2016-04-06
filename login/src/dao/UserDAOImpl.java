@@ -11,12 +11,11 @@ public class UserDAOImpl extends AbstractUserDAOImpl {
 	protected static final String FIND_USER_BY_NAME = "SELECT * FROM userdemo WHERE name = ?";
 
 	@Override
-	protected User findUserById(Connection conn, int id) throws SQLException {
+	protected User findUserById(Connection conn, int id) throws Exception {
 		PreparedStatement st = conn.prepareStatement(FIND_USER_BY_ID);
 		st.setInt(1, id);
 		ResultSet rs = st.executeQuery();
-		User result = rs.next() ? new User(rs.getInt("id"),
-				rs.getString("name"), rs.getString("password")) : null;
+		User result = UserFactory.create(rs);
 		rs.close();
 		st.close();
 		return result;
@@ -28,8 +27,7 @@ public class UserDAOImpl extends AbstractUserDAOImpl {
 		PreparedStatement st = conn.prepareStatement(FIND_USER_BY_NAME);
 		st.setString(1, name);
 		ResultSet rs = st.executeQuery();
-		User result = rs.next() ? new User(rs.getInt("id"),
-				rs.getString("name"), rs.getString("password")) : null;
+		User result = UserFactory.create(rs);
 		rs.close();
 		st.close();
 		return result;
@@ -38,7 +36,7 @@ public class UserDAOImpl extends AbstractUserDAOImpl {
 	public static void main(String[] args) {
 		UserDAOImpl dao = new UserDAOImpl();
 		try {
-			System.out.println(dao.findUserByName("benjamin"));
+			System.out.println(dao.findUserByName("jack"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
