@@ -31,9 +31,6 @@ public class ActionRouter extends HttpServlet {
 				e.printStackTrace();
 				throw new ServletException();
 			}
-			//User user = new User();
-			//user.setName(params.get("name")[0]);
-			//user.setPassword(params.get("password")[0]);
 				
 			if (UserDB.contains(user)) {
 				Cookie cookieUser = new Cookie("name", URLEncoder.encode(user.getName(), "utf-8"));
