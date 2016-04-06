@@ -10,17 +10,16 @@
 	</head>
 	<body>
 		<%
-			String name = (String) session.getAttribute("name");
-			name = name == null ? "" : name;
-			String password = (String) session.getAttribute("password");
-			password = password == null ? "" : password;
+			if (session.getAttribute("name") != null)
+				response.sendRedirect("/login/main.jsp");
+				
 			String error = (String) session.getAttribute("error");
 			error = error == null ? "" : error;
 ;		%>
 		<div id="login">
 			<form action="/login/validate.do" method="post">
-				用户：<input type="text" name="name" value="<%=name%>" /><br />
-				密码：<input type="password" name="password" value="<%=password%>" /><br />
+				用户：<input type="text" name="name" /><br />
+				密码：<input type="password" name="password" /><br />
 				<span><%=error%></span><br />
 				<input type="submit" value="登陆" />	
 			</form>

@@ -2,13 +2,14 @@
 
 <html>
 	<head>
-		<title>登陆</title>
+		<title>主页</title>
 		<meta charset="utf-8" />
-		<style>
-			#login {margin: 20px auto; padding: 10px; width: 200px;}
-		</style>
 	</head>
 	<body>
+		<%
+			if (session.getAttribute("name") == null)
+				response.sendRedirect("/login/login.jsp");
+		%>
 		<strong>Main</strong>
 	 </body>
 </html>
