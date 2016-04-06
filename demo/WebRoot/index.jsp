@@ -23,18 +23,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   <% 
   	Cookie[] cookies = request.getCookies();
-  	String user = "";
+  	String name = "";
   	String password = "";
   	if (cookies != null) {
   		for (Cookie c : cookies) {
   			String cName = c.getName();
-  			if ("user".equalsIgnoreCase(cName)) user = c.getValue();
+  			if ("name".equalsIgnoreCase(cName)) name = c.getValue();
   			if ("password".equalsIgnoreCase(cName)) password = c.getValue();
   		}
   	}
   %>
    <form action="/demo/login/login" method="post">
- 		USER:<input type="text" name="user" value="<%=user%>" /><br />
+ 		USER:<input type="text" name="name" value="<%=name%>" /><br />
  		PASS:<input type="text" name="password" value="<%=password%>" /><br />
  		<input type="checkbox" name="keep" />keep<br />
  		<input type="submit" />
