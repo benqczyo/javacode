@@ -10,10 +10,41 @@
     <servlet-name>ActionRouter</servlet-name>
     <servlet-class>servlet.ActionRouter</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Captcha</servlet-name>
+    <servlet-class>servlet.Captcha</servlet-class>
+    <init-param>
+    	<param-name>captcha-width</param-name>
+    	<param-value>200</param-value>
+    </init-param>
+    <init-param>
+    	<param-name>captcha-height</param-name>
+    	<param-value>50</param-value>
+    </init-param>
+    <init-param>
+    	<param-name>captcha-lines</param-name>
+    	<param-value>10</param-value>
+    </init-param>
+    <init-param>
+    	<param-name>captcha-chars</param-name>
+    	<param-value>4</param-value>
+    </init-param>
+     <init-param>
+    	<param-name>captcha-char-size</param-name>
+    	<param-value>30</param-value>
+    </init-param>
+  </servlet>
+
 
   <servlet-mapping>
     <servlet-name>ActionRouter</servlet-name>
     <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Captcha</servlet-name>
+    <url-pattern>/captcha</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
