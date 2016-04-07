@@ -7,6 +7,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletConfig;
@@ -40,15 +42,17 @@ public class Captcha extends HttpServlet {
 		
 		Random random = new Random();
 		
-		g.setColor(Color.BLUE);
-		for (int i = 0; i < lines; i++)
+		for (int i = 0; i < lines; i++) {
+			g.setColor(new Color(random.nextInt(255), random.nextInt(255), random.nextInt(255)));
 			g.drawLine(random.nextInt(width), random.nextInt(height), 
 					random.nextInt(width), random.nextInt(height));
+		}
 		
-		g.setColor(Color.RED);
-		g.setFont(new Font("ËÎÌו", Font.BOLD | Font.ITALIC, charSize));
+		int[] style = new int[] {Font.BOLD, Font.ITALIC, Font.BOLD | Font.ITALIC};
 		StringBuffer sb = new StringBuffer();
 		for (int i = 0; i < chars; i++) {
+			g.setColor(new Color(random.nextInt(255), random.nextInt(255), random.nextInt(255)));
+			g.setFont(new Font("ËÎÌו", style[random.nextInt(style.length - 1)], charSize));
 			String value = String.valueOf(random.nextInt(10));
 			sb.append(value);
 			g.drawString(value, 30 + charSize * i, 
@@ -56,6 +60,7 @@ public class Captcha extends HttpServlet {
 		}
 		request.getSession().setAttribute("captcha", sb.toString());
 		
+		response.setContentType("image/png");
 		ImageIO.write(image, "png", response.getOutputStream());
 	}
 	
