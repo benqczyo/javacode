@@ -12,6 +12,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import cfg.Configer;
 import db.Product;
@@ -74,6 +75,13 @@ public class Router extends HttpServlet {
 		request.setAttribute(Configer.PRODUCT_DETAIL_ATTR, ProductDB.findProductById(Integer.parseInt(value)));
 		request.getRequestDispatcher(Configer.SHOW_DETAIL_PAGE).forward(request, response);
 	}
+	
+	protected void add(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		StringBuffer sb = new StringBuffer(request.getParameter("id"));
+		String value = (String) session.getAttribute(Configer.CART_ATTR);
+		session.setAttribute(Configer.CART_ATTR, sb.append(value != null ? "-" + value : "").toString());
+	}
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
@@ -92,8 +100,13 @@ public class Router extends HttpServlet {
 			return;
 		}
 		
+		if (Configer.ADD_ACTION.equalsIgnoreCase(action)) {
+			add(request, response);
+			return;
+		}
+		
+		response.sendRedirect(getServletContext().getContextPath() + Configer.ERROR_PAGE);
+		
 	}
-	
-	
-	
+
 }

@@ -4,6 +4,9 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>手机列表</title>
+		<style>
+			img {width: 300px; height: 300px}
+		</style>
 	</head>
 	<body>
 		<div id="box">
@@ -14,6 +17,7 @@
 					return;
 				}
 			%>
+			<img src="<%=getServletContext().getContextPath() + "/" + p.getImage()%>" />
 			<strong><%=p.getDescription()%></strong>
 		</div>
 	</body>
