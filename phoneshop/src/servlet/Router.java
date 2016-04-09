@@ -70,17 +70,19 @@ public class Router extends HttpServlet {
 		
 		Cookie cookie = new Cookie(Configer.HISTORY_COOKIE_NAME, sb.toString());
 		cookie.setPath(getServletContext().getContextPath());
-		cookie.setMaxAge(60 * 10);
+		cookie.setMaxAge(Integer.MAX_VALUE);
 		response.addCookie(cookie);
 		request.setAttribute(Configer.PRODUCT_DETAIL_ATTR, ProductDB.findProductById(Integer.parseInt(value)));
 		request.getRequestDispatcher(Configer.SHOW_DETAIL_PAGE).forward(request, response);
 	}
 	
-	protected void add(HttpServletRequest request, HttpServletResponse response) {
+	protected void add(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		StringBuffer sb = new StringBuffer(request.getParameter("id"));
 		String value = (String) session.getAttribute(Configer.CART_ATTR);
 		session.setAttribute(Configer.CART_ATTR, sb.append(value != null ? "-" + value : "").toString());
+		response.sendRedirect(String.format("%s/%s.do", getServletContext().getContextPath(), Configer.LIST_ACTION));
 	}
 
 	@Override

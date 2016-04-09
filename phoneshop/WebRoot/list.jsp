@@ -40,7 +40,11 @@
 	<body>
 		<div id="box">
 			<div id="cart" class="clear">
-				<a href=""><img src="cart.gif" /> 查看购物车 <span>1</span></a>
+				<%
+					String value = (String) session.getAttribute(Configer.CART_ATTR);
+					int count = value == null ? 0 : value.split("-").length;
+				%>
+				<a href=""><img src="cart.gif" /> 查看购物车 <span><%=count%></span></a>
 			</div>
 			<div id="content" class="clear">
 				<div id="all">
