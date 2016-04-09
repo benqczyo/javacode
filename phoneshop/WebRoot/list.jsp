@@ -16,6 +16,7 @@
 			a {opacity: 0.8; filter: alpha(opacity=80); font-size: 12px; color: #858585; line-height: 19px;}
 			a:hover {opacity: 1.0; filter: alpha(opacity=100); color: #c81623; }
 			p {font-style: normal; color: #c61822;}
+			#content {}
 			#all {float: right; width: 685px;}
 			#all ul {padding: 20px; border: solid 1px #ddd;}
 			#all li {position: relative; float: left; padding: 0 10px; width: 140px; border-left: solid 1px #dddddd;}
@@ -31,74 +32,82 @@
 			#history li div:nth-last-of-type {float: right;}
 			#history img {width: 80px; height: 80px;}
 			#history strong {font-size: 12px; line-height: 19px;}
+			#cart {margin-bottom: 20px; padding: 10px;}
+			#cart a {float: right; padding: 5px; background: #ddd; line-height: 16px;}
+			#cart a span {color: #c61822;}
 		</style>
 	</head>
 	<body>
 		<div id="box">
-			<div id="all">
-				<h3>热门精品手机</h3>
-				<ul class="clear">
-				<% 
-					List<Product> products = (List<Product>) request.getAttribute(Configer.ALL_PROCUCTS_ATTR);
-					if (products == null) {
-						response.sendRedirect(getServletContext().getContextPath() + Configer.ERROR_PAGE);	
-						return;
-					}
-					
-					for (Product p : products) {
-				%>
-					<li>
-						<div>
-							<a href="detail.do?id=<%=p.getId()%>"><img src="<%=String.format("%s/%s", 
-								getServletContext().getContextPath(),
-								p.getImage())%>"  /></a>
-						</div>
-						<p><a href=""><%=p.getDescription()%></a></p>
-						<P><strong><%=p.getPrice()%></strong></P>
-					</li>
-				<% 
-					}
-				%>
-					<li>
-						<a href="">上一页</a><a href="">1</a><a href="">2</a><a href="">下一页</a>		
-					</li>
-				</ul>
+			<div id="cart" class="clear">
+				<a href=""><img src="cart.gif" /> 查看购物车 <span>1</span></a>
 			</div>
-			<%
-				List<Product> lastedProducts = (List<Product>) request.getAttribute(Configer.HISTORY_ATTR);
-				if (lastedProducts != null) {
-			%>
-			<div id="history">
-				<h3>浏览历史</h3>
-				<ul>
-					<%
-						for (Product p : lastedProducts) {
-							String shortName = p.getName();
-							if (shortName.length() > Configer.SHORT_NAME_MAX_LENGTH) 
-								shortName = shortName.substring(0, Configer.SHORT_NAME_CUT_LENGTH) + Configer.SHORT_NAME_CUT_SUFFIX;
-					%>
-					<li class="clear">
-						<div>
-							<a href="detail.do?id=<%=p.getId()%>"><img src="<%=String.format("%s/%s", 
-								getServletContext().getContextPath(),
-									p.getImage())%>"  /></a>
-						</div>
-						<div>
-							<p><a href="detail.do?id=<%=p.getId()%>"><%=shortName%></a><p>
-							<P><strong><%=p.getPrice()%></strong></P>
-							<p><a href="add.do?id=<%=p.getId()%>">加入购物车</a></p>
-							<p><a href="clear.do?id=<%=p.getId()%>">清除</a></p>
-						</div>
-					</li>
+			<div id="content" class="clear">
+				<div id="all">
+					<h3>热门精品手机</h3>
+					<ul class="clear">
 					<% 
-						} 
+						List<Product> products = (List<Product>) request.getAttribute(Configer.ALL_PROCUCTS_ATTR);
+						if (products == null) {
+							response.sendRedirect(getServletContext().getContextPath() + Configer.ERROR_PAGE);	
+							return;
+						}
+						
+						for (Product p : products) {
 					%>
-				</ul>
-				
+						<li>
+							<div>
+								<a href="detail.do?id=<%=p.getId()%>"><img src="<%=String.format("%s/%s", 
+									getServletContext().getContextPath(),
+									p.getImage())%>"  /></a>
+							</div>
+							<p><a href=""><%=p.getDescription()%></a></p>
+							<P><strong><%=p.getPrice()%></strong></P>
+						</li>
+					<% 
+						}
+					%>
+						<li>
+							<a href="">上一页</a><a href="">1</a><a href="">2</a><a href="">下一页</a>		
+						</li>
+					</ul>
+				</div>
+				<%
+					List<Product> lastedProducts = (List<Product>) request.getAttribute(Configer.HISTORY_ATTR);
+					if (lastedProducts != null) {
+				%>
+				<div id="history">
+					<h3>浏览历史</h3>
+					<ul>
+						<%
+							for (Product p : lastedProducts) {
+								String shortName = p.getName();
+								if (shortName.length() > Configer.SHORT_NAME_MAX_LENGTH) 
+									shortName = shortName.substring(0, Configer.SHORT_NAME_CUT_LENGTH) + Configer.SHORT_NAME_CUT_SUFFIX;
+						%>
+						<li class="clear">
+							<div>
+								<a href="detail.do?id=<%=p.getId()%>"><img src="<%=String.format("%s/%s", 
+									getServletContext().getContextPath(),
+										p.getImage())%>"  /></a>
+							</div>
+							<div>
+								<p><a href="detail.do?id=<%=p.getId()%>"><%=shortName%></a><p>
+								<P><strong><%=p.getPrice()%></strong></P>
+								<p><a href="add.do?id=<%=p.getId()%>">加入购物车</a></p>
+								<p><a href="clear.do?id=<%=p.getId()%>">清除</a></p>
+							</div>
+						</li>
+						<% 
+							} 
+						%>
+					</ul>
+					
+				</div>
+				<% 
+					}
+				%>
 			</div>
-			<% 
-				}
-			%>
 		</div>
 	</body>
 </html>
