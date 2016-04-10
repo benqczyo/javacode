@@ -41,10 +41,10 @@
 		<div id="box">
 			<div id="cart" class="clear">
 				<%
-					String value = (String) session.getAttribute(Configer.CART_ATTR);
-					int count = value == null ? 0 : value.split("-").length;
+					Object value = session.getAttribute(Configer.CART_ATTR);
+					int count = value == null ? 0 : ((List<Product>) value).size();
 				%>
-				<a href=""><img src="cart.gif" /> 查看购物车 <span><%=count%></span></a>
+				<a href="cart.do"><img src="cart.gif" /> 查看购物车 <span><%=count%></span></a>
 			</div>
 			<div id="content" class="clear">
 				<div id="all">
@@ -71,9 +71,6 @@
 					<% 
 						}
 					%>
-						<li>
-							<a href="">上一页</a><a href="">1</a><a href="">2</a><a href="">下一页</a>		
-						</li>
 					</ul>
 				</div>
 				<%

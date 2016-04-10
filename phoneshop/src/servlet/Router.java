@@ -20,6 +20,11 @@ import db.ProductDB;
 
 public class Router extends HttpServlet {
 	
+	protected boolean isValid(String id) {
+		return id == null || id.matches("[0-9]+") == false 
+			|| Integer.parseInt(id) > ProductDB.getSize();
+	}
+	
 	protected void showAll(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
@@ -45,8 +50,7 @@ public class Router extends HttpServlet {
 			throws ServletException, IOException {
 		
 		String value = request.getParameter("id");
-		if (value == null || value.matches("[0-9]+") == false 
-				|| Integer.parseInt(value) > ProductDB.getSize()) {
+		if (isValid(value)) {
 			response.sendRedirect(getServletContext().getContextPath() + Configer.ERROR_PAGE);
 			return;
 		}
@@ -74,15 +78,37 @@ public class Router extends HttpServlet {
 		response.addCookie(cookie);
 		request.setAttribute(Configer.PRODUCT_DETAIL_ATTR, ProductDB.findProductById(Integer.parseInt(value)));
 		request.getRequestDispatcher(Configer.SHOW_DETAIL_PAGE).forward(request, response);
+	
 	}
 	
 	protected void add(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
+		
+		String value = request.getParameter("id");
+		if (isValid(value)) {
+			response.sendRedirect(getServletContext().getContextPath() + Configer.ERROR_PAGE);
+			return;
+		}
+		
 		HttpSession session = request.getSession();
-		StringBuffer sb = new StringBuffer(request.getParameter("id"));
-		String value = (String) session.getAttribute(Configer.CART_ATTR);
-		session.setAttribute(Configer.CART_ATTR, sb.append(value != null ? "-" + value : "").toString());
+		List<Product> list = (List<Product>) session.getAttribute(Configer.CART_ATTR);
+		if (list == null) list = new ArrayList<Product>();
+		list.add(0, ProductDB.findProductById(Integer.parseInt(value)));
+		session.setAttribute(Configer.CART_ATTR, list);
+		session.setMaxInactiveInterval(Integer.MAX_VALUE);
+		Cookie cookie = new Cookie("JSESSIONID", session.getId());
+		cookie.setMaxAge(Integer.MAX_VALUE);
+		response.addCookie(cookie);
+		
 		response.sendRedirect(String.format("%s/%s.do", getServletContext().getContextPath(), Configer.LIST_ACTION));
+	
+	}
+	
+	protected void showCart(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		
+		request.getRequestDispatcher(Configer.SHOW_CART_PAGE).forward(request, response);
+		
 	}
 
 	@Override
@@ -104,6 +130,11 @@ public class Router extends HttpServlet {
 		
 		if (Configer.ADD_ACTION.equalsIgnoreCase(action)) {
 			add(request, response);
+			return;
+		}
+		
+		if (Configer.CART_ACTION.equalsIgnoreCase(action)) {
+			showCart(request, response);
 			return;
 		}
 		

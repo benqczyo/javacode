@@ -16,4 +16,6 @@ public class Configer {
 	public static final String SHORT_NAME_CUT_SUFFIX = "...";
 	public static final String ADD_ACTION = "add";
 	public static final String CART_ATTR = "cart";
+	public static final String CART_ACTION = "cart";
+	public static final String SHOW_CART_PAGE ="/cart.jsp";
 }

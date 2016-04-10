@@ -47,7 +47,6 @@ public class Captcha extends HttpServlet {
 			g.drawLine(random.nextInt(width), random.nextInt(height), 
 					random.nextInt(width), random.nextInt(height));
 		}
-		
 		int[] style = new int[] {Font.BOLD, Font.ITALIC, Font.BOLD | Font.ITALIC};
 		StringBuffer sb = new StringBuffer();
 		for (int i = 0; i < chars; i++) {
