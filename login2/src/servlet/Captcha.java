@@ -42,7 +42,6 @@ public class Captcha extends HttpServlet {
 		}
 		
 		
-		
 		int chars = Configer.getChars();
 		int fontSize = Configer.getFontSize();
 		int fontStyle = Configer.getFontStyle();
