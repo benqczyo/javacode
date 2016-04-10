@@ -16,11 +16,18 @@ public class Validate extends HttpServlet {
 		
 		String user = request.getParameter("user");
 		String password = request.getParameter("password");
+		String captcha = request.getParameter("captcha");
 		
-		if (user.equalsIgnoreCase(new StringBuffer(password).reverse().toString())) {
+		if (user.equalsIgnoreCase(new StringBuffer(password).reverse().toString()) 
+				&& captcha.equalsIgnoreCase((String) request.getSession().getAttribute("captcha"))) {
+			
 			request.getSession().setAttribute("user", user);
 			response.sendRedirect("/login2/index.jsp");
+			return;
+		
 		}
+			
+		response.sendRedirect("/login2/login.jsp");
 		
 	}
 }

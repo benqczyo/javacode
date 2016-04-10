@@ -6,12 +6,12 @@
 	</head>
 	<body>
 		<%
-			Object validated = session.getAttribute("user");
-			if (validated == null) {
+			String user = (String) session.getAttribute("user");
+			if (user == null) {
 				response.sendRedirect("/login2/login.jsp");
 				return;
 			}
 		%>
-		<strong>主页内容</strong><a href="/login2/logout">注销</a>	
+		<strong>欢迎<%=user%></strong>&nbsp;<a href="/login2/logout">注销</a>
 	</body>
 </html>
