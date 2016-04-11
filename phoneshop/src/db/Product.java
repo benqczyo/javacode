@@ -19,6 +19,14 @@ public class Product {
 		this.price = price;
 		this.image = image;
 	}
+	
+	public Product(Product p) {
+		this.id = p.id;
+		this.name = p.name;
+		this.description = p.description;
+		this.price = p.price;
+		this.image = p.image;
+	}
 
 	public int getId() {
 		return id;
