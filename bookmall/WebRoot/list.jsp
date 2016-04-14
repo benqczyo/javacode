@@ -21,7 +21,9 @@
 				for (Book b : books) {	
 			%>
 			<li><%=b.getName()%>&nbsp;<a href="<%=String.format("%s/%s.do?id=%s", 
-				application.getContextPath(), Constant.DETAIL_ACTION, b.getId())%>">详情</a></li>
+				application.getContextPath(), Constant.DETAIL_ACTION, b.getId())%>">详情</a>
+				&nbsp;<a href="<%=String.format("%s/%s.do?id=%s", 
+				application.getContextPath(), Constant.CART_ACTION, b.getId())%>">加入购物车</a></li>
 			<%
 				}
 			%>

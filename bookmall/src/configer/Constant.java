@@ -3,6 +3,7 @@ package configer;
 public interface Constant {
 	String LIST_ACTION = "list";
 	String DETAIL_ACTION = "detail";
+	String CART_ACTION = "cart";
 	String CLEAR_ACTION = "clear";
 	String LIST_PAGE = "list.jsp";
 	String DETAIL_PAGE = "detail.jsp";
