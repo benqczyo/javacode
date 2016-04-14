@@ -41,6 +41,10 @@ public class Captcha extends HttpServlet {
 			g.drawLine(r.nextInt(width), r.nextInt(height), r.nextInt(width), r.nextInt(height));
 		}
 		
+<<<<<<< HEAD
+=======
+		
+>>>>>>> 3a2fce611c2ed9f1e4a64920c540110314f1e5e4
 		int chars = Configer.getChars();
 		int fontSize = Configer.getFontSize();
 		int fontStyle = Configer.getFontStyle();
