@@ -13,7 +13,7 @@
 	<body>
 		<%
 			List<Book> books = (ArrayList<Book>) request.getAttribute(Constant.ALL_BOOKS_ATTR);
-			if (books == null) throw new ServletException();
+			if (books == null) throw new ServletException(Constant.LIST_FAILED_ERROR);
 		%>
 		<h3>本店所有书籍：</h3>
 		<ul>
@@ -39,9 +39,11 @@
 				<%
 					}
 				%>
+		</ul>
+		<div><a href="<%=String.format("%s/%s.do", 
+				application.getContextPath(), Constant.CLEAR_ACTION)%>">清空</a></div>
 		<%
 			}
 		%>	
-		</ul>
 	</body>
 </html>

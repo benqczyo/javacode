@@ -11,6 +11,7 @@
 			Book book = (Book) request.getAttribute(Constant.DETAIL_ATTR);
 			if (book == null) throw new ServletException();
 		%>
-		<h3><%=book.getName()%></h3>
+		<Strong><%=book.getName()%></strong>&nbsp;<a href='<%=String.format("%s/%s.do", 
+				application.getContextPath(), Constant.LIST_ACTION)%>'>返回</a>
 	</body>
 </html>

@@ -63,7 +63,7 @@ public class Router extends HttpServlet {
 				for (Cookie c : cookies) {
 					if (Constant.HISTORY_ATTR.equalsIgnoreCase(c.getName())) {
 						LinkedList<String> history = new LinkedList<String>(Arrays.asList(c.getValue().split(Constant.SEPARATOR)));
-						history.removeAll(Arrays.asList(new String[] {id}));
+						history.remove(id);
 						if (history.size() + 1 > Constant.HISTORY_SIZE) history.removeLast();
 						for (int i = 0; i < history.size(); i++) {
 							if (i > 0) sb.append(Constant.SEPARATOR);
@@ -74,13 +74,22 @@ public class Router extends HttpServlet {
 				}
 			}
 			sb.insert(0, sb.length() == 0 ? id : String.format("%s%s", id, Constant.SEPARATOR));
-			System.out.println(sb.toString());
 			Cookie cookie = new Cookie(Constant.HISTORY_ATTR, sb.toString());
 			cookie.setPath(getServletContext().getContextPath());
 			cookie.setMaxAge(Integer.MAX_VALUE);
 			response.addCookie(cookie);
 			request.setAttribute(Constant.DETAIL_ATTR, book);
 			request.getRequestDispatcher(Constant.DETAIL_PAGE).forward(request, response);
+			return;
+		}
+		
+		if (Constant.CLEAR_ACTION.equalsIgnoreCase(action)) {
+			Cookie cookie = new Cookie(Constant.HISTORY_ATTR, null);
+			String contextPath = getServletContext().getContextPath();
+			cookie.setPath(contextPath);
+			cookie.setMaxAge(0);
+			response.addCookie(cookie);
+			response.sendRedirect(String.format("%s/%s.do", contextPath, Constant.LIST_ACTION));
 			return;
 		}
 		
