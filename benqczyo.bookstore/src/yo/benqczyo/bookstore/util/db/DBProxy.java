@@ -6,6 +6,10 @@ import java.util.Properties;
 
 import org.apache.commons.dbcp.BasicDataSource;
 
+/**
+ * 数据库连接工具,根据dao.cfg配置文件读取配置
+ * @author benqc
+ */
 public class DBProxy {
 	
 	protected static class DBConfig {

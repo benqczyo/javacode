@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server>
+	<fregments>
+		<fregment>
+			<fregment-name>list</fregment-name>
+			<fregment-class>yo.benqczyo.bookstore.web.controller.fregment.book.Impl.ListBookControllerFregment</fregment-class>
+		</fregment>
+	</fregments>
+</server>

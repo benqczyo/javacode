@@ -3,6 +3,16 @@ package yo.benqczyo.bookstore.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * 书籍JavaBean对象
+ * id 书籍id
+ * isbn 书籍isbn
+ * title 书籍名字
+ * pub 书籍出版日期
+ * author 书籍作者
+ * description 书籍简介
+ * @author benqcz
+ */
 public class Book implements Serializable {
 
 	private int id;

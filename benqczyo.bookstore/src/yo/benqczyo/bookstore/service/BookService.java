@@ -1,10 +1,10 @@
-package yo.benqczyo.bookstore.DAO;
+package yo.benqczyo.bookstore.service;
 
 import java.util.Map;
 
 import yo.benqczyo.bookstore.domain.Book;
 
-public interface DAO {
+public interface BookService {
 	public abstract Map<Integer, Book> findAllBooks() throws Exception;
 	public abstract Book findBookById(int id) throws Exception;
 }
