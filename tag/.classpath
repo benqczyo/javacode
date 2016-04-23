@@ -3,11 +3,5 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_5_CONTAINER"/>
-<<<<<<< HEAD
-=======
-	<classpathentry kind="lib" path="lib/commons-dbcp-1.4.jar"/>
-	<classpathentry kind="lib" path="lib/commons-pool-1.6.jar"/>
-	<classpathentry kind="lib" path="lib/ojdbc6.jar"/>
->>>>>>> 1ebe12a7a2eedc40a7f589f61c2b2929de2ae7bd
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
