@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Book implements Serializable {
 
-	private Integer id;
+	private int id;
 	private String isbn;
 	private String title;
 	private Date pub;
@@ -16,7 +16,7 @@ public class Book implements Serializable {
 
 	}
 	
-	public Book(Integer id, String isbn, String title, Date pub, String author,
+	public Book(int id, String isbn, String title, Date pub, String author,
 			String description) {
 		super();
 		this.id = id;
@@ -28,11 +28,11 @@ public class Book implements Serializable {
 	}
 
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -78,8 +78,10 @@ public class Book implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Book [author=" + author + ", description=" + description
-				+ ", id=" + id + ", isbn=" + isbn + ", title=" + title + "]";
+		return String
+				.format(
+						"Book [author=%s, description=%s, id=%s, isbn=%s, pub=%s, title=%s]",
+						author, description, id, isbn, pub, title);
 	}
 
 }
