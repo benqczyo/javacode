@@ -23,7 +23,7 @@ public class ActionRouter extends HttpServlet {
 		String cmd = uri.substring(uri.lastIndexOf("/") + 1, uri.lastIndexOf("."));
 		
 		if ("login".equalsIgnoreCase(cmd)) {
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
 		}
 		
 		if ("validate".equalsIgnoreCase(cmd)) {
@@ -34,14 +34,14 @@ public class ActionRouter extends HttpServlet {
 				User user = new UserDAOImpl().findUserByName(validatingUser.getName());
 				if (user != null && user.equals(validatingUser)) {
 					session.setAttribute("name", user.getName());
-					response.sendRedirect("/login/main.jsp");
+					response.sendRedirect("/login/WEB-INF/pages/main");
 				} else {
 					session.setAttribute("error", "’À∫≈ªÚ√‹¬Î¥ÌŒÛ");
-					response.sendRedirect("/login/login.jsp");
+					response.sendRedirect("/login/WEB-INF/pages/login");
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				response.sendRedirect("/login/error.jsp");
+				response.sendRedirect("/login/WEB-INF/pages/error");
 			}
 		}
 	}
