@@ -5,5 +5,9 @@
 			<fregment-name>list</fregment-name>
 			<fregment-class>yo.benqczyo.bookstore.web.controller.fregment.book.Impl.ListBookControllerFregment</fregment-class>
 		</fregment>
+		<fregment>
+			<fregment-name>buy</fregment-name>
+			<fregment-class>yo.benqczyo.bookstore.web.controller.fregment.book.Impl.BuyBookControllerFregment</fregment-class>
+		</fregment>
 	</fregments>
 </server>

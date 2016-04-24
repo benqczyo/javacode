@@ -4,13 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 书籍JavaBean对象
- * id 书籍id
- * isbn 书籍isbn
- * title 书籍名字
- * pub 书籍出版日期
- * author 书籍作者
+ * 书籍JavaBean对象 id 书籍id isbn 书籍isbn title 书籍名字 pub 书籍出版日期 author 书籍作者
  * description 书籍简介
+ * 
  * @author benqcz
  */
 public class Book implements Serializable {
@@ -21,13 +17,14 @@ public class Book implements Serializable {
 	private Date pub;
 	private String author;
 	private String description;
+	private double price;
 
 	public Book() {
 
 	}
-	
+
 	public Book(int id, String isbn, String title, Date pub, String author,
-			String description) {
+			String description, double price) {
 		super();
 		this.id = id;
 		this.isbn = isbn;
@@ -35,8 +32,8 @@ public class Book implements Serializable {
 		this.pub = pub;
 		this.author = author;
 		this.description = description;
+		this.price = price;
 	}
-
 
 	public int getId() {
 		return id;
@@ -86,12 +83,19 @@ public class Book implements Serializable {
 		this.description = description;
 	}
 
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
 	@Override
 	public String toString() {
-		return String
-				.format(
-						"Book [author=%s, description=%s, id=%s, isbn=%s, pub=%s, title=%s]",
-						author, description, id, isbn, pub, title);
+		return "Book [author=" + author + ", description=" + description
+				+ ", id=" + id + ", isbn=" + isbn + ", price=" + price
+				+ ", pub=" + pub + ", title=" + title + "]";
 	}
 
 }
