@@ -14,7 +14,7 @@ public class ListBookControllerFregment extends AbstractBookControllerFregment {
 	@Override
 	public void exec(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 		try {
 			request.setAttribute("books", bookService.findAllBooks());
 			request.getRequestDispatcher("/WEB-INF/pages/list.jsp").forward(request, response);
