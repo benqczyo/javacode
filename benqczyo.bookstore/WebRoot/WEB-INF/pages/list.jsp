@@ -5,19 +5,7 @@
 <html>
 	<head>
 		<title>书籍列表</title>
-		<style type="text/css">
-			body, h2 {margin: 0; padding: 0;}
-			a {text-decoration: none;}
-			#box {margin: 120px auto; width: 80%; text-align: center;}
-			#box h2 {margin-bottom: 10px;}
-			#content {margin-bottom: 10px;}
-			#content table {border: none; border-collapse: collapse; width: 100%; color: #fff;}
-			#content table a {color: #ac0c14;}
-			#content table thead tr {background: #ac0c14;}
-			#content table tbody tr:nth-of-type(even) {background: #C9E8C6;}
-			#content table tbody tr:nth-of-type(odd) {background: #6CC072;}
-			#content table th, #content table td {padding: 4px; border: solid 2px #fff;}
-		</style>
+		<link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath}/css/css.css"/>
 	</head>
 	<body>
 		<div id="box">
@@ -54,7 +42,7 @@
 				</table>
 			</div>
 			<div id="op">
-				<a href="">[查看购物车]</a>	
+				<a href="${pageContext.servletContext.contextPath}/cart.do">[查看购物车]</a>	
 			</div>
 		</div>	
 	</body>

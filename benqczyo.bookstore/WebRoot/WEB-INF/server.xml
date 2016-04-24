@@ -9,5 +9,9 @@
 			<fregment-name>buy</fregment-name>
 			<fregment-class>yo.benqczyo.bookstore.web.controller.fregment.book.Impl.BuyBookControllerFregment</fregment-class>
 		</fregment>
+		<fregment>
+			<fregment-name>cart</fregment-name>
+			<fregment-class>yo.benqczyo.bookstore.web.controller.fregment.book.Impl.CartBookControllerFregment</fregment-class>
+		</fregment>
 	</fregments>
 </server>

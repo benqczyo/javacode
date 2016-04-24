@@ -23,6 +23,10 @@ public class Cart {
 		}
 		return result;
 	}
+	
+	public Map<Book, CartItem> getItems() {
+		return items;
+	}
 
 	public CartItem add2Cart(Book book) {
 		CartItem result = items.get(book);

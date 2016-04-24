@@ -33,7 +33,7 @@ public class BuyBookControllerFregment extends AbstractBookControllerFregment {
 			throw new ServletException(e);
 		}
 		
-		Cookie cookie = new Cookie("JSESSSIONID", session.getId());
+		Cookie cookie = new Cookie("JSESSIONID", session.getId());
 		cookie.setPath(request.getContextPath());
 		cookie.setMaxAge(Integer.MAX_VALUE);
 		response.addCookie(cookie);
