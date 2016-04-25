@@ -6,11 +6,11 @@ import java.util.Map.Entry;
 
 public class Cart {
 
-	private Map<Book, CartItem> items = new HashMap<Book, CartItem>();
+	private Map<String, CartItem> items = new HashMap<String, CartItem>();
 
 	public int getCount() {
 		int result = 0;
-		for (Entry<Book, CartItem> item : items.entrySet()) {
+		for (Entry<String, CartItem> item : items.entrySet()) {
 			result += item.getValue().getCount();
 		}
 		return result;
@@ -18,20 +18,20 @@ public class Cart {
 
 	public double getPrice() {
 		double result = 0;
-		for (Entry<Book, CartItem> item : items.entrySet()) {
+		for (Entry<String, CartItem> item : items.entrySet()) {
 			result += item.getValue().getPrice();
 		}
 		return result;
 	}
 	
-	public Map<Book, CartItem> getItems() {
+	public Map<String, CartItem> getItems() {
 		return items;
 	}
 
 	public CartItem add2Cart(Book book) {
-		CartItem result = items.get(book);
+		CartItem result = items.get(String.valueOf(book.getId()));
 		if (result == null) {
-			items.put(book, new CartItem(book));
+			items.put(String.valueOf(book.getId()), new CartItem(book));
 		} else {
 			result.setCount(result.getCount() + 1);
 		}

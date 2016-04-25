@@ -9,3 +9,6 @@ a {text-decoration: none;}
 #content table tbody tr:nth-of-type(even) {background: #C9E8C6;}
 #content table tbody tr:nth-of-type(odd) {background: #6CC072;}
 #content table th, #content table td {padding: 4px; border: solid 2px #fff;}
+#content table td strong {font-weight: normal; color: #000;}
+#content table td span {color: #ac0c14;}
+#error {font-size:12px; color: red;}

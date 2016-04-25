@@ -13,5 +13,13 @@
 			<fregment-name>cart</fregment-name>
 			<fregment-class>yo.benqczyo.bookstore.web.controller.fregment.book.Impl.CartBookControllerFregment</fregment-class>
 		</fregment>
+		<fregment>
+			<fregment-name>clear</fregment-name>
+			<fregment-class>yo.benqczyo.bookstore.web.controller.fregment.book.Impl.ClearBookControllerFregment</fregment-class>
+		</fregment>
+		<fregment>
+			<fregment-name>change</fregment-name>
+			<fregment-class>yo.benqczyo.bookstore.web.controller.fregment.book.Impl.ChangeBookControllerFregment</fregment-class>
+		</fregment>
 	</fregments>
 </server>
