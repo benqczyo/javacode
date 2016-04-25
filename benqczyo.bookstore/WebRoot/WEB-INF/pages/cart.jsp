@@ -15,6 +15,9 @@
 					obj.value = oldValue;
 				}
 			}
+			function deleteThis(id) {
+				return confirm("是否从购物车中删除这个商品?");
+			}
 		</script>
 	</head>
 	<body>
@@ -45,7 +48,7 @@
 									<td>${item.book.price}</td>
 									<td><input type="text" value="${item.count}" onchange="changeCount(${item.book.id}, this, ${item.count})"/></td>
 									<td>${item.price}</td>
-									<td><a href="${pageContext.servletContext.contextPath}/delete.do?id=${book.id}">删除</a></td>
+									<td><a href="javascript:deleteThis(${item.book.id});">删除</a></td>
 								</tr>
 							</c:forEach>
 							<tr>
@@ -62,9 +65,7 @@
 						</tbody>
 					</table>
 				</c:if>
-				<c:if test="${not empty requestScope.error}">
-					<p id="error">${requestScope.error}</p>
-				</c:if>
+				${requestScope.error}
 			</div>
 			<div>
 				<a href="${pageContext.servletContext.contextPath}/list.do">继续购物</a>

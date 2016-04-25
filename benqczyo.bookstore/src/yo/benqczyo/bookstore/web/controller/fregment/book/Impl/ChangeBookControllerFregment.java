@@ -26,7 +26,7 @@ public class ChangeBookControllerFregment extends
 			String id = request.getParameter("id");
 			String newValue = request.getParameter("value");
 			if (!bookService.change(cart, id, newValue)) 
-				session.setAttribute("error", "请检查修改的购买数量");
+				session.setAttribute("error", "<script>alert('输入的购买数量不正确');</script>");
 		}
 
 		response.sendRedirect(String.format("%s/%s", request.getContextPath(), "cart.do"));
