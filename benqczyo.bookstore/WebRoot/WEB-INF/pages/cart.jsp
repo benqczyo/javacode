@@ -16,7 +16,8 @@
 				}
 			}
 			function deleteThis(id) {
-				return confirm("是否从购物车中删除这个商品?");
+				if (confirm("是否从购物车中删除这个商品?")) 
+					window.location = "${pageContext.servletContext.contextPath}/delete.do?id=" + id;
 			}
 		</script>
 	</head>

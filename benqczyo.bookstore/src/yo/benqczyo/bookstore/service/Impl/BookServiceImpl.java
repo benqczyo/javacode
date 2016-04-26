@@ -49,4 +49,9 @@ public class BookServiceImpl implements BookService {
 		return result;
 	}
 
+	@Override
+	public void delete(Cart cart, String id) throws Exception {
+		if (cart.getItems().remove(id) == null) throw new Exception();
+	}
+
 }

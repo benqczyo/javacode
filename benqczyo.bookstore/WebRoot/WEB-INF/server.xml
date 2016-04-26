@@ -21,5 +21,9 @@
 			<fregment-name>change</fregment-name>
 			<fregment-class>yo.benqczyo.bookstore.web.controller.fregment.book.Impl.ChangeBookControllerFregment</fregment-class>
 		</fregment>
+		<fregment>
+			<fregment-name>delete</fregment-name>
+			<fregment-class>yo.benqczyo.bookstore.web.controller.fregment.book.Impl.DeleteBookControllerFregment</fregment-class>
+		</fregment>
 	</fregments>
 </server>
