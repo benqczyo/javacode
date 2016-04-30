@@ -6,9 +6,9 @@ public interface UserDao {
 	/**
 	 * 保存用户信息到xml数据库
 	 * @param user User对象
-	 * @return true成功 false失败
+	 * @return 成功返回User对象 失败返回null
 	 */
-	public abstract boolean addUser(User user);
+	public abstract User addUser(User user);
 	
 	/**
 	 * 根据用户名查找用户

@@ -1,11 +1,6 @@
-package com.benqcz.discuss.util.xml;
+package com.benqcz.discuss.util;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.io.OutputFormat;
@@ -19,7 +14,6 @@ public abstract class XmlUtil {
 	
 	static {
 		dbFilePath = XmlUtil.class.getClassLoader().getResource("users.xml").getPath();
-		System.out.println(dbFilePath);
 	}
 	
 	public static Document getDocument() {
@@ -32,8 +26,6 @@ public abstract class XmlUtil {
 	}
 	
 	public static void write2Xml(Document document) {
-		/*OutputFormat format = OutputFormat.createCompactFormat();
-		format.setEncoding("utf-8");*/
 		try {
 			XMLWriter writer = new XMLWriter(new FileOutputStream(dbFilePath), OutputFormat.createCompactFormat());
 			writer.write(document);
