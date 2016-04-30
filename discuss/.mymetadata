@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="discuss"
+  id="myeclipse.1462006438793"
+  context-root="/discuss"
+  j2ee-spec="5.0"
+  archive="discuss.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
