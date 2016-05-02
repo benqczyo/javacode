@@ -47,8 +47,7 @@ public class UserDaoImpl implements UserDao {
 				for (Field field : fields) {
 					String fieldName = field.getName();
 					PropertyDescriptor pd = new PropertyDescriptor(fieldName, UserBean.class);
-					pd.getWriteMethod().invoke(result, 
-							userNode.valueOf(String.format("@%s", fieldName)));
+					pd.getWriteMethod().invoke(result, userNode.valueOf(String.format("@%s", fieldName)));
 				}
 			}
 		} catch (Exception e) {
@@ -60,8 +59,24 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public UserBean findUserByName(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		UserBean result = null;
+		String xPath = String.format("//user[@username='%s']", username);
+		try {
+			Node userNode = XmlUtils.getDocument().selectSingleNode(xPath);
+			if (userNode != null) {
+				result = new UserBean();
+				Field[] fields = UserBean.class.getDeclaredFields();
+				for (Field field : fields) {
+					String fieldName = field.getName();
+					PropertyDescriptor pd = new PropertyDescriptor(fieldName, UserBean.class);
+					pd.getWriteMethod().invoke(result, userNode.valueOf(String.format("@%s", fieldName)));
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		return result;
 	}
 
 }
