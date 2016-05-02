@@ -14,12 +14,12 @@ public class UserDaoImplTest {
 	@Test
 	public void testAddUser() {
 		UserBean user = new UserBean();
-		user.setUsername("lox");
+		user.setUsername("benjamin");
 		user.setPassword("123456");
-		user.setEmail("lox@hotmail.com");
+		user.setEmail("benjamin@hotmail.com");
 		user.setBirthday("2000-01-01");
 		UserBean result = new UserDaoImpl().addUser(user);
-		Assert.assertEquals("lox", result.getUsername());
+		Assert.assertEquals("benjamin", result.getUsername());
 	}
 
 	@Test
@@ -30,7 +30,7 @@ public class UserDaoImplTest {
 
 	@Test
 	public void testFindUserByName() {
-		UserBean result = new UserDaoImpl().findUserByName("lox");
+		UserBean result = new UserDaoImpl().findUserByName("benjamin");
 		assertNotNull(result);
 	}
 
