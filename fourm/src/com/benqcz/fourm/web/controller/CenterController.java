@@ -49,7 +49,7 @@ public class CenterController extends HttpServlet {
 	
 	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getSession().invalidate();
-		request.setAttribute("message", "注销成功,三秒后跳转主页...");
+		request.setAttribute("message", "注销成功,<span id='tick'>3</span>秒后跳转主页...");
 		response.setHeader("Refresh", String.format("3;url=%s", request.getContextPath()));
 		request.getRequestDispatcher("/message.jsp").forward(request, response);
 	}
@@ -63,7 +63,7 @@ public class CenterController extends HttpServlet {
 				UserBean userBean = service.login(formBean.getUsername(), formBean.getPassword());
 				if (userBean != null) {
 					request.getSession().setAttribute("user", userBean);
-					request.setAttribute("message", "登陆成功,三秒后跳转主页...");
+					request.setAttribute("message", "登陆成功,<span id='tick'>3</span>秒后跳转主页...");
 					response.setHeader("Refresh", String.format("3;url=%s", request.getContextPath()));
 					path = "/message.jsp";
 				} else {
@@ -96,7 +96,8 @@ public class CenterController extends HttpServlet {
 				UserBean userBean = new UserBean();
 				BeanUtils.copyProperties(userBean, formBean);
 				service.register(userBean);
-				request.setAttribute("message", "保存成功");
+				request.setAttribute("message", "注册成功,<span id='tick'>3</span>秒后跳转主页...");
+				response.setHeader("Refresh", String.format("3;url=%s", request.getContextPath()));
 				path = "/message.jsp";
 			} else {
 				request.setAttribute("formBean", formBean);

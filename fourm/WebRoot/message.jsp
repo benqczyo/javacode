@@ -4,6 +4,20 @@
 <html>
   <head>
    <title>信息</title>
+   <style>
+   	#tick {color: red;}
+   </style>
+   <script>
+  		window.onload = function() {
+  			var tick = document.getElementById("tick"),
+  				count = 3;
+  			if (tick != null) {
+  				setInterval(function() {
+  					tick.innerText = --count;
+  				}, 1000);
+  			}
+  		};
+   </script>
   </head>
   <body>
 	<div>
