@@ -11,14 +11,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserBean login(String username, String password) {
-		return dao.findUser(username, password);
+		
 	}
 
 	@Override
 	public UserBean register(UserBean user) {
-		UserBean result = dao.findUserByName(user.getUsername());
-		if (result == null) dao.addUser(user);
-		return result;
+		
 	}
 
 }
