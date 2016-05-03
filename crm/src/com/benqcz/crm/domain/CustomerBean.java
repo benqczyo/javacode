@@ -1,7 +1,7 @@
 package com.benqcz.crm.domain;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 /*
  	CREATE TABLE customer (
