@@ -11,6 +11,7 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
+import com.benqcz.crm.dao.CustomerDao;
 import com.benqcz.crm.dao.impl.CustomerDaoImpl;
 import com.benqcz.crm.domain.CustomerBean;
 
@@ -19,14 +20,14 @@ public class CustomerDaoImplTest {
 	@Test
 	public void testAddCustomerConnectionCustomerBean() throws ParseException {
 		CustomerBean customer = new CustomerBean();
-		customer.setName("loxx");
+		customer.setName("benqcz");
 		customer.setGender(1);
 		customer.setBirthday(new Date(new SimpleDateFormat("yyyy-MM-dd").parse("1982-08-01").getTime()));
-		customer.setCellphone("1234567890");
-		customer.setEmail("lox@hotmail.com");
+		customer.setCellphone("13705090389");
+		customer.setEmail("benqcz@hotmail.com");
 		customer.setPreference("programing");
-		customer.setType(3);
-		customer.setDescription("common customer");
+		customer.setType(2);
+		customer.setDescription("to be or not to be...");
 		CustomerBean result = new CustomerDaoImpl().addCustomer(customer);
 		assertNotNull(result);
 	}
@@ -38,7 +39,11 @@ public class CustomerDaoImplTest {
 
 	@Test
 	public void testUpdateCustomerConnectionCustomerBean() {
-		fail("Not yet implemented");
+		CustomerDao dao = new CustomerDaoImpl();
+		CustomerBean customer = dao.findCustomerById(2);
+		customer.setDescription("suck my dick");
+		CustomerBean result = dao.updateCustomer(customer);
+		Assert.assertEquals("suck my dick", result.getDescription());
 	}
 
 	@Test

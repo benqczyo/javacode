@@ -17,7 +17,7 @@ import com.benqcz.crm.exception.DaoException;
 public class CustomerDaoImpl extends AbstractCustomerDaoImpl {
 
 	private static final String ADD_CUSTOMER = "INSERT INTO customer (id, name, gender, birthday, cellphone, email, preference, type, description) VALUES (customer_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String UPDATE_CUSTOMER = "UPDATE customer Set id = ?, name = ?, gender = ?, birthday = ?, cellphone = ?, email = ?, preference = ?, type = ?, description = ? WHERE id = ?";
+	private static final String UPDATE_CUSTOMER = "UPDATE customer SET name = ?, gender = ?, birthday = ?, cellphone = ?, email = ?, preference = ?, type = ?, description = ? WHERE id = ?";
 	private static final String DELETE_CUSTOMER_BY_ID = "DELETE FROM customer WHERE id = ?";
 	private static final String FIND_CUSTOMER = "SELECT id, name, gender, birthday, cellphone, email, preference, type, description FROM customer";
 	private static final String FIND_CUSTOMER_BY_ID = "SELECT id, name, gender, birthday, cellphone, email, preference, type, description FROM customer WHERE id = ?";
@@ -35,6 +35,7 @@ public class CustomerDaoImpl extends AbstractCustomerDaoImpl {
 			st.setString(6, customer.getPreference());
 			st.setInt(7, customer.getType());
 			st.setString(8, customer.getDescription());
+			st.setInt(9, customer.getId());
 			if (st.executeUpdate() > 0) {
 				ResultSet rs = st.getGeneratedKeys();
 				rs.next();
@@ -120,15 +121,15 @@ public class CustomerDaoImpl extends AbstractCustomerDaoImpl {
 		CustomerBean result = null;
 		try {
 			PreparedStatement st = conn.prepareStatement(UPDATE_CUSTOMER);
-			st.setInt(1, customer.getId());
-			st.setString(2, customer.getName());
-			st.setInt(3, customer.getGender());
-			st.setDate(4, new java.sql.Date(customer.getBirthday().getTime()));
-			st.setString(5, customer.getCellphone());
-			st.setString(6, customer.getEmail());
-			st.setString(7, customer.getPreference());
-			st.setInt(8, customer.getType());
-			st.setString(9, customer.getDescription());
+			st.setString(1, customer.getName());
+			st.setInt(2, customer.getGender());
+			st.setDate(3, new java.sql.Date(customer.getBirthday().getTime()));
+			st.setString(4, customer.getCellphone());
+			st.setString(5, customer.getEmail());
+			st.setString(6, customer.getPreference());
+			st.setInt(7, customer.getType());
+			st.setString(8, customer.getDescription());
+			st.setInt(9, customer.getId());
 			if (st.executeUpdate() > 0) result = customer;
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.benqcz.crm.dao.CustomerDao;
 import com.benqcz.crm.domain.CustomerBean;
+import com.benqcz.crm.exception.DaoException;
 import com.benqcz.crm.utils.DBUtils;
 
 import oracle.sql.CustomDatum;
@@ -23,7 +24,7 @@ public abstract class AbstractCustomerDaoImpl implements CustomerDao {
 			return addCustomer(DBUtils.open(), customer);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException(e);
+			throw new DaoException(e);
 		} finally {
 			DBUtils.close();
 		}
@@ -35,7 +36,7 @@ public abstract class AbstractCustomerDaoImpl implements CustomerDao {
 			return deleteCustomerById(DBUtils.open(), id);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException(e);
+			throw new DaoException(e);
 		} finally {
 			DBUtils.close();
 		}
@@ -47,7 +48,7 @@ public abstract class AbstractCustomerDaoImpl implements CustomerDao {
 			return findCustomer(DBUtils.open());
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException(e);
+			throw new DaoException(e);
 		} finally {
 			DBUtils.close();
 		}
@@ -59,7 +60,7 @@ public abstract class AbstractCustomerDaoImpl implements CustomerDao {
 			return findCustomerById(DBUtils.open(), id);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException(e);
+			throw new DaoException(e);
 		} finally {
 			DBUtils.close();
 		}
@@ -71,7 +72,7 @@ public abstract class AbstractCustomerDaoImpl implements CustomerDao {
 			return updateCustomer(DBUtils.open(), customer);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException(e);
+			throw new DaoException(e);
 		} finally {
 			DBUtils.close();
 		}
