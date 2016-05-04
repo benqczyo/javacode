@@ -36,4 +36,9 @@ public class CustomerServiceImpl implements CustomerService {
 		return dao.updateCustomer(customer);
 	}
 
+	@Override
+	public boolean deleteMutilCustomer(String[] ids) {
+		return dao.deleteMutilCustomer(ids);
+	}
+
 }

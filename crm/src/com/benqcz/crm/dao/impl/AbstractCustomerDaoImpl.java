@@ -17,6 +17,7 @@ public abstract class AbstractCustomerDaoImpl implements CustomerDao {
 	protected abstract CustomerBean updateCustomer(Connection conn, CustomerBean customer);
 	protected abstract Map<Integer, CustomerBean> findCustomer(Connection conn);
 	protected abstract CustomerBean findCustomerById(Connection conn, int id);
+	protected abstract boolean deleteMutilCustomer(Connection conn, String[] ids);
 
 	@Override
 	public CustomerBean addCustomer(CustomerBean customer) {
@@ -70,6 +71,17 @@ public abstract class AbstractCustomerDaoImpl implements CustomerDao {
 	public CustomerBean updateCustomer(CustomerBean customer) {
 		try {
 			return updateCustomer(DBUtils.open(), customer);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new DaoException(e);
+		} finally {
+			DBUtils.close();
+		}
+	}
+	@Override
+	public boolean deleteMutilCustomer(String[] ids) {
+		try {
+			return deleteMutilCustomer(DBUtils.open(), ids);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new DaoException(e);

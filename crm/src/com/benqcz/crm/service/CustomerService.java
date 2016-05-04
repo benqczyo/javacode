@@ -34,4 +34,10 @@ public interface CustomerService {
 	 * @return 成功返回map对象，键为客户id，值为CustomerBean对象
 	 */
 	public abstract Map<Integer, CustomerBean> findCustomer();
+	/**
+	 * 删除多条客户记录
+	 * @param ids 客户id数组
+	 * @return 成功返回true,失败返回false
+	 */
+	public abstract boolean deleteMutilCustomer(String[] ids);
 }

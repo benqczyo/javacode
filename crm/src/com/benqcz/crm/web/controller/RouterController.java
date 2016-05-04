@@ -66,7 +66,43 @@ public class RouterController extends HttpServlet {
 			return;
 		}
 		
+		if ("delete".equalsIgnoreCase(action)) {
+			deleteCustomer(request, response);
+			return;
+		}
+		
+		if ("deleteMutilCustomer".equalsIgnoreCase(action)) {
+			deleteMutilCustomer(request, response);
+			return;
+		}
+		
 		request.setAttribute("message", "系统繁忙请稍后再试...");
+		request.getRequestDispatcher("/WEB-INF/pages/message.jsp").forward(request, response);
+	}
+
+	private void deleteMutilCustomer(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		try {
+			String[] ids = request.getParameterValues("id");
+			if (ids != null && ids.length > 0)
+				service.deleteMutilCustomer(ids);
+			request.setAttribute("message", "删除成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("message", "系统繁忙请稍后再试");
+		}
+		request.getRequestDispatcher("/WEB-INF/pages/message.jsp").forward(request, response);
+	}
+
+	private void deleteCustomer(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		try {
+			service.deleteCustomerById(Integer.parseInt(request.getParameter("id")));
+			request.setAttribute("message", "删除成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("message", "系统繁忙请稍后再试...");
+		}
 		request.getRequestDispatcher("/WEB-INF/pages/message.jsp").forward(request, response);
 	}
 
@@ -84,7 +120,7 @@ public class RouterController extends HttpServlet {
 				ConvertUtils.register(new DateLocaleConverter(), Date.class);
 				BeanUtils.copyProperties(customer, formBean);
 				service.updateCustomer(customer);
-				request.setAttribute("message", "添加成功");
+				request.setAttribute("message", "更新成功");
 				path = "/WEB-INF/pages/message.jsp";
 			}
 		} catch (Exception e) {

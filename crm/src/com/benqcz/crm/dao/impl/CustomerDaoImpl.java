@@ -138,4 +138,22 @@ public class CustomerDaoImpl extends AbstractCustomerDaoImpl {
 		return result;
 	}
 
+	@Override
+	protected boolean deleteMutilCustomer(Connection conn, String[] ids) {
+		boolean result = false;
+		try {
+			PreparedStatement st = conn.prepareStatement(DELETE_CUSTOMER_BY_ID);
+			for (String id : ids) {
+				st.setInt(1, Integer.parseInt(id));
+				st.addBatch();
+			}
+			st.executeBatch();
+			result = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DaoException(e);
+		}
+		return result;
+	}
+
 }
