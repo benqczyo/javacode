@@ -19,7 +19,7 @@ public class CustomerDaoImpl extends AbstractCustomerDaoImpl {
 	private static final String ADD_CUSTOMER = "INSERT INTO customer (id, name, gender, birthday, cellphone, email, preference, type, description) VALUES (customer_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_CUSTOMER = "UPDATE customer SET name = ?, gender = ?, birthday = ?, cellphone = ?, email = ?, preference = ?, type = ?, description = ? WHERE id = ?";
 	private static final String DELETE_CUSTOMER_BY_ID = "DELETE FROM customer WHERE id = ?";
-	private static final String FIND_CUSTOMER = "SELECT id, name, gender, birthday, cellphone, email, preference, type, description FROM customer";
+	private static final String FIND_CUSTOMER = "SELECT id, name, gender, birthday, cellphone, email, preference, type, description FROM customer ORDER BY id";
 	private static final String FIND_CUSTOMER_BY_ID = "SELECT id, name, gender, birthday, cellphone, email, preference, type, description FROM customer WHERE id = ?";
 	
 	@Override
