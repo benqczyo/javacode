@@ -40,4 +40,15 @@ public interface CustomerService {
 	 * @return 成功返回true,失败返回false
 	 */
 	public abstract boolean deleteMutilCustomer(String[] ids);
+	/**
+	 * 返回客户记录数
+	 * @return 客户记录数
+	 */
+	public abstract int getNumberOfCustomers();
+	/**
+	 * 分页查询用户
+	 * @param pageId 页面id，1开始
+	 * @return 返回客户Map,失败返回null
+	 */
+	public abstract Map<Integer, CustomerBean> selectCustomerByPageId(int pageId);
 }

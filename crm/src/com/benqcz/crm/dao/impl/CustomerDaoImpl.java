@@ -21,6 +21,7 @@ public class CustomerDaoImpl extends AbstractCustomerDaoImpl {
 	private static final String DELETE_CUSTOMER_BY_ID = "DELETE FROM customer WHERE id = ?";
 	private static final String FIND_CUSTOMER = "SELECT id, name, gender, birthday, cellphone, email, preference, type, description FROM customer ORDER BY id";
 	private static final String FIND_CUSTOMER_BY_ID = "SELECT id, name, gender, birthday, cellphone, email, preference, type, description FROM customer WHERE id = ?";
+	private static final String GET_NUMBER_OF_CUSTOMERS = "SELECT count(*) AS customers FROM customer";
 	
 	@Override
 	protected CustomerBean addCustomer(Connection conn, CustomerBean customer) {
@@ -149,6 +150,20 @@ public class CustomerDaoImpl extends AbstractCustomerDaoImpl {
 			}
 			st.executeBatch();
 			result = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DaoException(e);
+		}
+		return result;
+	}
+
+	@Override
+	protected int getNumberOfCustomers(Connection conn) {
+		int result = -1;
+		try {
+			Statement st = conn.createStatement();
+			ResultSet rs = st.executeQuery(GET_NUMBER_OF_CUSTOMERS);
+			if (rs.next()) result = rs.getInt("customers");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DaoException(e);

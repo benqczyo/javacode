@@ -18,6 +18,8 @@ public abstract class AbstractCustomerDaoImpl implements CustomerDao {
 	protected abstract Map<Integer, CustomerBean> findCustomer(Connection conn);
 	protected abstract CustomerBean findCustomerById(Connection conn, int id);
 	protected abstract boolean deleteMutilCustomer(Connection conn, String[] ids);
+	protected abstract int getNumberOfCustomers(Connection conn);
+	protected abstract Map<Integer, CustomerBean> findCustomersByPageId(Connection conn, int id);
 
 	@Override
 	public CustomerBean addCustomer(CustomerBean customer) {
@@ -82,6 +84,28 @@ public abstract class AbstractCustomerDaoImpl implements CustomerDao {
 	public boolean deleteMutilCustomer(String[] ids) {
 		try {
 			return deleteMutilCustomer(DBUtils.open(), ids);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new DaoException(e);
+		} finally {
+			DBUtils.close();
+		}
+	}
+	@Override
+	public int getNumberOfCustomers() {
+		try {
+			return getNumberOfCustomers(DBUtils.open());
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new DaoException(e);
+		} finally {
+			DBUtils.close();
+		}
+	}
+	@Override
+	public Map<Integer, CustomerBean> findCustomersByPageId(int pageId) {
+		try {
+			return findCustomersByPageId(DBUtils.open(), );
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new DaoException(e);

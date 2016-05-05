@@ -40,4 +40,14 @@ public interface CustomerDao {
 	 * @return 成功返回true,失败返回false
 	 */
 	public abstract boolean deleteMutilCustomer(String[] ids);
+	/**
+	 * 返回数据库记录数
+	 * @return 返回数据库记录数,失败返回-1
+	 */
+	public abstract int getNumberOfCustomers();
+	/**
+	 * 分页返回客户集
+	 * @return 成功客户Map,失败返回null
+	 */
+	public abstract Map<Integer, CustomerBean> findCustomersByPageId(int pageId);
 }

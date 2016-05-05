@@ -40,5 +40,16 @@ public class CustomerServiceImpl implements CustomerService {
 	public boolean deleteMutilCustomer(String[] ids) {
 		return dao.deleteMutilCustomer(ids);
 	}
+	
+	@Override
+	public int getNumberOfCustomers() {
+		return dao.getNumberOfCustomers();
+	}
+
+	@Override
+	public Map<Integer, CustomerBean> selectCustomerByPageId(int pageId) {
+		
+		return null; 
+	}
 
 }

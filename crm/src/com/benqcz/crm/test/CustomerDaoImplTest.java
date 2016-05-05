@@ -58,5 +58,11 @@ public class CustomerDaoImplTest {
 		assertNotNull(customer);
 		System.out.println(customer);
 	}
+	
+	@Test
+	public void testGetNumberOfCustomersConnection() {
+		int customers = new CustomerDaoImpl().getNumberOfCustomers();
+		Assert.assertEquals(5, customers);
+	}
 
 }

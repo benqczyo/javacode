@@ -85,6 +85,9 @@
 							</c:forEach>
 						</table>
 					</div>
+					<div style="text-align: center;">
+						<a href="">首页</a><a href="">上一页</a><a href="">下一页</a><a href="">尾页</a>
+					</div>
 		 		</c:if>
 			</form>
 		</div>
