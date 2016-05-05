@@ -92,10 +92,14 @@
 						<c:set var="totalPages" value="${page.totalPages}"/>
 						<p>
 							第<span>${currentPageId}</span>页/共<span>${totalPages}</span>页&nbsp;
+							<c:if test="${prevPageId eq -1}">首页</c:if>
+							<c:if test="${prevPageId ne -1}"><a href="${path}/router?action=showPage&pageId=1">首页</a></c:if>
 							<c:if test="${prevPageId eq -1}">上一页</c:if>
 							<c:if test="${prevPageId ne -1}"><a href="${path}/router?action=showPage&pageId=${prevPageId}">上一页</a></c:if>
 							<c:if test="${nextPageId eq -1}">下一页</c:if>
 							<c:if test="${nextPageId ne -1}"><a href="${path}/router?action=showPage&pageId=${nextPageId}">下一页</a></c:if>
+							<c:if test="${nextPageId eq -1}">尾页</c:if>
+							<c:if test="${nextPageId ne -1}"><a href="${path}/router?action=showPage&pageId=${totalPages}">尾页</a></c:if>
 						</p>
 					</div>
 		 		</c:if>
