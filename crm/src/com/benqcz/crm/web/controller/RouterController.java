@@ -22,6 +22,7 @@ import org.apache.commons.beanutils.Converter;
 import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
 
 import com.benqcz.crm.domain.CustomerBean;
+import com.benqcz.crm.domain.Page;
 import com.benqcz.crm.service.CustomerService;
 import com.benqcz.crm.service.impl.CustomerServiceImpl;
 import com.benqcz.crm.utils.FormBeanUtils;
@@ -42,7 +43,7 @@ public class RouterController extends HttpServlet {
 		
 		String action = request.getParameter("action");
 		
-		if (action == null) {
+		if (action == null || "showPage".equalsIgnoreCase(action)) {
 			showAllCustomer(request, response);
 			return;
 		}
@@ -186,11 +187,22 @@ public class RouterController extends HttpServlet {
 
 	private void showAllCustomer(HttpServletRequest request, HttpServletResponse response) 
 		throws ServletException, IOException {
-		
-		List<CustomerBean> customers = service.findCustomer();
-		request.setAttribute("customers", customers);
-		request.getRequestDispatcher("/WEB-INF/pages/showAllCustomers.jsp").forward(request, response);
-		
+		String path = "";
+		String paramPageId = request.getParameter("pageId");
+		String pageId = "1";
+		if (paramPageId != null && !paramPageId.trim().equals("") && paramPageId.matches("[1-9]+")) {
+			pageId = paramPageId;
+		}
+		try {
+			Page page = service.getPage(pageId);
+			request.setAttribute("page", page);
+			path = "/WEB-INF/pages/showAllCustomers.jsp";
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("message", "系统繁忙请稍后再试...");
+			path = "/WEB-INF/pages/message.jsp";
+		}
+		request.getRequestDispatcher(path).forward(request, response);
 	}
 
 }

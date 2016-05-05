@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.benqcz.crm.domain.CustomerBean;
+import com.benqcz.crm.domain.Page;
 
 public interface CustomerService {
 	/**
@@ -47,9 +48,9 @@ public interface CustomerService {
 	 */
 	public abstract int getNumberOfCustomers();
 	/**
-	 * 分页查询用户
-	 * @param pageId 页面id，1开始
-	 * @return 返回客户Map,失败返回null
+	 * 根据页面返回Page对象
+	 * @param pageId 页码
+	 * @return 成功Page对象，失败null
 	 */
-	public abstract List<CustomerBean> selectCustomerByPageId(int pageId);
+	public abstract Page getPage(String pageId);
 }

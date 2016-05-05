@@ -9,7 +9,7 @@ public class Page {
 	private int totalPages;
 	private int defaultPageSize;
 	private int currentPageId;
-	private int prePageId;
+	private int prevPageId;
 	private int nextPageId;
 	private int startIndex;
 	private int endIndex;
@@ -17,14 +17,14 @@ public class Page {
 	private List<CustomerBean> recoders;
 	
 	public Page(int totalRows, int pageId) {
-		this.defaultPageSize = 10;
+		this.defaultPageSize = 2;
 		this.totalRows = totalRows;
 		this.currentPageId = pageId;
-		this.totalPages = this.totalRows / this.defaultPageSize + this.totalRows % this.defaultPageSize;
-		this.prePageId = this.currentPageId == 1 ? -1 : this.currentPageId - 1;
+		this.totalPages = this.totalRows < this.defaultPageSize ? 1 : this.totalRows / this.defaultPageSize + this.totalRows % this.defaultPageSize;
+		this.prevPageId = this.currentPageId == 1 ? -1 : this.currentPageId - 1;
 		this.nextPageId = this.currentPageId == this.totalPages ? -1 : this.currentPageId + 1;
-		this.startIndex = (this.currentPageId - 1) * this.defaultPageSize;
-		this.endIndex = this.currentPageId * this.defaultPageSize - 1;
+		this.startIndex = (this.currentPageId - 1) * this.defaultPageSize + 1;
+		this.endIndex = this.currentPageId * this.defaultPageSize;
 	}
 
 	public int getTotalRows() {
@@ -43,8 +43,8 @@ public class Page {
 		return currentPageId;
 	}
 
-	public int getPrePageId() {
-		return prePageId;
+	public int getPrevPageId() {
+		return prevPageId;
 	}
 
 	public int getNextPageId() {
@@ -63,13 +63,17 @@ public class Page {
 		return recoders;
 	}
 	
+	public void setRecoders(List<CustomerBean> recoders) {
+		this.recoders = recoders;
+	}
+
 	@Override
 	public String toString() {
-		return "Page [currentPageId=" + currentPageId + ", defaultPageSize="
-				+ defaultPageSize + ", endIndex=" + endIndex + ", nextPageId="
-				+ nextPageId + ", prePageId=" + prePageId + ", startIndex="
-				+ startIndex + ", totalPages=" + totalPages + ", totalRows="
-				+ totalRows + "]";
+		return String
+				.format(
+						"Page [currentPageId=%s, defaultPageSize=%s, endIndex=%s, nextPageId=%s, prePageId=%s, recoders=%s, startIndex=%s, totalPages=%s, totalRows=%s]",
+						currentPageId, defaultPageSize, endIndex, nextPageId,
+						prevPageId, recoders, startIndex, totalPages, totalRows);
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 import com.benqcz.crm.dao.CustomerDao;
 import com.benqcz.crm.dao.impl.CustomerDaoImpl;
 import com.benqcz.crm.domain.CustomerBean;
+import com.benqcz.crm.domain.Page;
 import com.benqcz.crm.service.CustomerService;
 
 public class CustomerServiceImpl implements CustomerService {
@@ -46,11 +47,12 @@ public class CustomerServiceImpl implements CustomerService {
 	public int getNumberOfCustomers() {
 		return dao.getNumberOfCustomers();
 	}
-
+	
 	@Override
-	public List<CustomerBean> selectCustomerByPageId(int pageId) {
-		
-		return null; 
+	public Page getPage(String pageId) {
+		Page result = new Page(getNumberOfCustomers(), Integer.parseInt(pageId));
+		result.setRecoders(dao.findCustomersByRange(result.getStartIndex(), result.getEndIndex()));
+		return result;
 	}
 
 }

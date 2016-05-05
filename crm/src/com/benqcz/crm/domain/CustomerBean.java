@@ -3,22 +3,6 @@ package com.benqcz.crm.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-/*
- 	CREATE TABLE customer (
-		id NUMBER(9),
-		name VARCHAR2(40 CHAR) NOT NULL,
-		gender NUMBER(1) NOT NULL,
-		birthday DATE NOT NULL,
-		cellphone VARCHAR2(13 CHAR) NOT NULL,
-		email VARCHAR2(40 CHAR) NOT NULL,
-		preference VARCHAR2(40 CHAR) NOT NULL,
-		type NUMBER(2) NOT NULL,
-		description VARCHAR2(100 CHAR) NOT NULL
-	);
-	ALTER TABLE customer ADD CONSTRAINTS pk_customer_id PRIMARY KEY (id);
-	ALTER TABLE customer ADD CONSTRAINTS fk_customer_type FOREIGN KEY(type) REFERENCES customer_type(id);
-*/
-
 public class CustomerBean implements Serializable {
 	
 	private int id;

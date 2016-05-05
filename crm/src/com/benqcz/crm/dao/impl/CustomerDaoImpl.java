@@ -21,9 +21,10 @@ public class CustomerDaoImpl extends AbstractCustomerDaoImpl {
 	private static final String ADD_CUSTOMER = "INSERT INTO customer (id, name, gender, birthday, cellphone, email, preference, type, description) VALUES (customer_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_CUSTOMER = "UPDATE customer SET name = ?, gender = ?, birthday = ?, cellphone = ?, email = ?, preference = ?, type = ?, description = ? WHERE id = ?";
 	private static final String DELETE_CUSTOMER_BY_ID = "DELETE FROM customer WHERE id = ?";
-	private static final String FIND_CUSTOMER = "SELECT id, name, gender, birthday, cellphone, email, preference, type, description FROM customer ORDER BY id";
+	//private static final String FIND_CUSTOMER = "SELECT id, name, gender, birthday, cellphone, email, preference, type, description FROM customer ORDER BY id";
 	private static final String FIND_CUSTOMER_BY_ID = "SELECT id, name, gender, birthday, cellphone, email, preference, type, description FROM customer WHERE id = ?";
 	private static final String GET_NUMBER_OF_CUSTOMERS = "SELECT count(*) AS customers FROM customer";
+	private static final String FIND_CUSTOMER_BY_RANGE = "SELECT * FROM (SELECT a.*, ROWNUM rn FROM (SELECT * FROM customer) a) WHERE rn BETWEEN ? and ?";
 	
 	@Override
 	protected CustomerBean addCustomer(Connection conn, CustomerBean customer) {
@@ -68,7 +69,8 @@ public class CustomerDaoImpl extends AbstractCustomerDaoImpl {
 
 	@Override
 	protected List<CustomerBean> findCustomer(Connection conn) {
-		List<CustomerBean> result = null;
+		throw new AbstractMethodError("不能执行虚方法");
+		/*List<CustomerBean> result = null;
 		try {
 			Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery(FIND_CUSTOMER);
@@ -90,7 +92,7 @@ public class CustomerDaoImpl extends AbstractCustomerDaoImpl {
 			e.printStackTrace();
 			throw new DaoException(e);
 		}
-		return result;
+		return result;*/
 	}
 
 	@Override
@@ -174,9 +176,32 @@ public class CustomerDaoImpl extends AbstractCustomerDaoImpl {
 	}
 
 	@Override
-	protected List<CustomerBean> findCustomersByPageId(Connection conn, int id) {
-		// TODO Auto-generated method stub
-		return null;
+	protected List<CustomerBean> findCustomersByRange(Connection conn, int startId, int endIndex) {
+		List<CustomerBean> result = null;
+		try {
+			PreparedStatement st = conn.prepareStatement(FIND_CUSTOMER_BY_RANGE);
+			st.setInt(1, startId);
+			st.setInt(2, endIndex);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				if (result == null) result = new ArrayList<CustomerBean>();
+				CustomerBean customer = new CustomerBean();
+				customer.setId(rs.getInt("id"));
+				customer.setName(rs.getString("name"));
+				customer.setGender(rs.getInt("gender"));
+				customer.setBirthday(rs.getDate("birthday"));
+				customer.setCellphone(rs.getString("cellphone"));
+				customer.setEmail(rs.getString("email"));
+				customer.setPreference(rs.getString("preference"));
+				customer.setType(rs.getInt("type"));
+				customer.setDescription(rs.getString("description"));
+				result.add(customer);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DaoException(e);
+		}
+		return result;
 	}
 
 }

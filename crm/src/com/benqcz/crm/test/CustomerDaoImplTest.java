@@ -66,4 +66,10 @@ public class CustomerDaoImplTest {
 		Assert.assertEquals(5, customers);
 	}
 
+	@Test
+	public void testFindCustomerByRangeIntInt() {
+		List<CustomerBean> customers = new CustomerDaoImpl().findCustomersByRange(0, 2);
+		assertNotNull(customers);
+		System.out.println(customers);
+	}
 }

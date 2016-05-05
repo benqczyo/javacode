@@ -46,10 +46,10 @@
 				<div id="op">
 					<a href="javascript:deleteAll()">删除</a>&nbsp;<a href="${pageContext.request.contextPath}/router?action=showAddForm"">添加</a>
 				</div>
-				<c:if test="${requestScope.customers eq null}">
+				<c:if test="${empty requestScope.page.recoders}">
 					<strong>还没有添加客户</strong>
 				</c:if>
-				<c:if test="${not empty requestScope.customers}">
+				<c:if test="${not empty requestScope.page.recoders}">
 					<div id="content">
 						<table>
 							<tr>
@@ -65,7 +65,7 @@
 								<th>个人简介</th>
 								<th>操作</th>
 							</tr>
-							<c:forEach var="customer" items="${requestScope.customers}">
+							<c:forEach var="customer" items="${requestScope.page.recoders}">
 								<tr>
 									<td><input type="checkbox" name="id" value="${customer.id}"/></td>
 									<td>${customer.id}</td>
@@ -85,7 +85,18 @@
 						</table>
 					</div>
 					<div style="text-align: center;">
-						<a href="">首页</a><a href="">上一页</a><a href="">下一页</a><a href="">尾页</a>
+						<c:set var="path" value="${pageContext.request.contextPath}"/>
+						<c:set var="currentPageId" value="${page.currentPageId}"/>
+						<c:set var="prevPageId" value="${page.prevPageId}"/>
+						<c:set var="nextPageId" value="${page.nextPageId}"/>
+						<c:set var="totalPages" value="${page.totalPages}"/>
+						<p>
+							第<span>${currentPageId}</span>页/共<span>${totalPages}</span>页&nbsp;
+							<c:if test="${prevPageId eq -1}">上一页</c:if>
+							<c:if test="${prevPageId ne -1}"><a href="${path}/router?action=showPage&pageId=${prevPageId}">上一页</a></c:if>
+							<c:if test="${nextPageId eq -1}">下一页</c:if>
+							<c:if test="${nextPageId ne -1}"><a href="${path}/router?action=showPage&pageId=${nextPageId}">下一页</a></c:if>
+						</p>
 					</div>
 		 		</c:if>
 			</form>

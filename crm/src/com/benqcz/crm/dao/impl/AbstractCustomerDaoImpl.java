@@ -20,7 +20,7 @@ public abstract class AbstractCustomerDaoImpl implements CustomerDao {
 	protected abstract CustomerBean findCustomerById(Connection conn, int id);
 	protected abstract boolean deleteMutilCustomer(Connection conn, String[] ids);
 	protected abstract int getNumberOfCustomers(Connection conn);
-	protected abstract List<CustomerBean> findCustomersByPageId(Connection conn, int id);
+	protected abstract List<CustomerBean> findCustomersByRange(Connection conn, int startIndex, int endIndex);
 
 	@Override
 	public CustomerBean addCustomer(CustomerBean customer) {
@@ -104,9 +104,9 @@ public abstract class AbstractCustomerDaoImpl implements CustomerDao {
 		}
 	}
 	@Override
-	public List<CustomerBean> findCustomersByPageId(int pageId) {
+	public List<CustomerBean> findCustomersByRange(int startId, int endIndex) {
 		try {
-			return findCustomersByPageId(DBUtils.open(), pageId);
+			return findCustomersByRange(DBUtils.open(), startId, endIndex);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new DaoException(e);
