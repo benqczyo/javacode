@@ -1,6 +1,7 @@
 package com.benqcz.crm.dao.impl;
 
 import java.sql.Connection;
+import java.util.List;
 import java.util.Map;
 
 import com.benqcz.crm.dao.CustomerDao;
@@ -15,11 +16,11 @@ public abstract class AbstractCustomerDaoImpl implements CustomerDao {
 	protected abstract CustomerBean addCustomer(Connection conn, CustomerBean customer);
 	protected abstract boolean deleteCustomerById(Connection conn, int id);
 	protected abstract CustomerBean updateCustomer(Connection conn, CustomerBean customer);
-	protected abstract Map<Integer, CustomerBean> findCustomer(Connection conn);
+	protected abstract List<CustomerBean> findCustomer(Connection conn);
 	protected abstract CustomerBean findCustomerById(Connection conn, int id);
 	protected abstract boolean deleteMutilCustomer(Connection conn, String[] ids);
 	protected abstract int getNumberOfCustomers(Connection conn);
-	protected abstract Map<Integer, CustomerBean> findCustomersByPageId(Connection conn, int id);
+	protected abstract List<CustomerBean> findCustomersByPageId(Connection conn, int id);
 
 	@Override
 	public CustomerBean addCustomer(CustomerBean customer) {
@@ -46,7 +47,7 @@ public abstract class AbstractCustomerDaoImpl implements CustomerDao {
 	}
 
 	@Override
-	public Map<Integer, CustomerBean> findCustomer() {
+	public List<CustomerBean> findCustomer() {
 		try {
 			return findCustomer(DBUtils.open());
 		} catch (Exception e) {
@@ -103,9 +104,9 @@ public abstract class AbstractCustomerDaoImpl implements CustomerDao {
 		}
 	}
 	@Override
-	public Map<Integer, CustomerBean> findCustomersByPageId(int pageId) {
+	public List<CustomerBean> findCustomersByPageId(int pageId) {
 		try {
-			return findCustomersByPageId(DBUtils.open(), );
+			return findCustomersByPageId(DBUtils.open(), pageId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new DaoException(e);

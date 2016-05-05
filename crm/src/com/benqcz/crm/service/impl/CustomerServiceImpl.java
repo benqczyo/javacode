@@ -1,5 +1,6 @@
 package com.benqcz.crm.service.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import com.benqcz.crm.dao.CustomerDao;
@@ -22,7 +23,7 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Map<Integer, CustomerBean> findCustomer() {
+	public List<CustomerBean> findCustomer() {
 		return dao.findCustomer();
 	}
 
@@ -47,7 +48,7 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Map<Integer, CustomerBean> selectCustomerByPageId(int pageId) {
+	public List<CustomerBean> selectCustomerByPageId(int pageId) {
 		
 		return null; 
 	}

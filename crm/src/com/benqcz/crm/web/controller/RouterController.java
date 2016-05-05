@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -186,7 +187,7 @@ public class RouterController extends HttpServlet {
 	private void showAllCustomer(HttpServletRequest request, HttpServletResponse response) 
 		throws ServletException, IOException {
 		
-		Map<Integer, CustomerBean> customers = service.findCustomer();
+		List<CustomerBean> customers = service.findCustomer();
 		request.setAttribute("customers", customers);
 		request.getRequestDispatcher("/WEB-INF/pages/showAllCustomers.jsp").forward(request, response);
 		

@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Map;
 
 import junit.framework.Assert;
@@ -48,7 +49,7 @@ public class CustomerDaoImplTest {
 
 	@Test
 	public void testFindCustomerConnection() {
-		Map<Integer, CustomerBean> customers = new CustomerDaoImpl().findCustomer();
+		List<CustomerBean> customers = new CustomerDaoImpl().findCustomer();
 		assertNotNull(customers);
 	}
 

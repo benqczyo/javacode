@@ -65,8 +65,7 @@
 								<th>个人简介</th>
 								<th>操作</th>
 							</tr>
-							<c:forEach var="item" items="${requestScope.customers}">
-								<c:set var="customer" value="${item.value}"/>
+							<c:forEach var="customer" items="${requestScope.customers}">
 								<tr>
 									<td><input type="checkbox" name="id" value="${customer.id}"/></td>
 									<td>${customer.id}</td>

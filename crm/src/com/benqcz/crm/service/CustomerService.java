@@ -1,5 +1,6 @@
 package com.benqcz.crm.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.benqcz.crm.domain.CustomerBean;
@@ -31,9 +32,9 @@ public interface CustomerService {
 	public abstract CustomerBean findCustomerById(int id);
 	/**
 	 * 查找所有客户
-	 * @return 成功返回map对象，键为客户id，值为CustomerBean对象
+	 * @return 成功返回List对象，键为客户id，值为CustomerBean对象
 	 */
-	public abstract Map<Integer, CustomerBean> findCustomer();
+	public abstract List<CustomerBean> findCustomer();
 	/**
 	 * 删除多条客户记录
 	 * @param ids 客户id数组
@@ -50,5 +51,5 @@ public interface CustomerService {
 	 * @param pageId 页面id，1开始
 	 * @return 返回客户Map,失败返回null
 	 */
-	public abstract Map<Integer, CustomerBean> selectCustomerByPageId(int pageId);
+	public abstract List<CustomerBean> selectCustomerByPageId(int pageId);
 }

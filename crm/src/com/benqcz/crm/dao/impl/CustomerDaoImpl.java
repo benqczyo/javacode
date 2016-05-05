@@ -8,7 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.benqcz.crm.domain.CustomerBean;
@@ -65,13 +67,13 @@ public class CustomerDaoImpl extends AbstractCustomerDaoImpl {
 	}
 
 	@Override
-	protected Map<Integer, CustomerBean> findCustomer(Connection conn) {
-		Map<Integer, CustomerBean> result = null;
+	protected List<CustomerBean> findCustomer(Connection conn) {
+		List<CustomerBean> result = null;
 		try {
 			Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery(FIND_CUSTOMER);
 			while (rs.next()) {
-				if (result == null) result = new HashMap<Integer, CustomerBean>();
+				if (result == null) result = new ArrayList<CustomerBean>();
 				CustomerBean customer = new CustomerBean();
 				customer.setId(rs.getInt("id"));
 				customer.setName(rs.getString("name"));
@@ -82,7 +84,7 @@ public class CustomerDaoImpl extends AbstractCustomerDaoImpl {
 				customer.setPreference(rs.getString("preference"));
 				customer.setType(rs.getInt("type"));
 				customer.setDescription(rs.getString("description"));
-				result.put(customer.getId(), customer);
+				result.add(customer);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -169,6 +171,12 @@ public class CustomerDaoImpl extends AbstractCustomerDaoImpl {
 			throw new DaoException(e);
 		}
 		return result;
+	}
+
+	@Override
+	protected List<CustomerBean> findCustomersByPageId(Connection conn, int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

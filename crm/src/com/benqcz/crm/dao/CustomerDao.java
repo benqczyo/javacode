@@ -1,5 +1,6 @@
 package com.benqcz.crm.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import com.benqcz.crm.domain.CustomerBean;
@@ -33,7 +34,7 @@ public interface CustomerDao {
 	 * 查找所有客户
 	 * @return 成功返回map对象，键为客户id，值为CustomerBean对象
 	 */
-	public abstract Map<Integer, CustomerBean> findCustomer();
+	public abstract List<CustomerBean> findCustomer();
 	/**
 	 * 删除多条客户记录
 	 * @param ids 客户id数组
@@ -49,5 +50,5 @@ public interface CustomerDao {
 	 * 分页返回客户集
 	 * @return 成功客户Map,失败返回null
 	 */
-	public abstract Map<Integer, CustomerBean> findCustomersByPageId(int pageId);
+	public abstract List<CustomerBean> findCustomersByPageId(int pageId);
 }
