@@ -148,9 +148,13 @@ public class CustomerDaoImpl extends AbstractCustomerDaoImpl {
 		boolean result = false;
 		try {
 			PreparedStatement st = conn.prepareStatement(DELETE_CUSTOMER_BY_ID);
-			for (String id : ids) {
-				st.setInt(1, Integer.parseInt(id));
+			for (int i = 0 ; i < ids.length; i++) {
+				st.setString(1, ids[i]);
 				st.addBatch();
+				if (i % 100 == 0) {
+					st.executeBatch();
+					st.clearBatch();
+				}
 			}
 			st.executeBatch();
 			result = true;

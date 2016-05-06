@@ -20,8 +20,8 @@ public class Page {
 	private List<CustomerBean> recoders;
 	
 	public Page(int totalRows, int pageId) {
-		this.defaultPageSize = 1;
-		this.defaultPageRecords = 2;
+		this.defaultPageSize = 10;
+		this.defaultPageRecords = 10;
 		this.totalRows = totalRows;
 		this.currentPageId = pageId;
 		this.totalPages = this.totalRows < this.defaultPageSize ? 1 : this.totalRows % this.defaultPageSize == 0 ? this.totalRows / this.defaultPageSize : this.totalRows / this.defaultPageSize + 1;
