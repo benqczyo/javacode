@@ -37,6 +37,10 @@
 					alert("没有选择删除的客户记录");
 				}
 			}
+			function jump() {
+				var select = document.getElementsByTagName("select")[0];
+				window.location = "${pageContext.request.contextPath}/router?action=showPage&pageId=" + select.value;
+			}
 		</script>
 	</head>
 	<body>
@@ -84,24 +88,7 @@
 							</c:forEach>
 						</table>
 					</div>
-					<div style="text-align: center;">
-						<c:set var="path" value="${pageContext.request.contextPath}"/>
-						<c:set var="currentPageId" value="${page.currentPageId}"/>
-						<c:set var="prevPageId" value="${page.prevPageId}"/>
-						<c:set var="nextPageId" value="${page.nextPageId}"/>
-						<c:set var="totalPages" value="${page.totalPages}"/>
-						<p>
-							第<span>${currentPageId}</span>页/共<span>${totalPages}</span>页&nbsp;
-							<c:if test="${prevPageId eq -1}">首页</c:if>
-							<c:if test="${prevPageId ne -1}"><a href="${path}/router?action=showPage&pageId=1">首页</a></c:if>
-							<c:if test="${prevPageId eq -1}">上一页</c:if>
-							<c:if test="${prevPageId ne -1}"><a href="${path}/router?action=showPage&pageId=${prevPageId}">上一页</a></c:if>
-							<c:if test="${nextPageId eq -1}">下一页</c:if>
-							<c:if test="${nextPageId ne -1}"><a href="${path}/router?action=showPage&pageId=${nextPageId}">下一页</a></c:if>
-							<c:if test="${nextPageId eq -1}">尾页</c:if>
-							<c:if test="${nextPageId ne -1}"><a href="${path}/router?action=showPage&pageId=${totalPages}">尾页</a></c:if>
-						</p>
-					</div>
+					<%@include file="page.jsp" %>
 		 		</c:if>
 			</form>
 		</div>
