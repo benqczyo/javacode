@@ -2,14 +2,10 @@ package com.benqcz.crm.dao.impl;
 
 import java.sql.Connection;
 import java.util.List;
-import java.util.Map;
-
 import com.benqcz.crm.dao.CustomerDao;
 import com.benqcz.crm.domain.CustomerBean;
 import com.benqcz.crm.exception.DaoException;
-import com.benqcz.crm.utils.DBUtils;
-
-import oracle.sql.CustomDatum;
+import com.benqcz.crm.utils.DBCPUtils;
 
 public abstract class AbstractCustomerDaoImpl implements CustomerDao {
 	
@@ -25,93 +21,93 @@ public abstract class AbstractCustomerDaoImpl implements CustomerDao {
 	@Override
 	public CustomerBean addCustomer(CustomerBean customer) {
 		try {
-			return addCustomer(DBUtils.open(), customer);
+			return addCustomer(DBCPUtils.open(), customer);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new DaoException(e);
 		} finally {
-			DBUtils.close();
+			DBCPUtils.close();
 		}
 	}
 
 	@Override
 	public boolean deleteCustomerById(int id) {
 		try {
-			return deleteCustomerById(DBUtils.open(), id);
+			return deleteCustomerById(DBCPUtils.open(), id);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new DaoException(e);
 		} finally {
-			DBUtils.close();
+			DBCPUtils.close();
 		}
 	}
 
 	@Override
 	public List<CustomerBean> findCustomer() {
 		try {
-			return findCustomer(DBUtils.open());
+			return findCustomer(DBCPUtils.open());
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new DaoException(e);
 		} finally {
-			DBUtils.close();
+			DBCPUtils.close();
 		}
 	}
 
 	@Override
 	public CustomerBean findCustomerById(int id) {
 		try {
-			return findCustomerById(DBUtils.open(), id);
+			return findCustomerById(DBCPUtils.open(), id);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new DaoException(e);
 		} finally {
-			DBUtils.close();
+			DBCPUtils.close();
 		}
 	}
 
 	@Override
 	public CustomerBean updateCustomer(CustomerBean customer) {
 		try {
-			return updateCustomer(DBUtils.open(), customer);
+			return updateCustomer(DBCPUtils.open(), customer);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new DaoException(e);
 		} finally {
-			DBUtils.close();
+			DBCPUtils.close();
 		}
 	}
 	@Override
 	public boolean deleteMutilCustomer(String[] ids) {
 		try {
-			return deleteMutilCustomer(DBUtils.open(), ids);
+			return deleteMutilCustomer(DBCPUtils.open(), ids);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new DaoException(e);
 		} finally {
-			DBUtils.close();
+			DBCPUtils.close();
 		}
 	}
 	@Override
 	public int getNumberOfCustomers() {
 		try {
-			return getNumberOfCustomers(DBUtils.open());
+			return getNumberOfCustomers(DBCPUtils.open());
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new DaoException(e);
 		} finally {
-			DBUtils.close();
+			DBCPUtils.close();
 		}
 	}
 	@Override
 	public List<CustomerBean> findCustomersByRange(int startId, int endIndex) {
 		try {
-			return findCustomersByRange(DBUtils.open(), startId, endIndex);
+			return findCustomersByRange(DBCPUtils.open(), startId, endIndex);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new DaoException(e);
 		} finally {
-			DBUtils.close();
+			DBCPUtils.close();
 		}
 	}
 
