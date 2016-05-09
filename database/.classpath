@@ -5,5 +5,9 @@
 	<classpathentry kind="lib" path="lib/ojdbc6.jar"/>
 	<classpathentry kind="lib" path="lib/commons-dbcp-1.4.jar"/>
 	<classpathentry kind="lib" path="lib/commons-pool-1.6.jar"/>
+	<classpathentry kind="lib" path="lib/c3p0-0.9.1.2-jdk1.3.jar"/>
+	<classpathentry kind="lib" path="lib/c3p0-0.9.1.2.jar"/>
+	<classpathentry kind="lib" path="lib/c3p0-oracle-thin-extras-0.9.1.2.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
