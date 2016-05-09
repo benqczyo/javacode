@@ -1,32 +1,14 @@
 package com.benqcz.crm.utils;
 
-import java.io.IOException;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Properties;
 
-import javax.sql.DataSource;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 
-import org.apache.commons.dbcp.BasicDataSourceFactory;
-
-public class DBCPUtils {
+public class C3P0Utils {
 	
-	private static final String SOURCE_CONFIG_FILE = "source.cfg";
-	
-	private static DataSource ds;
+	private static ComboPooledDataSource ds = new ComboPooledDataSource();
 	private static ThreadLocal<Connection> connections;
-	
-	static {
-		Properties p = new Properties();
-		try {
-			p.load(DBCPUtils.class.getClassLoader().getResourceAsStream(SOURCE_CONFIG_FILE));
-			ds = BasicDataSourceFactory.createDataSource(p);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 	
 	public static Connection open() {
 		Connection result = null;
@@ -55,6 +37,6 @@ public class DBCPUtils {
 			} finally {
 				connections.remove();
 			}
-	}
-	
+	} 
+
 }

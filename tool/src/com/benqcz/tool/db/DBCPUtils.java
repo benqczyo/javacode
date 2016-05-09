@@ -1,4 +1,4 @@
-package com.benqcz.crm.utils;
+package com.benqcz.tool.db;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -13,7 +13,7 @@ import org.apache.commons.dbcp.BasicDataSourceFactory;
 
 public class DBCPUtils {
 	
-	private static final String SOURCE_CONFIG_FILE = "source.cfg";
+	private static final String DBCP_CONFIG_FILE = "dbcp.cfg";
 	
 	private static DataSource ds;
 	private static ThreadLocal<Connection> connections;
@@ -21,7 +21,7 @@ public class DBCPUtils {
 	static {
 		Properties p = new Properties();
 		try {
-			p.load(DBCPUtils.class.getClassLoader().getResourceAsStream(SOURCE_CONFIG_FILE));
+			p.load(DBCPUtils.class.getClassLoader().getResourceAsStream(DBCP_CONFIG_FILE));
 			ds = BasicDataSourceFactory.createDataSource(p);
 		} catch (Exception e) {
 			e.printStackTrace();
