@@ -45,9 +45,9 @@ public class DBAssist {
 			PreparedStatement st = conn.prepareStatement(sql);
 			int numOfPlaceHolders = st.getParameterMetaData().getParameterCount();
 			if (numOfPlaceHolders > 0 && (params == null || params.length != numOfPlaceHolders))
-				throw new IllegalArgumentException("参数个数不匹配"); 
+				throw new IllegalArgumentException("the number of parameters does not match"); 
 			if (numOfPlaceHolders == 0 && params != null)
-				throw new IllegalArgumentException("无需提供参数，却错误的传入了参数"); 
+				throw new IllegalArgumentException("it is not need to transfer the parameters");
 			for (int i = 1; i <= numOfPlaceHolders; i++)
 				st.setObject(i, params[i - 1]);
 			result = st.executeUpdate();
@@ -66,9 +66,9 @@ public class DBAssist {
 			PreparedStatement st = conn.prepareStatement(sql);
 			int numOfPlaceHolders = st.getParameterMetaData().getParameterCount();
 			if (numOfPlaceHolders > 0 && (params == null || params.length != numOfPlaceHolders))
-				throw new IllegalArgumentException("参数个数不匹配"); 
+				throw new IllegalArgumentException("the number of parameters does not match");
 			if (numOfPlaceHolders == 0 && params != null)
-				throw new IllegalArgumentException("无需提供参数，却错误的传入了参数"); 
+				throw new IllegalArgumentException("it is not need to transfer the parameters"); 
 			for (int i = 1; i <= numOfPlaceHolders; i++)
 				st.setObject(i, params[i - 1]);
 			result = handler.handle(st.executeQuery());

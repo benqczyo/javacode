@@ -1,0 +1,2 @@
+package proxy;import java.util.Random;public class TankTimer implements proxy.Moveable {private proxy.Moveable innerObject;public TankTimer(proxy.Moveable innerObject) {this.innerObject = innerObject;}@Override
+public void move() {long startTime = System.currentTimeMillis();innerObject.move();try {Thread.sleep(new Random().nextInt(10000));} catch (InterruptedException e) {e.printStackTrace();}System.out.println("time:" + (System.currentTimeMillis() - startTime) / 1000);System.out.println("tank stop");}}
