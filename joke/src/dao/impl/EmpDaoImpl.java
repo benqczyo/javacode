@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
@@ -15,17 +16,23 @@ import org.apache.commons.beanutils.converters.SqlDateConverter;
 import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 
-import utils.C3P0Utils;
+import com.benqcz.dbutils.C3P0Utils;
+
 
 import dao.EmpDao;
 import domain.Emp;
 
 public class EmpDaoImpl implements EmpDao {
 	
+	private final String FIND_EMP_BY_EMPNO = "SELECT empno, ename, job, mgr, hiredate, sal, comm, deptno FROM emp WHERE empno = ?";
+	private final String FIND_ALL_EMP = "SELECT empno, ename, job, mgr, hiredate, sal, comm, deptno FROM emp";
 	private final String ADD_EMP = "INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	private final String DEL_EMP = "DELETE FROM emp WHERE empno = ?";
 	
-	private QueryRunner queryRunner = new QueryRunner(C3P0Utils.getDataSource(), true);
+	private QueryRunner queryRunner = new QueryRunner();
 
 	@Override
 	public Emp addEmp(Emp emp) {
@@ -37,7 +44,7 @@ public class EmpDaoImpl implements EmpDao {
 				field.setAccessible(true);
 				params.add(field.get(emp));
 			}
-			queryRunner.update(ADD_EMP, params.toArray());
+			queryRunner.update(C3P0Utils.open(), ADD_EMP, params.toArray());
 			result = emp;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -46,35 +53,47 @@ public class EmpDaoImpl implements EmpDao {
 	}
 
 	@Override
-	public Emp delEmpByNo(int empno) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean delEmpByNo(int empno) {
+		try {
+			return queryRunner.update(C3P0Utils.open(), DEL_EMP, empno) == 1;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
 	public List<Emp> findAllEmps() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Emp findEmpByNo(int empno) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return queryRunner.query(C3P0Utils.open(), FIND_ALL_EMP, new BeanListHandler<Emp>(Emp.class));
+		} catch (SQLException e) {
+			throw new RuntimeException();
+		}
 	}
 	
-	public static void main(String[] args) throws ParseException {
-		Emp emp = new Emp();
-		emp.setEmpno(5400);
-		emp.setEname("Lord");
-		emp.setJob("Mgr");
-		emp.setMgr(1000);
-		emp.setHiredate(new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse("1982-08-01").getTime()));
-		emp.setSal(9000);
-		emp.setComm(4500);
-		emp.setDeptno(20);
-		//System.out.println(emp);
-		new EmpDaoImpl().addEmp(emp);
+	@Override
+	public Emp findEmpByNo(int empno) {
+		try {
+			return queryRunner.query(C3P0Utils.open(), FIND_EMP_BY_EMPNO, new BeanHandler<Emp>(Emp.class), empno);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	@Override
+	public boolean addRandomData() {
+		boolean result = false;
+		Object[][] params = new Object[][] {
+				new Object[] {new Random().nextInt(3000), "random", "random", 2999, new java.sql.Date(System.currentTimeMillis()), 5000, 4000, 20},
+				new Object[] {new Random().nextInt(3000), "random", "random", 2999, new java.sql.Date(System.currentTimeMillis()), 5000, 4000, 20},
+				new Object[] {new Random().nextInt(3000), "random", "random", 2999, new java.sql.Date(System.currentTimeMillis()), 5000, 4000, 20},
+		};
+		try {
+			queryRunner.batch(C3P0Utils.open(), ADD_EMP, params);
+			result = true;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return result;
 	}
 
 }

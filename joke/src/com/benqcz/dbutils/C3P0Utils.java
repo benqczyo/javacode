@@ -1,4 +1,4 @@
-package com.benqcz.tool.db;
+package com.benqcz.dbutils;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -34,7 +34,7 @@ public class C3P0Utils {
 	
 	public static void startTransaction() {
 		try {
-			open().setAutoCommit(true);
+			open().setAutoCommit(false);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -67,6 +67,14 @@ public class C3P0Utils {
 	public static void setSavePoint() {
 		try {
 			open().setSavepoint();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public static void commit() {
+		try {
+			open().commit();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
