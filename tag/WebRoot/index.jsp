@@ -1,12 +1,12 @@
-<%@page pageEncoding="utf-8" contentType="text/html; charset=utf-8" %>
-<%@taglib prefix="util" uri="http://www.benqczyo.net/jsp/jstl/util" %>
+<%@page pageEncoding="utf-8" contentType="text/html;charset=utf-8" %>
+<%@taglib uri="http://www.benqcz.com/servlet/jsp/jstl" prefix="benqcz" %>
 
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Util Functions</title>
+		<title>显示远程IP</title>
 	</head>
 	<body>
-		<strong>${util:uppercase("lowercase")}</strong>
+		<strong>远程IP地址：<span style="color: red"><benqcz:remoteAddress/></span></strong>
 	</body>
 </html>
