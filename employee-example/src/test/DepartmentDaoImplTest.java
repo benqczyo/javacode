@@ -52,17 +52,23 @@ public class DepartmentDaoImplTest {
 
 	@Test
 	public void testDelDepartmentByNo() {
-		fail("Not yet implemented");
+		new DepartmentDaoImpl().delDepartmentByNo(60);
 	}
 
 	@Test
 	public void testFindAllDepartments() {
-		fail("Not yet implemented");
+		List<Department> depts = null;
+		assertNotNull(depts = new DepartmentDaoImpl().findAllDepartments());
 	}
 
 	@Test
 	public void testFindDepartmentByNo() {
-		fail("Not yet implemented");
+		Department dept = null;
+		assertNotNull(dept = new DepartmentDaoImpl().findDepartmentByNo(60));
+		List<Employee> emps = dept.getEmployees();
+		for (Employee emp : emps) {
+			System.out.println(emp);
+		}
 	}
 
 }

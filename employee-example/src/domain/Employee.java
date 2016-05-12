@@ -104,8 +104,8 @@ public class Employee implements Serializable {
 	public String toString() {
 		return String
 				.format(
-						"Employee [comm=%s, dept=%s, deptno=%s, empno=%s, ename=%s, hiredate=%s, job=%s, mgr=%s, sal=%s]",
-						comm, dept, deptno, empno, ename, hiredate, job, mgr,
+						"Employee [comm=%s, deptno=%s, empno=%s, ename=%s, hiredate=%s, job=%s, mgr=%s, sal=%s]",
+						comm, deptno, empno, ename, hiredate, job, mgr,
 						sal);
 	}
 	
