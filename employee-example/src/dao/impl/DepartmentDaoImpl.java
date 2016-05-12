@@ -25,7 +25,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 	private final String FIND_DEPARTMENT_BY_ID = "SELECT deptno, dname, loc FROM dept WHERE deptno = ?";
 	private final String DEL_DEPARTMENT_BY_ID = "DELETE FROM dept WHERE deptno = ?";
 	private final String DEL_ALL_EMPLOYEES_BY_DEPARTMENT_ID = "DELETE FROM emp WHERE deptno = ?";
-	
+
 	private QueryRunner qr = new QueryRunner();
 
 	@Override
@@ -84,8 +84,10 @@ public class DepartmentDaoImpl implements DepartmentDao {
 		boolean result = false;
 		try {
 			C3P0Utils.startTransaction();
-			qr.update(C3P0Utils.open(), DEL_ALL_EMPLOYEES_BY_DEPARTMENT_ID, new Object[] { deptno });
-			qr.update(C3P0Utils.open(), DEL_DEPARTMENT_BY_ID, new Object[] { deptno });
+			qr.update(C3P0Utils.open(), DEL_ALL_EMPLOYEES_BY_DEPARTMENT_ID,
+					new Object[] { deptno });
+			qr.update(C3P0Utils.open(), DEL_DEPARTMENT_BY_ID,
+					new Object[] { deptno });
 		} catch (SQLException e) {
 			C3P0Utils.rollback();
 		} finally {
