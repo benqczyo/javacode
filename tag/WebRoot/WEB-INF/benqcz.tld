@@ -13,5 +13,10 @@
     <body-content>empty</body-content>
   </tag>
  
+ <tag>
+ 	<name>hide</name>
+ 	<tag-class>com.benqcz.tag.Hide</tag-class>
+ 	 <body-content>jsp</body-content>
+ </tag>
  
 </taglib>
