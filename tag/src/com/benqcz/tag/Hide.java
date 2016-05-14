@@ -10,5 +10,11 @@ public class Hide extends TagSupport {
 	public int doStartTag() throws JspException {
 		return Tag.SKIP_BODY;
 	}
+
+	@Override
+	public int doEndTag() throws JspException {
+		return Tag.SKIP_PAGE;
+	}
+	
 	
 }
