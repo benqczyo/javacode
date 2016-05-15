@@ -19,6 +19,7 @@
 				<p><strong>欢迎您：<span>${sessionScope.user.username}</span></strong>&nbsp;<a href="${pageContext.servletContext.contextPath}/controller?action=logout">注销</a></p>
 			</c:if>
 		</div>
+		<a href="http://localhost:8080/tag/">访问</a>
 	</div>  	
   </body>
 </html>

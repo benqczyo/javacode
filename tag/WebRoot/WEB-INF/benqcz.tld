@@ -18,22 +18,63 @@
 		<tag-class>com.benqcz.tag.Hide</tag-class>
 		<body-content>jsp</body-content>
 	</tag>
-	
+
 	<tag>
-		<name>forEach</name>
-		<tag-class>com.benqcz.tag.Foreach</tag-class>
+		<name>repeat</name>
+		<tag-class>com.benqcz.tag.Repeat</tag-class>
 		<body-content>jsp</body-content>
 		<attribute>
-			<name>var</name>
+			<name>count</name>
 			<required>true</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>simpleRemoteAddress</name>
+		<tag-class>com.benqcz.tag.SimpleRemoteAddress</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+	
+	<tag>
+		<name>simpleHide</name>
+		<tag-class>com.benqcz.tag.SimpleHide</tag-class>
+		<body-content>scriptless</body-content>
+	</tag>
+	
+	<tag>
+		<name>simpleUppercast</name>
+		<tag-class>com.benqcz.tag.SimpleUppercast</tag-class>
+		<body-content>scriptless</body-content>
+	</tag>
+	
+	<tag>
+		<name>antiHotlinking</name>
+		<tag-class>com.benqcz.tag.AntiHotlinking</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>site</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<name>items</name>
+			<name>redirect</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Iterable</type>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>if</name>
+		<tag-class>com.benqcz.tag.If</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>test</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
 		</attribute>
 	</tag>
 
