@@ -4,13 +4,15 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-	<jsp-config>
+	<!--<jsp-config>
 		<taglib>
 			<taglib-uri>http://www.benqcz.com/servlet/jsp/jstl</taglib-uri>
 			<taglib-location>/WEB-INF/benqcz.tld</taglib-location>
 		</taglib>
 	</jsp-config>
 
+	-->
+	
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
