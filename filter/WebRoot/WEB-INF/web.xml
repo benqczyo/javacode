@@ -13,21 +13,34 @@
 		</init-param>
 	</filter>
 	
+	<filter>
+		<filter-name>DynamicResourceCacheControllerFilter</filter-name>
+		<filter-class>com.benqcz.filter.filter.DynamicResourceCacheControllerFilter</filter-class>
+	</filter>
+	
 	<filter-mapping>
 		<filter-name>EncodingFilter</filter-name>
 		<url-pattern>*</url-pattern>
 	</filter-mapping>
 	
+	<filter-mapping>
+		<filter-name>DynamicResourceCacheControllerFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>DynamicResourceCacheControllerFilter</filter-name>
+		<url-pattern>/service/*</url-pattern>
+	</filter-mapping>
+	
 	<servlet>
-		<description>This is the description of my J2EE component</description>
-		<display-name>This is the display name of my J2EE component</display-name>
 		<servlet-name>Router</servlet-name>
 		<servlet-class>com.benqcz.filter.web.controller.Router</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>Router</servlet-name>
-		<url-pattern>/router</url-pattern>
+		<url-pattern>/service/router</url-pattern>
 	</servlet-mapping>
 
 	<welcome-file-list>

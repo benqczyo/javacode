@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="loginex"
+  id="myeclipse.1463538160486"
+  context-root="/loginex"
+  j2ee-spec="5.0"
+  archive="loginex.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
