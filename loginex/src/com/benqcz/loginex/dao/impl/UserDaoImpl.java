@@ -112,7 +112,7 @@ public class UserDaoImpl implements UserDao {
 				Field[] userBeanFields = UserBean.class.getDeclaredFields();
 				for (Field userBeanField : userBeanFields) {
 					userBeanField.setAccessible(true);
-					userBeanField.set(result, userNode.valueOf(userBeanField.getName()));
+					userBeanField.set(result, userNode.valueOf(String.format("@%s", userBeanField.getName())));
 				}
 			}
 		} catch (Exception e) {

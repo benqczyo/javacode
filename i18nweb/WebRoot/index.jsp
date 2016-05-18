@@ -1,30 +1,31 @@
-<%@ page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
-<%@page import="java.util.ResourceBundle, java.util.Locale"%>
+<%@page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<% 
-	ResourceBundle rb = ResourceBundle.getBundle("com.benqcz.i18nweb.resource.ui", request.getLocale());
-%>
-
+<fmt:setLocale value="${pageContext.request.locale}"/>
+<fmt:setBundle basename="com.benqcz.i18nweb.resource.ui" scope="page" var="bundle"/>
+${b}
 <!DOCTYPE html>
 <html>
 	<head>
-		<title><%=rb.getString("ui_login_title")%></title>
+		<title>
+			<fmt:message key="ui_login_title" bundle="${bundle}"/>
+		</title>
 	</head>
 	<body>
 		<div id="box">
 			<form action="" method="post">
 				<table>
 					<tr>
-						<td><%=rb.getString("ui_login_name")%></td>
+						<td><fmt:message key="ui_login_name" bundle="${bundle}"/><br></td>
 						<td><input type="text"/></td>
 					</tr>
 					<tr>
-						<td><%=rb.getString("ui_login_password")%></td>
+						<td><fmt:message key="ui_login_password" bundle="${bundle}"/></td>
 						<td><input type="password"/></td>
 					</tr>
 					<tr>
 						<td colspan="2">
-							<input type="submit" value="<%=rb.getString("ui_login_submit")%>"/>
+							<input type="submit" value='<fmt:message key="ui_login_submit" bundle="${bundle}"/>'/>
 						</td>
 					</tr>
 				</table>				

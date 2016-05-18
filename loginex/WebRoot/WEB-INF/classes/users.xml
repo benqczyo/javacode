@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<users></users>
+
+<users> 
+  <user id="1001" name="benjamin" password="3XsdAojw9RGL6Q71wOA6sbE3w/g=" email="benqcz@hotmail.com"/>  
+  <user id="1002" name="mojo" password="3XsdAojw9RGL6Q71wOA6sbE3w/g=" email="mojo@hotmail.com"/> 
+</users>

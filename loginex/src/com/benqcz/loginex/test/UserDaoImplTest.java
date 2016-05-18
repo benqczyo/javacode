@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import com.benqcz.loginex.dao.impl.UserDaoImpl;
 import com.benqcz.loginex.domain.UserBean;
+import com.benqcz.utils.SHA1Utils;
 
 public class UserDaoImplTest {
 
@@ -14,8 +15,8 @@ public class UserDaoImplTest {
 	public void testAddUser() {
 		UserBean user = new UserBean();
 		user.setId("1");
-		user.setName("benjamin");
-		user.setPassword("heelo");
+		user.setName("benqcz");
+		user.setPassword("sorry");
 		user.setEmail("benqcz@hotmail.com");
 		new UserDaoImpl().addUser(user);
 	}
@@ -38,11 +39,16 @@ public class UserDaoImplTest {
 	@Test
 	public void testUpdateUser() {
 		UserBean user = new UserBean();
-		user.setId("1");
-		user.setName("benqcz");
+		user.setId("2");
+		user.setName("dojo");
 		user.setPassword("9527");
 		user.setEmail("benqcz@hotmail.com");
 		new UserDaoImpl().updateUser(user);
+	}
+	
+	@Test
+	public void testFindUser() {
+		System.out.println(new UserDaoImpl().findUser("benjamin", SHA1Utils.encode("sorry")));
 	}
 
 }

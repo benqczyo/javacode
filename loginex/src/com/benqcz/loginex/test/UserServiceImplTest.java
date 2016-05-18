@@ -12,19 +12,16 @@ public class UserServiceImplTest {
 
 	@Test
 	public void testLogin() {
-		UserBean userBean = new UserBean();
-		userBean.setName("benjamin");
-		userBean.setPassword("sorry");
-		Assert.assertEquals(true, new UserServiceImpl().login(userBean));
+		
 	}
 
 	@Test
 	public void testRegister() {
 		UserBean userBean = new UserBean();
-		userBean.setId("1001");
-		userBean.setName("benjamin");
+		userBean.setId("1002");
+		userBean.setName("mojo");
 		userBean.setPassword("sorry");
-		userBean.setEmail("benqcz@hotmail.com");
+		userBean.setEmail("mojo@hotmail.com");
 		Assert.assertEquals(true, new UserServiceImpl().register(userBean));
 	}
 

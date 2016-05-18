@@ -4,6 +4,7 @@ public class LoginFormBean extends AbstractFormBeanImpl {
 	
 	private String name;
 	private String password;
+	private String auto;
 
 	public LoginFormBean() {}
 
@@ -21,6 +22,14 @@ public class LoginFormBean extends AbstractFormBeanImpl {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String getAuto() {
+		return auto;
+	}
+
+	public void setAuto(String auto) {
+		this.auto = auto;
 	}
 
 	public boolean validate() {
