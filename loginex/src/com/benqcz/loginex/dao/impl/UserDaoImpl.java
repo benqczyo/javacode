@@ -78,26 +78,6 @@ public class UserDaoImpl implements UserDao {
 		return result;
 	}
 
-	public UserBean findUserById(String id) {
-		UserBean result = null;
-		String xPath = String.format("//user[@id='%s']", id);
-		try {
-			Node userNode = xmlUtils.open().selectSingleNode(xPath);
-			if (userNode != null) {
-				result = new UserBean();
-				Field[] userBeanFields = UserBean.class.getDeclaredFields();
-				for (Field userBeanField : userBeanFields) {
-					userBeanField.setAccessible(true);
-					String fieldName = userBeanField.getName();
-					userBeanField.set(result, userNode.valueOf(String.format("@%s", fieldName)));
-				}
-			}
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-		return result;
-	}
-
 	public boolean updateUser(UserBean user) {
 		boolean result = false;
 		try {
@@ -120,6 +100,45 @@ public class UserDaoImpl implements UserDao {
 			throw new RuntimeException(e);
 		}
 		return false;
+	}
+
+	public UserBean findUser(String name, String password) {
+		UserBean result = null;
+		try {
+			String xPath = String.format("//user[@name='%s' and @password='%s']", name, password);
+			Node userNode = xmlUtils.open().selectSingleNode(xPath);
+			if (userNode != null) {
+				result = new UserBean();
+				Field[] userBeanFields = UserBean.class.getDeclaredFields();
+				for (Field userBeanField : userBeanFields) {
+					userBeanField.setAccessible(true);
+					userBeanField.set(result, userNode.valueOf(userBeanField.getName()));
+				}
+			}
+		} catch (Exception e) {
+			new RuntimeException(e);
+		}
+		return result;
+	}
+
+	public UserBean findUserByName(String name) {
+		UserBean result = null;
+		String xPath = String.format("//user[@name='%s']", name);
+		try {
+			Node userNode = xmlUtils.open().selectSingleNode(xPath);
+			if (userNode != null) {
+				result = new UserBean();
+				Field[] userBeanFields = UserBean.class.getDeclaredFields();
+				for (Field userBeanField : userBeanFields) {
+					userBeanField.setAccessible(true);
+					String fieldName = userBeanField.getName();
+					userBeanField.set(result, userNode.valueOf(String.format("@%s", fieldName)));
+				}
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		return result;
 	}
 
 }

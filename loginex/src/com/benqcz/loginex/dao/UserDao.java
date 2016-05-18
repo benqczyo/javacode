@@ -8,6 +8,7 @@ public interface UserDao {
 	boolean addUser(UserBean user);
 	boolean delUserById(String id);
 	boolean updateUser(UserBean user);
-	UserBean findUserById(String id);
+	UserBean findUserByName(String name);
+	UserBean findUser(String name, String password);
 	List<UserBean> findAllUsers();
 }

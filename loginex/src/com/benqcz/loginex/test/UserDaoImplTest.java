@@ -31,8 +31,8 @@ public class UserDaoImplTest {
 	}
 
 	@Test
-	public void testFindUserById() {
-		assertNotNull(new UserDaoImpl().findUserById("1"));
+	public void testFindUserByName() {
+		assertNotNull(new UserDaoImpl().findUserByName("benjamin"));
 	}
 
 	@Test
