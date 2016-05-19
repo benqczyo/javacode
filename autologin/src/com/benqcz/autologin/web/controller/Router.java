@@ -35,6 +35,22 @@ public class Router extends HttpServlet {
 			return;
 		}
 		
+		if (action.equalsIgnoreCase("logout")) {
+			doLogout(req, res);
+			return;
+		}
+		
+		res.sendRedirect(String.format("%s/%s", req.getContextPath(), "message.jsp"));
+		
+	}
+
+	private void doLogout(HttpServletRequest req, HttpServletResponse res) throws IOException {
+		req.getSession().removeAttribute("user");
+		Cookie cookie = new Cookie("loginInfo", null);
+		cookie.setPath(req.getContextPath());
+		cookie.setMaxAge(0);
+		res.addCookie(cookie);
+		res.sendRedirect(String.format("%s/%s", req.getContextPath(), "index.jsp"));
 	}
 
 	private void doShow(HttpServletRequest req, HttpServletResponse res) throws IOException {
