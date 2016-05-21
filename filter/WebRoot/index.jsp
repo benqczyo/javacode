@@ -10,7 +10,7 @@
 		</title>	
 	</head>
 	<body>
-		<form action="${pageContext.request.contextPath}/service/router?action=login" method="post">
+		<form action="${pageContext.request.contextPath}/service/router?action=login" method="get">
 			<table>
 				<tr>
 					<td>

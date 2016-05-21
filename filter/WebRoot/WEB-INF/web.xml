@@ -5,8 +5,8 @@
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	
 	<filter>
-		<filter-name>EncodingFilter</filter-name>
-		<filter-class>com.benqcz.filter.filter.EncodingFilter</filter-class>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>com.benqcz.filter.filter.CharacterEncodingFilter</filter-class>
 		<init-param>
 			<param-name>preference</param-name>
 			<param-value>UTF-8</param-value>
@@ -18,8 +18,13 @@
 		<filter-class>com.benqcz.filter.filter.DynamicResourceCacheControllerFilter</filter-class>
 	</filter>
 	
+	<filter>
+		<filter-name>DirtyWordFilter</filter-name>
+		<filter-class>com.benqcz.filter.filter.DirtyWordFilter</filter-class>
+	</filter>
+	
 	<filter-mapping>
-		<filter-name>EncodingFilter</filter-name>
+		<filter-name>CharacterEncodingFilter</filter-name>
 		<url-pattern>*</url-pattern>
 	</filter-mapping>
 	
@@ -31,6 +36,11 @@
 	<filter-mapping>
 		<filter-name>DynamicResourceCacheControllerFilter</filter-name>
 		<url-pattern>/service/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>DirtyWordFilter</filter-name>
+		<url-pattern>*</url-pattern>
 	</filter-mapping>
 	
 	<servlet>
