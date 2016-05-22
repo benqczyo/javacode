@@ -36,6 +36,7 @@ public class DirtyWordFilter implements Filter {
 		for (Entry<String, String> item : dirtywords.entrySet()) {
 			System.out.println(item.getKey() + "=" + item.getValue());
 		}
+		
 		filterChain.doFilter(request, response);
 	}
 

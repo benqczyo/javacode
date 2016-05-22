@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="filters"
+  id="myeclipse.1463833970678"
+  context-root="/filters"
+  j2ee-spec="5.0"
+  archive="filters.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

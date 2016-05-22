@@ -18,12 +18,12 @@
 		<filter-class>com.benqcz.filter.filter.DynamicResourceCacheControllerFilter</filter-class>
 	</filter>
 	
-	<filter>
+	<!--<filter>
 		<filter-name>DirtyWordFilter</filter-name>
 		<filter-class>com.benqcz.filter.filter.DirtyWordFilter</filter-class>
 	</filter>
 	
-	<filter-mapping>
+	--><filter-mapping>
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<url-pattern>*</url-pattern>
 	</filter-mapping>
@@ -38,12 +38,12 @@
 		<url-pattern>/service/*</url-pattern>
 	</filter-mapping>
 	
-	<filter-mapping>
+	<!--<filter-mapping>
 		<filter-name>DirtyWordFilter</filter-name>
 		<url-pattern>*</url-pattern>
 	</filter-mapping>
 	
-	<servlet>
+	--><servlet>
 		<servlet-name>Router</servlet-name>
 		<servlet-class>com.benqcz.filter.web.controller.Router</servlet-class>
 	</servlet>

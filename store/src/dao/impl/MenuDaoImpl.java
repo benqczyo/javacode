@@ -17,7 +17,7 @@ import exception.MenuDaoException;
 
 public class MenuDaoImpl implements MenuDao {
 	
-	private final String ADD_MENU = "INSERT INO menu (id, title, uri, description) VALUES (?, ?, ?, ?)";
+	private final String ADD_MENU = "INSERT INTO menu (id, title, uri, description) VALUES (?, ?, ?, ?)";
 
 	private QueryRunner qr = new QueryRunner(C3P0Utils.getDataSource());
 	

@@ -1,4 +1,4 @@
-package com.benqcz.filter.filter;
+package filters;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
