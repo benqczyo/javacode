@@ -15,11 +15,11 @@ public class UserDaoImplTest extends TestCase {
 	private UserDao dao = new UserDaoImpl();
 
 	public void testAddUser() {
-		UserBean user = new UserBean();
-		user.setName("benqcz");
-		user.setPassword(SHA1Utils.encode("sorry"));
-		user.setEmail("benqcz@hotmail.com");
-		Assert.assertEquals(true, dao.addUser(user));
+		UserBean user2 = new UserBean();
+		user2.setName("张三");
+		user2.setPassword(SHA1Utils.encode("yrros"));
+		user2.setEmail("lox@163.com");
+		dao.addUser(user2);
 	}
 
 	public void testDelUserByName() {
@@ -42,7 +42,7 @@ public class UserDaoImplTest extends TestCase {
 
 	public void testUpdateUser() {
 		UserBean user = new UserBean();
-		user.setName("lox");
+		user.setName("张三");
 		user.setPassword(SHA1Utils.encode("yrros"));
 		user.setEmail("lox@163.com");
 		Assert.assertEquals(true, dao.updateUser(user));

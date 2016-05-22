@@ -12,6 +12,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import sun.misc.BASE64Decoder;
+
 import com.benqcz.autologin.dao.impl.UserDaoImpl;
 import com.benqcz.autologin.domain.UserBean;
 
@@ -35,7 +37,8 @@ public class AutoLoginFilter implements Filter {
 					String cookieName = cookie.getName();
 					if (cookieName.equalsIgnoreCase("loginInfo")) {
 						String[] params = cookie.getValue().split(":");
-						UserBean user = new UserDaoImpl().findUserByName(params[0]);
+						String userName = new String(new BASE64Decoder().decodeBuffer(params[0]));
+						UserBean user = new UserDaoImpl().findUserByName(userName);
 						if (user != null && user.getPassword().equalsIgnoreCase(params[1])) {
 							session.setAttribute("user", user);
 						}

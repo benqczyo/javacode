@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import sun.misc.BASE64Encoder;
+
 import com.benqcz.autologin.domain.UserBean;
 import com.benqcz.autologin.service.UserService;
 import com.benqcz.autologin.service.impl.UserServiceImpl;
@@ -41,7 +43,6 @@ public class Router extends HttpServlet {
 		}
 		
 		res.sendRedirect(String.format("%s/%s", req.getContextPath(), "message.jsp"));
-		
 	}
 
 	private void doLogout(HttpServletRequest req, HttpServletResponse res) throws IOException {
@@ -70,7 +71,7 @@ public class Router extends HttpServlet {
 			if (user != null) {
 				req.getSession().setAttribute("user", user);
 				if (req.getParameter("auto") != null) {
-					Cookie cookie = new Cookie("loginInfo", String.format("%s:%s", user.getName(), user.getPassword()));
+					Cookie cookie = new Cookie("loginInfo", String.format("%s:%s", new BASE64Encoder().encode(user.getName().getBytes()), user.getPassword()));
 					cookie.setPath(getServletContext().getContextPath());
 					cookie.setMaxAge(Integer.MAX_VALUE);
 					res.addCookie(cookie);
