@@ -4,7 +4,7 @@ import java.util.List;
 
 import domain.MenuBean;
 
-public interface BizService {
+public interface BussinessService {
 	/**
 	 * 添加菜单
 	 * @param menu 菜单对象

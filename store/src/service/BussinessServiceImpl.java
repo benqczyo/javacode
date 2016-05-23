@@ -6,7 +6,7 @@ import dao.MenuDao;
 import dao.impl.MenuDaoImpl;
 import domain.MenuBean;
 
-public class BizServiceImpl implements BizService {
+public class BussinessServiceImpl implements BussinessService {
 	
 	private MenuDao dao = new MenuDaoImpl();
 
