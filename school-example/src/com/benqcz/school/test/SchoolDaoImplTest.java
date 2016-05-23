@@ -18,16 +18,16 @@ public class SchoolDaoImplTest {
 	@Test
 	public void testAddTeacher() {
 		Teacher teacher = new Teacher();
-		teacher.setId(1);
-		teacher.setName("张三");
+		teacher.setId(5);
+		teacher.setName("Solo");
 		
 		Student student1 = new Student();
-		student1.setId(1);
-		student1.setName("周左左");
+		student1.setId(3);
+		student1.setName("周22");
 		
 		Student student2 = new Student();
-		student2.setId(2);
-		student2.setName("陈右右");
+		student2.setId(4);
+		student2.setName("陈33");
 		
 		teacher.getStudents().add(student1);
 		teacher.getStudents().add(student2);

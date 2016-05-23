@@ -1,11 +1,13 @@
 package test;
 
+import java.util.List;
 import java.util.UUID;
 
+import junit.framework.Assert;
+import junit.framework.TestCase;
 import dao.MenuDao;
 import dao.impl.MenuDaoImpl;
 import domain.MenuBean;
-import junit.framework.TestCase;
 
 public class MenuDaoImplTest extends TestCase {
 	
@@ -14,26 +16,35 @@ public class MenuDaoImplTest extends TestCase {
 	public void testAddMenu() {
 		MenuBean menu = new MenuBean();
 		menu.setId(UUID.randomUUID().toString());
-		menu.setTitle("test");
+		menu.setTitle("test3");
 		menu.setUri("/router?action=test");
 		menu.setDescription("just test");
 		dao.addMenu(menu);
 	}
 
 	public void testDelMenuById() {
-		fail("Not yet implemented");
+		Assert.assertEquals(true, dao.delMenuById("5f629a14-d2a1-4b2d-85f3-7279cfe9c3d7"));
 	}
 
 	public void testFindAllMenus() {
-		fail("Not yet implemented");
+		List<MenuBean> menus = null;
+		assertNotNull(menus = dao.findAllMenus());
+		System.out.println(menus);
 	}
 
 	public void testFindMenuById() {
-		fail("Not yet implemented");
+		MenuBean menu = null;
+		assertNotNull(menu = dao.findMenuById("7bc359ee-50f6-471a-9df7-91bc3eb2f5b6"));
+		System.out.println(menu);
 	}
 
 	public void testUpdateMenu() {
-		fail("Not yet implemented");
+		MenuBean menu = new MenuBean();
+		menu.setId("7bc359ee-50f6-471a-9df7-91bc3eb2f5b6");
+		menu.setTitle("≤‚ ‘");
+		menu.setUri("/router?action=test");
+		menu.setDescription("can you see it");
+		dao.updateMenu(menu);
 	}
 
 }

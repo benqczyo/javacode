@@ -19,10 +19,18 @@ public class C3P0Utils {
 	private static ComboPooledDataSource ds = new ComboPooledDataSource();
 	private static ThreadLocal<Connection> connections;
 	
+	/**
+	 * 返回数据库源
+	 * @return 数据库源对象
+	 */
 	public static DataSource getDataSource() {
 		return ds;
 	}
 	
+	/**
+	 * 返回数据库链接
+	 * @return 数据库链接对象
+	 */
 	public static Connection open() {
 		Connection result = null;
 		if (connections == null) connections = new ThreadLocal<Connection>();
@@ -38,6 +46,9 @@ public class C3P0Utils {
 		return result;
 	}
 	
+	/**
+	 * 开启事务
+	 */
 	public static void startTransaction() {
 		try {
 			open().setAutoCommit(false);
@@ -46,6 +57,9 @@ public class C3P0Utils {
 		}
 	}
 	
+	/**
+	 * 事务回滚
+	 */
 	public static void rollback() {
 		try {
 			open().rollback();
@@ -54,6 +68,10 @@ public class C3P0Utils {
 		}
 	}
 	
+	/**
+	 * 事务回滚到保存点
+	 * @param savepoint 保存点
+	 */
 	public static void rollback(Savepoint savepoint) {
 		try {
 			open().rollback(savepoint);
@@ -62,6 +80,9 @@ public class C3P0Utils {
 		}
 	}
 	
+	/**
+	 * 事务提交
+	 */
 	public static void commit() {
 		try {
 			open().commit();
@@ -70,6 +91,9 @@ public class C3P0Utils {
 		}
 	}
 	
+	/**
+	 * 关闭链接
+	 */
 	public static void close() {
 		Connection conn = connections.get();
 		if (conn != null)

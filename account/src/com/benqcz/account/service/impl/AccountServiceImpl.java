@@ -4,7 +4,7 @@ import com.benqcz.account.dao.AccountDao;
 import com.benqcz.account.dao.impl.AccountDaoImpl;
 import com.benqcz.account.domain.Account;
 import com.benqcz.account.service.AccountService;
-import com.benqcz.dbutils.C3P0Utils;
+import com.benqcz.utils.jdbc.C3P0Utils;
 
 public class AccountServiceImpl implements AccountService {
 	

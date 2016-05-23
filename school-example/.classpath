@@ -5,9 +5,9 @@
 	<classpathentry kind="lib" path="lib/c3p0-0.9.1.2-jdk1.3.jar"/>
 	<classpathentry kind="lib" path="lib/c3p0-0.9.1.2.jar"/>
 	<classpathentry kind="lib" path="lib/c3p0-oracle-thin-extras-0.9.1.2.jar"/>
-	<classpathentry kind="lib" path="lib/c3p0utils.jar"/>
 	<classpathentry kind="lib" path="lib/ojdbc6.jar"/>
 	<classpathentry kind="lib" path="lib/commons-dbutils-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/benqcz-c3p0utils-1.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

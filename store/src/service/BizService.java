@@ -1,10 +1,10 @@
-package dao;
+package service;
 
 import java.util.List;
 
 import domain.MenuBean;
 
-public interface MenuDao {
+public interface BizService {
 	/**
 	 * 添加菜单
 	 * @param menu 菜单对象

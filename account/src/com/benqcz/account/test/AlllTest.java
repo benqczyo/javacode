@@ -8,7 +8,6 @@ import org.junit.Test;
 import com.benqcz.account.dao.impl.AccountDaoImpl;
 import com.benqcz.account.domain.Account;
 import com.benqcz.account.service.impl.AccountServiceImpl;
-import com.benqcz.dbutils.C3P0Utils;
 
 public class AlllTest {
 

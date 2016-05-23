@@ -10,10 +10,10 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
-import com.benqcz.dbutils.C3P0Utils;
 import com.benqcz.school.dao.SchoolDao;
 import com.benqcz.school.domain.Student;
 import com.benqcz.school.domain.Teacher;
+import com.benqcz.utils.jdbc.C3P0Utils;
 import com.mchange.v2.c3p0.cfg.C3P0Config;
 
 public class SchoolDaoImpl implements SchoolDao {

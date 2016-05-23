@@ -10,7 +10,7 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 
 import com.benqcz.account.dao.AccountDao;
 import com.benqcz.account.domain.Account;
-import com.benqcz.dbutils.C3P0Utils;
+import com.benqcz.utils.jdbc.C3P0Utils;
 
 public class AccountDaoImpl implements AccountDao {
 	
