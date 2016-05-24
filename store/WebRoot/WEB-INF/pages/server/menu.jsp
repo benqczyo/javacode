@@ -2,9 +2,9 @@
 <%@include file="/server/header.jsp"%>
 <div id="mgrMenu">
 	<div>
-		<a href="">[添加菜单项]</a>	
+		<a href="${pathPrefix}?action=show&view=addmenu">[添加菜单项]</a>	
 	</div>
-	<c:if test="not empty menus">
+	<c:if test="${not empty menus}">
 		<div>
 			<table>
 				<tr>

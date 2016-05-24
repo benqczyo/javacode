@@ -1,6 +1,7 @@
 package service;
 
 import java.util.List;
+import java.util.UUID;
 
 import dao.MenuDao;
 import dao.impl.MenuDaoImpl;
@@ -12,6 +13,7 @@ public class BussinessServiceImpl implements BussinessService {
 
 	@Override
 	public boolean addMenu(MenuBean menu) {
+		menu.setId(UUID.randomUUID().toString());
 		return dao.addMenu(menu);
 	}
 
