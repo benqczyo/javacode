@@ -58,22 +58,22 @@ public class Router extends HttpServlet {
 				MenuBean menu = new MenuBean();
 				BeanUtils.copyProperties(menu, formBean);
 				service.addMenu(menu);
-				response.sendRedirect(request.getContextPath() + "/servlet/router?action=show&view=bgmenu");
+				response.sendRedirect(request.getContextPath() + "/router?action=show&view=mgrMenu");
 			// 无效转发到添加页面显示错误信息
 			} else {
 				request.setAttribute("formBean", formBean);
-				request.getRequestDispatcher("/WEB-INF/pages/server/addMenu.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/pages/views/mgrAddMenu.jsp").forward(request, response);
 			}
 		} catch (MenuDaoException e) {
 			// 如果添加不成功转发到添加页面显示错误信息
 			e.printStackTrace();
 			formBean.getMessages().put("result", "菜单项重复");
 			request.setAttribute("formBean", formBean);
-			request.getRequestDispatcher("/WEB-INF/pages/server/addMenu.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/pages/views/mgrAddMenu.jsp").forward(request, response);
 		} catch (Exception e) {
 			// 出错跳转消息页面
 			e.printStackTrace();
-			response.sendRedirect(request.getContextPath() + "/messages.jsp");
+			response.sendRedirect(request.getContextPath() + "/router?action=show&view=messages");
 		}
 		
 	}
@@ -89,6 +89,7 @@ public class Router extends HttpServlet {
 			request.setAttribute("menus", service.findAllMenus());
 			path = viewPath + "mgrMenu.jsp";
 		}
+		if ("mgrAddMenu".equalsIgnoreCase(view)) path = viewPath + "mgrAddMenu.jsp";
 		if ("mgrRole".equalsIgnoreCase(view)) path = viewPath + "mgrRole.jsp";
 		if ("mgrAccount".equalsIgnoreCase(view)) path = viewPath + "mgrAccount.jsp";
 		

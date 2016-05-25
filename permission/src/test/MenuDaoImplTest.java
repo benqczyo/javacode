@@ -16,9 +16,9 @@ public class MenuDaoImplTest extends TestCase {
 	public void testAddMenu() {
 		MenuBean menu = new MenuBean();
 		menu.setId(UUID.randomUUID().toString());
-		menu.setTitle("≤‚ ‘");
+		menu.setTitle("TEST-4");
 		menu.setUri("/router?action=test");
-		menu.setDescription("≤‚ ‘“≥√Ê");
+		menu.setDescription("TEST-4");
 		dao.addMenu(menu);
 	}
 

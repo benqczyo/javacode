@@ -27,6 +27,12 @@
 			#header ul {float: right;}
 			#header li {float: left;}
 			#header a {display: block; padding: 4px;}
+			#mgrMenu table {border-collapse: collapse; width: 100%; text-align: center;}
+			#mgrMenu tr:hover {cursor: pointer; color: red;}
+			#mgrMenu tr:nth-of-type(even) {background: #F7FAFF;}
+			#mgrMenu th, #mgrMenu td {padding: 4px;}
+			#mgrMenu th {background: #CEEBEF; color: #697279;}
+			#mgrAddMenu span {color: red;}
 		</style>
 	</head>
 	<body>
