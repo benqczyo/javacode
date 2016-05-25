@@ -22,6 +22,8 @@ import utils.FormBeanUtils;
 
 public class Router extends HttpServlet {
 
+	private final String viewPath = "/WEB-INF/pages/views/";
+	
 	private BussinessService service = new BussinessServiceImpl();
 
 	@Override
@@ -30,8 +32,14 @@ public class Router extends HttpServlet {
 
 		String action = request.getParameter("action");
 
+		// œ‘ æJsp“≥√Ê
 		if ("show".equalsIgnoreCase(action)) {
 			showAction(request, response);
+			return;
+		}
+		
+		if ("addMenu".equalsIgnoreCase(action)) {
+			addMenuAction(request, response);
 			return;
 		}
 
@@ -73,7 +81,18 @@ public class Router extends HttpServlet {
 	private void showAction(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		
+		String path = null;
+		String view = request.getParameter("view");
 		
+		if ("mgrIndex".equalsIgnoreCase(view)) path = "/manager/index.jsp";
+		if ("mgrMenu".equalsIgnoreCase(view)) {
+			request.setAttribute("menus", service.findAllMenus());
+			path = viewPath + "mgrMenu.jsp";
+		}
+		if ("mgrRole".equalsIgnoreCase(view)) path = viewPath + "mgrRole.jsp";
+		if ("mgrAccount".equalsIgnoreCase(view)) path = viewPath + "mgrAccount.jsp";
+		
+		request.getRequestDispatcher(path).forward(request, response);
 	}
 
 }
