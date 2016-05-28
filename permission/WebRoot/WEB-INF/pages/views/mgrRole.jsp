@@ -10,7 +10,7 @@
 			<strong><fmt:message key="role.empty" bundle="${bundle}" /></strong>
 		</c:if>
 		<c:if test="${not empty requestScope.page.records}">
-			<table>
+			<table class="list">
 				<tr>
 					<th><fmt:message key="role.id" bundle="${bundle}" /></th>
 					<th><fmt:message key="role.name" bundle="${bundle}" /></th>

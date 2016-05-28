@@ -79,7 +79,18 @@ public class Router extends HttpServlet {
 			updateMenuAction(request, response);
 			return;
 		}
+		
+		if ("updateRole".equalsIgnoreCase(action)) {
+			updateRoleAction(request, response);
+			return;
+		}
 
+	}
+
+	private void updateRoleAction(HttpServletRequest request,
+			HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private void delRolesAction(HttpServletRequest request,

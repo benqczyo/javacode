@@ -10,7 +10,7 @@
 <html>
 	<head>
 		<title><fmt:message key="mgr.title" bundle="${bundle}"/></title>
-		<style>
+		<style><!--
 			body, h3, ul {margin: 0; padding: 0;}
 			li {list-style: none;}
 			a {text-decoration: none;}
@@ -28,14 +28,19 @@
 			#header ul {float: right;}
 			#header li {float: left;}
 			#header a {display: block; padding: 4px;}
-			#mgrMenu table {border-collapse: collapse; width: 100%; text-align: center;}
-			#mgrMenu tr:hover {cursor: pointer; color: red;}
-			#mgrMenu tr:nth-of-type(even) {background: #F7FAFF;}
-			#mgrMenu th, #mgrMenu td {padding: 4px;}
-			#mgrMenu th {background: #CEEBEF; color: #697279;}
+<!--			#mgrMenu table {border-collapse: collapse; width: 100%; text-align: center;}-->
+<!--			#mgrMenu tr:hover {cursor: pointer; color: red;}-->
+<!--			#mgrMenu tr:nth-of-type(even) {background: #F7FAFF;}-->
+<!--			#mgrMenu th, #mgrMenu td {padding: 4px;}-->
+<!--			#mgrMenu th {background: #CEEBEF; color: #697279;}-->
+			table.list {border-collapse: collapse; width: 100%; text-align: center;}
+			table.list tr:hover {cursor: pointer; color: red;}
+			table.list tr:nth-of-type(even) {background: #F7FAFF;}
+			table.list th, table.list td {padding: 4px;}
+			table.list th {background: #CEEBEF; color: #697279;}
 			#page {text-align: center;}
 			#mgrAddMenu span {color: red;}
-		</style>
+		--></style>
 		<script>
 			function delMenu(id) {
 				if (confirm("确定删除所选菜单项？")) window.location = "${uri}?action=delMenu&id=" + id;	
