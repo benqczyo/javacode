@@ -20,6 +20,7 @@
 			.r {float: right;}
 			a, a:visited {color: #000;}
 			a:hover {color: #e11515;}
+			a.selected, a.selected:visited {color: red;}
 			body {font-family: "微软雅黑"; font-size: 14px;}
 			#box {margin: 20px auto; width: 800px;}
 			#header {font-size: 16px; border-bottom: solid 1px #000;}
@@ -32,8 +33,50 @@
 			#mgrMenu tr:nth-of-type(even) {background: #F7FAFF;}
 			#mgrMenu th, #mgrMenu td {padding: 4px;}
 			#mgrMenu th {background: #CEEBEF; color: #697279;}
+			#page {text-align: center;}
 			#mgrAddMenu span {color: red;}
 		</style>
+		<script>
+			function delMenu(id) {
+				if (confirm("确定删除所选菜单项？")) window.location = "${uri}?action=delMenu&id=" + id;	
+			}
+			
+			function delRole(id) {
+				if (confirm("确定删除所选角色？")) window.location = "${uri}?action=delRole&id=" + id;	
+			}
+			
+			function delMenus() {
+				var form = document.getElementById("delMenusForm"), ids = document.getElementsByName("ids"), isChecked = false;
+				for (var i = 0; i < ids.length; i++) {
+					if (ids[i].checked) {
+						isChecked = true;
+						break;
+					}
+				}
+				if (isChecked == false) {
+					alert("没有选择菜单项");
+				} else {
+					
+					confirm("确定删除所选菜单项？") && form.submit();
+				}
+			}
+			
+			function delRoles() {
+				var form = document.getElementById("delRolesForm"), ids = document.getElementsByName("ids"), isChecked = false;
+				for (var i = 0; i < ids.length; i++) {
+					if (ids[i].checked) {
+						isChecked = true;
+						break;
+					}
+				}
+				if (isChecked == false) {
+					alert("没有选择角色");
+				} else {
+					
+					confirm("确定删除所选角色？") && form.submit();
+				}
+			}
+		</script>
 	</head>
 	<body>
 		<div id="box">

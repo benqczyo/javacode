@@ -1,22 +1,22 @@
 package exception;
 
-public class MenuDaoException extends RuntimeException {
+public class DaoException extends RuntimeException {
 
-	public MenuDaoException() {
+	public DaoException() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public MenuDaoException(String message) {
+	public DaoException(String message) {
 		super(message);
 		// TODO Auto-generated constructor stub
 	}
 
-	public MenuDaoException(Throwable cause) {
+	public DaoException(Throwable cause) {
 		super(cause);
 		// TODO Auto-generated constructor stub
 	}
 
-	public MenuDaoException(String message, Throwable cause) {
+	public DaoException(String message, Throwable cause) {
 		super(message, cause);
 		// TODO Auto-generated constructor stub
 	}

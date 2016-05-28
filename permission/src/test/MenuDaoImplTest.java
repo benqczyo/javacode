@@ -46,5 +46,11 @@ public class MenuDaoImplTest extends TestCase {
 		menu.setDescription("can you see it");
 		dao.updateMenu(menu);
 	}
+	
+	public void testFindMenusByRange() {
+		List<MenuBean> menus = null;
+		assertNotNull(menus = dao.findMenusByRange(1, 100));
+		System.out.println(menus);
+	}
 
 }
