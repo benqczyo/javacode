@@ -15,6 +15,7 @@ import org.apache.commons.beanutils.BeanUtils;
 
 import com.sun.xml.internal.messaging.saaj.packaging.mime.util.BEncoderStream;
 
+import domain.AccountBean;
 import domain.MenuBean;
 import domain.RoleBean;
 import exception.DaoException;
@@ -353,7 +354,7 @@ public class Router extends HttpServlet {
 				path = viewPath + "mgrAssignMenu.jsp";
 			}
 		}
-		if ("mgrAccount".equalsIgnoreCase(view)) path = viewPath + "mgrAccount.jsp";
+		if ("mgrAccount".equalsIgnoreCase(view)) path = getPage(new AccountBean(), request, "mgrAccount.jsp");
 		
 		request.getRequestDispatcher(path).forward(request, response);
 	}

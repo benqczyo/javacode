@@ -2,6 +2,7 @@ package service;
 
 import java.util.List;
 
+import domain.AccountBean;
 import domain.MenuBean;
 import domain.Page;
 import domain.RoleBean;
@@ -14,6 +15,7 @@ public interface BussinessService {
 	 */
 	int getNumberOfMenus();
 	int getNumberOfRoles();
+	int getNumberOfAccounts();
 	/**
 	 * 添加菜单
 	 * @param menu 菜单对象
@@ -59,4 +61,5 @@ public interface BussinessService {
 	boolean delRolesByIds(String[] ids);
 	boolean assignMenu(String roleId, String[] menuIds);
 	boolean delAssignedMenus(String roleId);
+	List<AccountBean> findAllAccount();
 }

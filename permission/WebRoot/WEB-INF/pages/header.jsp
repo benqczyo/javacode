@@ -10,7 +10,7 @@
 <html>
 	<head>
 		<title><fmt:message key="mgr.title" bundle="${bundle}"/></title>
-		<style><!--
+		<style>
 			body, h3, ul {margin: 0; padding: 0;}
 			li {list-style: none;}
 			a {text-decoration: none;}

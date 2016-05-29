@@ -5,12 +5,15 @@ import java.util.UUID;
 
 import service.BussinessService;
 
+import dao.AccountDao;
 import dao.MenuDao;
 import dao.RoleDao;
 import dao.RoleMenuDao;
+import dao.impl.AccountDaoImpl;
 import dao.impl.MenuDaoImpl;
 import dao.impl.RoleDaoImpl;
 import dao.impl.RoleMenuDaoImpl;
+import domain.AccountBean;
 import domain.MenuBean;
 import domain.Page;
 import domain.RoleBean;
@@ -21,6 +24,7 @@ public class BussinessServiceImpl implements BussinessService {
 	private MenuDao mDao = new MenuDaoImpl();
 	private RoleDao rDao = new RoleDaoImpl();
 	private RoleMenuDao rmDao = new RoleMenuDaoImpl();
+	private AccountDao aDao = new AccountDaoImpl();
 
 	@Override
 	public boolean addMenu(MenuBean menu) {
@@ -75,6 +79,10 @@ public class BussinessServiceImpl implements BussinessService {
 			result = new Page(getNumberOfRoles(), pageRange, pageRecords, Integer.parseInt(currentPageId));
 			result.setRecords(rDao.findRolesByRange(result.getStartIndex(), result.getEndIndex()));
 		}
+		if (target instanceof AccountBean) {
+			result = new Page(getNumberOfAccounts(), pageRange, pageRecords, Integer.parseInt(currentPageId));
+			result.setRecords(aDao.findAccountsByRange(result.getStartIndex(), result.getEndIndex()));
+		}
 		return result;
 	}
 
@@ -117,6 +125,16 @@ public class BussinessServiceImpl implements BussinessService {
 	@Override
 	public boolean delAssignedMenus(String roleId) {
 		return rmDao.delRelationsByRoleId(roleId);
+	}
+
+	@Override
+	public List<AccountBean> findAllAccount() {
+		return aDao.findAllAccounts();
+	}
+
+	@Override
+	public int getNumberOfAccounts() {
+		return aDao.getNumberOfAccounts();
 	}
 	
 }
