@@ -47,8 +47,9 @@ public class RoleBean implements Serializable {
 
 	@Override
 	public String toString() {
-		return String.format("RoleBean [description=%s, id=%s, name=%s]",
-				description, id, name);
+		return String.format(
+				"RoleBean [description=%s, id=%s, menus=%s, name=%s]",
+				description, id, menus, name);
 	}
 
 }

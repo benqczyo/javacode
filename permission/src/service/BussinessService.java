@@ -5,6 +5,7 @@ import java.util.List;
 import domain.MenuBean;
 import domain.Page;
 import domain.RoleBean;
+import formbean.impl.UpdateRoleFormBean;
 
 public interface BussinessService {
 	/**
@@ -53,4 +54,7 @@ public interface BussinessService {
 	
 	boolean addRole(RoleBean role);
 	boolean delRoleById(String id);
+	RoleBean findRoleById(String id);
+	boolean updateRole(RoleBean role);
+	boolean delRolesByIds(String[] ids);
 }

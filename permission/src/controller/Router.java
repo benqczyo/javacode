@@ -21,6 +21,7 @@ import exception.DaoException;
 
 import formbean.impl.AddMenuFormBean;
 import formbean.impl.AddRoleFormBean;
+import formbean.impl.UpdateRoleFormBean;
 import formbean.impl.UpdateMenuFormBean;
 
 import service.BussinessService;
@@ -88,15 +89,49 @@ public class Router extends HttpServlet {
 	}
 
 	private void updateRoleAction(HttpServletRequest request,
-			HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
+			HttpServletResponse response) throws IOException, ServletException {
+		UpdateRoleFormBean formBean = null;
+		try {
+			// 获取FormBean
+			formBean = FormBeanUtils.fill(request, UpdateRoleFormBean.class);
+			// 测试FormBean是否有效
+			// 有效
+			if (formBean.validate()) {
+				// 添加到数据库
+				RoleBean role = new RoleBean();
+				BeanUtils.copyProperties(role, formBean);
+				service.updateRole(role);
+				response.sendRedirect(request.getContextPath() + "/router?action=show&view=mgrRole");
+			// 无效转发到添加页面显示错误信息
+			} else {
+				request.setAttribute("formBean", formBean);
+				request.getRequestDispatcher("/WEB-INF/pages/views/mgrUpdateRole.jsp").forward(request, response);
+			}
+		} catch (DaoException e) {
+			// 如果添加不成功转发到添加页面显示错误信息
+			e.printStackTrace();
+			formBean.getMessages().put("result", "角色重复");
+			request.setAttribute("formBean", formBean);
+			request.getRequestDispatcher("/WEB-INF/pages/views/mgrUpdateRole.jsp").forward(request, response);
+		} catch (Exception e) {
+			// 出错跳转消息页面
+			e.printStackTrace();
+			response.sendRedirect(request.getContextPath() + "/router?action=show&view=messages");
+		}	
 	}
 
 	private void delRolesAction(HttpServletRequest request,
-			HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
+			HttpServletResponse response) throws IOException {
+		try {
+			String[] ids = request.getParameterValues("ids");
+			if (ids != null && ids.length > 0) {
+				service.delRolesByIds(ids);
+				response.sendRedirect(request.getContextPath() + "/router?action=show&view=mgrRole");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.sendRedirect(request.getContextPath() + "/router?action=show&view=messages");
+		}	
 	}
 
 	private void delRoleAction(HttpServletRequest request,
@@ -164,22 +199,39 @@ public class Router extends HttpServlet {
 	}
 
 	private void updateMenuAction(HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
-		MenuBean menu = new MenuBean();
+			HttpServletResponse response) throws IOException, ServletException {
+		UpdateMenuFormBean formBean = null;
 		try {
-			BeanUtils.populate(menu, request.getParameterMap());
-			service.updateMenu(menu);
-			response.sendRedirect(request.getContextPath() + "/router?action=show&view=mgrMenu");
+			// 获取FormBean
+			formBean = FormBeanUtils.fill(request, UpdateMenuFormBean.class);
+			// 测试FormBean是否有效
+			// 有效
+			if (formBean.validate()) {
+				// 添加到数据库
+				MenuBean menu = new MenuBean();
+				BeanUtils.copyProperties(menu, formBean);
+				service.updateMenu(menu);
+				response.sendRedirect(request.getContextPath() + "/router?action=show&view=mgrMenu");
+			// 无效转发到添加页面显示错误信息
+			} else {
+				request.setAttribute("formBean", formBean);
+				request.getRequestDispatcher("/WEB-INF/pages/views/mgrUpdateMenu.jsp").forward(request, response);
+			}
+		} catch (DaoException e) {
+			// 如果添加不成功转发到添加页面显示错误信息
+			e.printStackTrace();
+			formBean.getMessages().put("result", "角色重复");
+			request.setAttribute("formBean", formBean);
+			request.getRequestDispatcher("/WEB-INF/pages/views/mgrUpdateRole.jsp").forward(request, response);
 		} catch (Exception e) {
+			// 出错跳转消息页面
 			e.printStackTrace();
 			response.sendRedirect(request.getContextPath() + "/router?action=show&view=messages");
-		}
-		
+		}	
 	}
 
 	private void delMenusAction(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
-		
 		try {
 			String[] ids = request.getParameterValues("ids");
 			if (ids != null && ids.length > 0) {
@@ -190,7 +242,6 @@ public class Router extends HttpServlet {
 			e.printStackTrace();
 			response.sendRedirect(request.getContextPath() + "/router?action=show&view=messages");
 		}
-		
 	}
 
 	private void addMenuAction(HttpServletRequest request,
@@ -254,8 +305,35 @@ public class Router extends HttpServlet {
 				path = viewPath + "mgrUpdateMenu.jsp";
 			}
 		}
+		if ("mgrUpdateRole".equalsIgnoreCase(view)) {
+			String id = request.getParameter("id");
+			if (id != null && !id.trim().equalsIgnoreCase("")) {
+				RoleBean role = service.findRoleById(id);
+				if (role == null) {
+					response.sendRedirect(request.getContextPath() + "/router?action=show&view=messages");
+					return;
+				}
+				UpdateRoleFormBean formBean = new UpdateRoleFormBean();
+				try {
+					BeanUtils.copyProperties(formBean, role);
+				} catch (Exception e) {
+					e.printStackTrace();
+					throw new ServletException(e);
+				}
+				request.setAttribute("formBean", formBean);
+				path = viewPath + "mgrUpdateRole.jsp";
+			}
+		}
 		if ("mgrRole".equalsIgnoreCase(view)) path = getPage(new RoleBean(), request, "mgrRole.jsp");
 		if ("mgrAddRole".equalsIgnoreCase(view)) path = viewPath + "mgrAddRole.jsp";
+		if ("mgrAssignMenu".equalsIgnoreCase(view)) {
+			String id = request.getParameter("id");
+			if (id != null && !id.trim().equals("")) {
+				request.setAttribute("role", service.findRoleById(id));
+				request.setAttribute("menus", service.findAllMenus());
+				path = viewPath + "mgrAssignMenu.jsp";
+			}
+		}
 		if ("mgrAccount".equalsIgnoreCase(view)) path = viewPath + "mgrAccount.jsp";
 		
 		request.getRequestDispatcher(path).forward(request, response);

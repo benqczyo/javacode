@@ -12,6 +12,7 @@ import dao.impl.RoleDaoImpl;
 import domain.MenuBean;
 import domain.Page;
 import domain.RoleBean;
+import formbean.impl.UpdateRoleFormBean;
 
 public class BussinessServiceImpl implements BussinessService {
 	
@@ -85,6 +86,21 @@ public class BussinessServiceImpl implements BussinessService {
 	public boolean delRoleById(String id) {
 		return rDao.delRoleById(id);
 		
+	}
+
+	@Override
+	public RoleBean findRoleById(String id) {
+		return rDao.findRolesById(id);
+	}
+
+	@Override
+	public boolean updateRole(RoleBean role) {
+		return rDao.updateRole(role);
+	}
+
+	@Override
+	public boolean delRolesByIds(String[] ids) {
+		return rDao.delRolesByIds(ids);
 	}
 	
 }
