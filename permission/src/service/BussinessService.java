@@ -62,4 +62,5 @@ public interface BussinessService {
 	boolean assignMenu(String roleId, String[] menuIds);
 	boolean delAssignedMenus(String roleId);
 	List<AccountBean> findAllAccount();
+	boolean addAccount(AccountBean account);
 }

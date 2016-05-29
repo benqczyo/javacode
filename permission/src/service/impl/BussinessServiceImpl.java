@@ -3,6 +3,8 @@ package service.impl;
 import java.util.List;
 import java.util.UUID;
 
+import com.benqcz.utils.SHA1Utils;
+
 import service.BussinessService;
 
 import dao.AccountDao;
@@ -135,6 +137,13 @@ public class BussinessServiceImpl implements BussinessService {
 	@Override
 	public int getNumberOfAccounts() {
 		return aDao.getNumberOfAccounts();
+	}
+
+	@Override
+	public boolean addAccount(AccountBean account) {
+		account.setId(UUID.randomUUID().toString());
+		account.setPassword(SHA1Utils.encode(account.getPassword()));
+		return aDao.addAccount(account);
 	}
 	
 }

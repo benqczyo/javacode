@@ -6,6 +6,7 @@ import domain.AccountBean;
 
 public interface AccountDao {
 	int getNumberOfAccounts();
+	boolean addAccount(AccountBean account);
 	List<AccountBean> findAllAccounts();
 	List<AccountBean> findAccountsByRange(int startRowId, int endRowId);
 }

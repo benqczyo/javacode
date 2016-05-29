@@ -1,8 +1,11 @@
 package dao.impl;
 
+import java.lang.reflect.Field;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
@@ -17,6 +20,7 @@ import exception.DaoException;
 public class AccountDaoImpl implements AccountDao {
 	
 	private final String GET_NUMBER_OF_ACCOUNTS = "SELECT count(*) FROM account";
+	private final String ADD_ACCOUNT = "INSERT INTO account (id, name, password) VALUES (?, ?, ?)";
 	private final String FIND_ACCOUNTS_BY_RANGE = "SELECT id, name, password, row_id FROM (SELECT a.*, ROWNUM as row_id FROM (SELECT id, name, password FROM account) a) WHERE row_id BETWEEN ? AND ?";
 	private final String FIND_ALL_ACCOUNTS = "SELECT id, name, password FROM account";
 	
@@ -47,6 +51,24 @@ public class AccountDaoImpl implements AccountDao {
 		} catch (SQLException e) {
 			throw new DaoException(e);
 		}
+	}
+
+	@Override
+	public boolean addAccount(AccountBean account) {
+		boolean result = false;
+		List<Object> params = new LinkedList<Object>();
+		Field[] fields = account.getClass().getDeclaredFields();
+		try {
+			for (Field field : fields) {
+				String fieldName = field.getName();
+				if (!fieldName.equalsIgnoreCase("roles"))
+					params.add(BeanUtils.getProperty(account, field.getName()));
+			}
+			result = qr.update(ADD_ACCOUNT, params.toArray(new Object[0])) == 1;
+		} catch (Exception e) {
+			throw new DaoException(e);
+		}
+		return result;
 	}
 
 }

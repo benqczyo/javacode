@@ -20,6 +20,7 @@ import domain.MenuBean;
 import domain.RoleBean;
 import exception.DaoException;
 
+import formbean.impl.AddAccountFormBean;
 import formbean.impl.AddMenuFormBean;
 import formbean.impl.AddRoleFormBean;
 import formbean.impl.UpdateRoleFormBean;
@@ -91,7 +92,45 @@ public class Router extends HttpServlet {
 			assignMenuAction(request, response);
 			return;
 		}
+		
+		if ("addAccount".equalsIgnoreCase(action)) {
+			addAccountAction(request, response);
+			return;
+		}
 
+	}
+
+	private void addAccountAction(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		AddAccountFormBean formBean = null;
+		try {
+			// 获取FormBean
+			formBean = FormBeanUtils.fill(request, AddAccountFormBean.class);
+			// 测试FormBean是否有效
+			// 有效
+			if (formBean.validate()) {
+				// 添加到数据库
+				AccountBean account = new AccountBean();
+				BeanUtils.copyProperties(account, formBean);
+				service.addAccount(account);
+				response.sendRedirect(request.getContextPath() + "/router?action=show&view=mgrAccount");
+			// 无效转发到添加页面显示错误信息
+			} else {
+				request.setAttribute("formBean", formBean);
+				request.getRequestDispatcher("/WEB-INF/pages/views/mgrAddAccount.jsp").forward(request, response);
+			}
+		} catch (DaoException e) {
+			// 如果添加不成功转发到添加页面显示错误信息
+			e.printStackTrace();
+			formBean.getMessages().put("result", "菜单项重复");
+			request.setAttribute("formBean", formBean);
+			request.getRequestDispatcher("/WEB-INF/pages/views/mgrAddMenu.jsp").forward(request, response);
+		} catch (Exception e) {
+			// 出错跳转消息页面
+			e.printStackTrace();
+			response.sendRedirect(request.getContextPath() + "/router?action=show&view=messages");
+		}
+		
 	}
 
 	private void assignMenuAction(HttpServletRequest request,
@@ -294,7 +333,6 @@ public class Router extends HttpServlet {
 			e.printStackTrace();
 			response.sendRedirect(request.getContextPath() + "/router?action=show&view=messages");
 		}
-		
 	}
 
 	private void showAction(HttpServletRequest request,
@@ -355,6 +393,7 @@ public class Router extends HttpServlet {
 			}
 		}
 		if ("mgrAccount".equalsIgnoreCase(view)) path = getPage(new AccountBean(), request, "mgrAccount.jsp");
+		if ("mgrAddAccount".equalsIgnoreCase(view)) path = viewPath + "mgrAddAccount.jsp";
 		
 		request.getRequestDispatcher(path).forward(request, response);
 	}
