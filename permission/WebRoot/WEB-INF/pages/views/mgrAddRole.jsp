@@ -20,7 +20,9 @@
 				<td colspan="3"><span>${formBean.messages.result}</span></td>
 			</tr>
 			<tr>
-				<td colspan="3"><input type="submit" value="添加角色"/></td>
+				<td colspan="3">
+					<input type="submit" value="<fmt:message key='btn.add' bundle='${bundle}'/>"/>
+				</td>
 			</tr>
 		</table>
 	</form>

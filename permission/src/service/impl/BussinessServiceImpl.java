@@ -7,8 +7,10 @@ import service.BussinessService;
 
 import dao.MenuDao;
 import dao.RoleDao;
+import dao.RoleMenuDao;
 import dao.impl.MenuDaoImpl;
 import dao.impl.RoleDaoImpl;
+import dao.impl.RoleMenuDaoImpl;
 import domain.MenuBean;
 import domain.Page;
 import domain.RoleBean;
@@ -18,6 +20,7 @@ public class BussinessServiceImpl implements BussinessService {
 	
 	private MenuDao mDao = new MenuDaoImpl();
 	private RoleDao rDao = new RoleDaoImpl();
+	private RoleMenuDao rmDao = new RoleMenuDaoImpl();
 
 	@Override
 	public boolean addMenu(MenuBean menu) {
@@ -101,6 +104,19 @@ public class BussinessServiceImpl implements BussinessService {
 	@Override
 	public boolean delRolesByIds(String[] ids) {
 		return rDao.delRolesByIds(ids);
+	}
+
+	@Override
+	public boolean assignMenu(String roleId, String[] menuIds) {
+		boolean result = false;
+		if (rmDao.delRelationsByRoleId(roleId) && rmDao.addRelations(roleId, menuIds))
+			result = true;
+		return result;
+	}
+
+	@Override
+	public boolean delAssignedMenus(String roleId) {
+		return rmDao.delRelationsByRoleId(roleId);
 	}
 	
 }

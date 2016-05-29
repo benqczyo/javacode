@@ -85,7 +85,26 @@ public class Router extends HttpServlet {
 			updateRoleAction(request, response);
 			return;
 		}
+		
+		if ("assignMenu".equalsIgnoreCase(action)) {
+			assignMenuAction(request, response);
+			return;
+		}
 
+	}
+
+	private void assignMenuAction(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		String roleId = request.getParameter("roleId");
+		if (roleId != null && !roleId.trim().equals("")) {
+			String[] menuIds = request.getParameterValues("menuId");
+			if (menuIds != null && menuIds.length > 0) {
+				service.assignMenu(roleId, menuIds);
+			} else {
+				service.delAssignedMenus(roleId);
+			}
+		}
+		response.sendRedirect(request.getContextPath() + "/router?action=show&view=mgrRole");
 	}
 
 	private void updateRoleAction(HttpServletRequest request,

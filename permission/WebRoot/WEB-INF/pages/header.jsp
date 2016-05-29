@@ -30,7 +30,7 @@
 			#header li {float: left;}
 			#header a {display: block; padding: 4px;}
 			table.list {border-collapse: collapse; width: 100%; text-align: center;}
-			table.list tr:hover {cursor: pointer; color: red;}
+			table.list tr:hover {cursor: pointer;}
 			table.list tr:nth-of-type(even) {background: #F7FAFF;}
 			table.list th, table.list td {padding: 4px;}
 			table.list th {background: #CEEBEF; color: #697279;}
@@ -74,6 +74,21 @@
 				} else {
 					
 					confirm("确定删除所选角色？") && form.submit();
+				}
+			}
+			
+			function doAssign() {
+				var form = document.getElementById("assignMenuForm"), menuIds = document.getElementsByName("menuId"), isChecked = false;
+				for (var i = 0; i < menuIds.length; i++) {
+					if (menuIds[i].checked) {
+						isChecked = true;
+						break;
+					}
+				}
+				if (isChecked == false) {
+					confirm("确定清空用户分配菜单？") && form.submit();
+				} else {
+					confirm("确定分配菜单？") && form.submit();
 				}
 			}
 		</script>

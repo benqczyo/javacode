@@ -57,4 +57,6 @@ public interface BussinessService {
 	RoleBean findRoleById(String id);
 	boolean updateRole(RoleBean role);
 	boolean delRolesByIds(String[] ids);
+	boolean assignMenu(String roleId, String[] menuIds);
+	boolean delAssignedMenus(String roleId);
 }
