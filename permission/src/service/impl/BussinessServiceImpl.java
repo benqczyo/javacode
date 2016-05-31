@@ -39,7 +39,7 @@ public class BussinessServiceImpl implements BussinessService {
 
 	@Override
 	public boolean delMenuById(String id) {
-		return mDao.delMenuById(id) && rmDao.delRelationsByMenuId(id);
+		return mDao.delMenuById(id);
 	}
 
 	@Override
@@ -59,13 +59,7 @@ public class BussinessServiceImpl implements BussinessService {
 
 	@Override
 	public boolean delMenusByIds(String[] ids) {
-		boolean result = false;
-		if (mDao.delMenusByIds(ids)) {
-			for (String id : ids) {
-				rmDao.delRelationsByMenuId(id);
-			}
-		}
-		return result;
+		return mDao.delMenusByIds(ids);
 	}
 
 	@Override
@@ -128,14 +122,14 @@ public class BussinessServiceImpl implements BussinessService {
 	@Override
 	public boolean assignMenu(String roleId, String[] menuIds) {
 		boolean result = false;
-		if (rmDao.delRelationsByRoleId(roleId) == 1 && rmDao.addRelations(roleId, menuIds))
+		if (rmDao.delRelationsByRoleId(roleId) && rmDao.addRelations(roleId, menuIds))
 			result = true;
 		return result;
 	}
 
 	@Override
 	public boolean delAssignedMenus(String roleId) {
-		return rmDao.delRelationsByRoleId(roleId) == 1;
+		return rmDao.delRelationsByRoleId(roleId);
 	}
 
 	@Override

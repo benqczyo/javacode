@@ -89,7 +89,7 @@ public class AccountDaoImpl implements AccountDao {
 		try {
 			result = qr.query(C3P0Utils.open(), FIND_ACCOUNT_BY_ID, new BeanHandler<AccountBean>(AccountBean.class), new Object[] {id});
 			if (result != null) {
-				List<RoleBean> roles = qr.query(FIND_ROLES_BY_ACCOUNT_ID, new BeanListHandler<RoleBean>(RoleBean.class), new Object[] {id});
+				List<RoleBean> roles = qr.query(C3P0Utils.open(), FIND_ROLES_BY_ACCOUNT_ID, new BeanListHandler<RoleBean>(RoleBean.class), new Object[] {id});
 				result.setRoles(roles);
 			}
 		} catch (SQLException e) {

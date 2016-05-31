@@ -20,7 +20,7 @@ public class AccountRoleDaoImpl implements AccountRoleDao {
 	@Override
 	public boolean delRelationsByAccountId(String id) {
 		try {
-			return qr.update(C3P0Utils.open(), DEL_RELATIONS_BY_ACCOUNT_ID, id) == 1;
+			return qr.update(C3P0Utils.open(), DEL_RELATIONS_BY_ACCOUNT_ID, id) >= 0;
 		} catch (SQLException e) {
 			throw new DaoException(e);
 		} finally {
@@ -31,7 +31,7 @@ public class AccountRoleDaoImpl implements AccountRoleDao {
 	@Override
 	public boolean delRelationsByRoleId(String id) {
 		try {
-			return qr.update(C3P0Utils.open(), DEL_RELATIONS_BY_ROLE_ID, id) == 1;
+			return qr.update(C3P0Utils.open(), DEL_RELATIONS_BY_ROLE_ID, id) >= 0;
 		} catch (SQLException e) {
 			throw new DaoException(e);
 		} finally {

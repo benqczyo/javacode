@@ -422,6 +422,10 @@ public class Router extends HttpServlet {
 		}
 		if ("mgrAccount".equalsIgnoreCase(view)) path = getPage(new AccountBean(), request, "mgrAccount.jsp");
 		if ("mgrAddAccount".equalsIgnoreCase(view)) path = viewPath + "mgrAddAccount.jsp";
+		if ("defaultIndex".equalsIgnoreCase(view)) {
+			request.setAttribute("menus", service.findAllMenus());
+			path = viewPath + "clientIndex.jsp";
+		}
 		
 		request.getRequestDispatcher(path).forward(request, response);
 	}

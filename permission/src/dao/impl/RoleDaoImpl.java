@@ -104,7 +104,7 @@ public class RoleDaoImpl implements RoleDao {
 		try {
 			result = qr.query(C3P0Utils.open(), FIND_ROLE_BY_ID, new BeanHandler<RoleBean>(RoleBean.class), new Object[] {id});
 			if (result != null) {
-				List<MenuBean> menus = qr.query(FIND_MENUS_BY_ROLE_ID, new BeanListHandler<MenuBean>(MenuBean.class), new Object[] {id});
+				List<MenuBean> menus = qr.query(C3P0Utils.open(), FIND_MENUS_BY_ROLE_ID, new BeanListHandler<MenuBean>(MenuBean.class), new Object[] {id});
 				result.setMenus(menus);
 			}
 		} catch (SQLException e) {
