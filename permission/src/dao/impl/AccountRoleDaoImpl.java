@@ -13,8 +13,31 @@ public class AccountRoleDaoImpl implements AccountRoleDao {
 
 	private final String ADD_RELATIONS = "INSERT INTO account_role (a_id, r_id) VALUES (?, ?)";
 	private final String DEL_RELATIONS_BY_ACCOUNT_ID = "DELETE FROM account_role WHERE a_id = ?";
+	private final String DEL_RELATIONS_BY_ROLE_ID = "DELETE FROM account_role WHERE r_id = ?";
 	
-	private QueryRunner qr = new QueryRunner(C3P0Utils.getDataSource());
+	private QueryRunner qr = new QueryRunner();
+	
+	@Override
+	public boolean delRelationsByAccountId(String id) {
+		try {
+			return qr.update(C3P0Utils.open(), DEL_RELATIONS_BY_ACCOUNT_ID, id) == 1;
+		} catch (SQLException e) {
+			throw new DaoException(e);
+		} finally {
+			C3P0Utils.close();
+		}
+	}
+	
+	@Override
+	public boolean delRelationsByRoleId(String id) {
+		try {
+			return qr.update(C3P0Utils.open(), DEL_RELATIONS_BY_ROLE_ID, id) == 1;
+		} catch (SQLException e) {
+			throw new DaoException(e);
+		} finally {
+			C3P0Utils.close();
+		}
+	}
 	
 	@Override
 	public boolean addRelations(String aId, String[] rIds) {
@@ -24,22 +47,16 @@ public class AccountRoleDaoImpl implements AccountRoleDao {
 			params[i] = new String[] {aId, rIds[i]};
 		}
 		try {
-			qr.batch(ADD_RELATIONS, params);
-			result = true;
+			int[] status = qr.batch(C3P0Utils.open(), ADD_RELATIONS, params);
+			for (int i = 0; i < status.length; i++) {
+				if (status[i] != 1) result = false; 
+			}
 		} catch (SQLException e) {
 			throw new DaoException(e);
+		} finally {
+			C3P0Utils.close();
 		}
 		return result;
-	}
-
-	@Override
-	public boolean delRelationsByAccountId(String id) {
-		try {
-			qr.update(DEL_RELATIONS_BY_ACCOUNT_ID, id);
-			return true;
-		} catch (SQLException e) {
-			throw new DaoException(e);
-		}
 	}
 
 }

@@ -32,15 +32,16 @@ public class RoleDaoImpl implements RoleDao {
 	private final String UPDATE_ROLE = "UPDATE role SET name = ?, description = ? WHERE id = ?";
 	private final String FIND_MENUS_BY_ROLE_ID = "SELECT id, title, uri, description FROM menu WHERE id IN (SELECT m_id FROM role_menu WHERE r_id = ?)";
 	
-	// 使用c3p0数据源，直接从池中拿到链接用后可自动关闭
-	private QueryRunner qr = new QueryRunner(C3P0Utils.getDataSource());
+	private QueryRunner qr = new QueryRunner();
 
 	@Override
 	public List<RoleBean> findAllRoles() {
 		try {
-			return qr.query(FIND_ALL_ROLES, new BeanListHandler<RoleBean>(RoleBean.class));
+			return qr.query(C3P0Utils.open(), FIND_ALL_ROLES, new BeanListHandler<RoleBean>(RoleBean.class));
 		} catch (SQLException e) {
 			throw new DaoException(e);
+		} finally {
+			C3P0Utils.close();
 		}
 	}
 
@@ -55,9 +56,11 @@ public class RoleDaoImpl implements RoleDao {
 				if (!fieldName.equalsIgnoreCase("menus"))
 					params.add(BeanUtils.getProperty(role, field.getName()));
 			}
-			result = qr.update(ADD_ROLE, params.toArray(new Object[0])) == 1;
+			result = qr.update(C3P0Utils.open(), ADD_ROLE, params.toArray(new Object[0])) == 1;
 		} catch (Exception e) {
 			throw new DaoException(e);
+		} finally {
+			C3P0Utils.close();
 		}
 		return result;
 	}
@@ -65,27 +68,33 @@ public class RoleDaoImpl implements RoleDao {
 	@Override
 	public int getNumberOfRoles() {
 		try {
-			return ((Number) qr.query(GET_NUMBER_OF_ROLES, new ScalarHandler(1))).intValue();
+			return ((Number) qr.query(C3P0Utils.open(), GET_NUMBER_OF_ROLES, new ScalarHandler(1))).intValue();
 		} catch (SQLException e) {
 			throw new DaoException(e);
+		} finally {
+			C3P0Utils.close();
 		}
 	}
 
 	@Override
 	public List findRolesByRange(int startRowId, int endRowId) {
 		try {
-			return qr.query(FIND_ROLE_BY_RANGE, new BeanListHandler<RoleBean>(RoleBean.class), new Object[] {startRowId, endRowId});
+			return qr.query(C3P0Utils.open(), FIND_ROLE_BY_RANGE, new BeanListHandler<RoleBean>(RoleBean.class), new Object[] {startRowId, endRowId});
 		} catch (SQLException e) {
 			throw new DaoException(e);
+		} finally {
+			C3P0Utils.close();
 		}
 	}
 
 	@Override
 	public boolean delRoleById(String id) {
 		try {
-			return qr.update(DEL_ROLE_BY_ID, id) == 1;
+			return qr.update(C3P0Utils.open(), DEL_ROLE_BY_ID, id) == 1;
 		} catch (SQLException e) {
 			throw new DaoException(e);
+		} finally {
+			C3P0Utils.close();
 		}
 	}
 
@@ -93,13 +102,15 @@ public class RoleDaoImpl implements RoleDao {
 	public RoleBean findRolesById(String id) {
 		RoleBean result = null;
 		try {
-			result = qr.query(FIND_ROLE_BY_ID, new BeanHandler<RoleBean>(RoleBean.class), new Object[] {id});
+			result = qr.query(C3P0Utils.open(), FIND_ROLE_BY_ID, new BeanHandler<RoleBean>(RoleBean.class), new Object[] {id});
 			if (result != null) {
 				List<MenuBean> menus = qr.query(FIND_MENUS_BY_ROLE_ID, new BeanListHandler<MenuBean>(MenuBean.class), new Object[] {id});
 				result.setMenus(menus);
 			}
 		} catch (SQLException e) {
 			throw new DaoException(e);
+		} finally {
+			C3P0Utils.close();
 		}
 		return result;
 	}
@@ -115,9 +126,11 @@ public class RoleDaoImpl implements RoleDao {
 					params.add(BeanUtils.getProperty(role, field.getName()));
 			}
 			params.add(params.remove(0));
-			return qr.update(UPDATE_ROLE, params.toArray(new Object[0])) == 1;
+			return qr.update(C3P0Utils.open(), UPDATE_ROLE, params.toArray(new Object[0])) == 1;
 		} catch (Exception e) {
 			throw new DaoException(e);
+		} finally {
+			C3P0Utils.close();
 		}
 	}
 
@@ -129,8 +142,10 @@ public class RoleDaoImpl implements RoleDao {
 			params.add(new Object[] {ids[i]});
 		}
 		try {
-			qr.batch(DEL_ROLE_BY_ID, params.toArray(new Object[0][0]));
-			result = true;
+			int[] status = qr.batch(C3P0Utils.open(), DEL_ROLE_BY_ID, params.toArray(new Object[0][0]));
+			for (int i = 0; i < status.length; i++) {
+				if (status[i] != 1) result = false; 
+			}
 		} catch (SQLException e) {
 			throw new DaoException(e);
 		}
