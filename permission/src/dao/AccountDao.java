@@ -9,4 +9,5 @@ public interface AccountDao {
 	boolean addAccount(AccountBean account);
 	List<AccountBean> findAllAccounts();
 	List<AccountBean> findAccountsByRange(int startRowId, int endRowId);
+	AccountBean findAccountById(String id);
 }

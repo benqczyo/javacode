@@ -23,7 +23,7 @@
 						<td>
 							<a href="${uri}?action=show&view=mgrUpdateAccount&id=${account.id}"><fmt:message key="ops.update" bundle="${bundle}" /></a>
 							<a href="javascript: delAccount('${account.id}')"><fmt:message key="ops.delete" bundle="${bundle}" /></a>
-							<a href="">其他</a>
+							<a href="${uri}?action=show&view=mgrAssignRole&id=${account.id}"><fmt:message key="ops.assignRole" bundle="${bundle}"/></a>
 						</td>
 					</tr>
 				</c:forEach>

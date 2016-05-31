@@ -1,8 +1,8 @@
 <%@page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8"%>
 <%@include file="/WEB-INF/pages/header.jsp"%>
-<div id="mgrAssignMenu">
-	<form action="${uri}?action=assignMenu" method="post" id="assignMenuForm">
-		<input type="hidden" name="roleId" value="${role.id}" />
+<div id="mgrAssignRole">
+	<form action="${uri}?action=assignRole" method="post" id="assignRoleForm">
+		<input type="hidden" name="accountId" value="${account.id}" />
 		<table class="list">
 			<tr>
 				<th>
@@ -15,19 +15,19 @@
 			<tr>
 				<td>
 					<ul>
-						<c:forEach var="menu" items="${role.menus}">
+						<c:forEach var="role" items="${account.roles}">
 							<li>
-								${menu.title}
+								${role.name}
 							</li>
 						</c:forEach>
 					</ul>
 				</td>
 				<td>
 					<ul>
-						<c:forEach var="menu" items="${menus}">
+						<c:forEach var="role" items="${roles}">
 							<li>
-								<input type="checkbox" name="menuId" value="${menu.id}" />
-								${menu.title}
+								<input type="checkbox" name="roleId" value="${role.id}" />
+								${role.name}
 							</li>
 						</c:forEach>
 					</ul>
@@ -37,7 +37,7 @@
 				<td colspan="2">
 					<input type="button"
 						value="<fmt:message key='btn.save' bundle='${bundle}'/>" 
-						onclick="javascript: doAssignMenu()"	
+						onclick="javascript: doAssignRole()"	
 					/>
 				</td>
 			</tr>

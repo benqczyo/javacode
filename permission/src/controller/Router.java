@@ -93,11 +93,31 @@ public class Router extends HttpServlet {
 			return;
 		}
 		
+		if ("assignRole".equalsIgnoreCase(action)) {
+			assignRoleAction(request, response);
+			return;
+		}
+		
 		if ("addAccount".equalsIgnoreCase(action)) {
 			addAccountAction(request, response);
 			return;
 		}
 
+	}
+
+	private void assignRoleAction(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		String accountId = request.getParameter("accountId");
+		if (accountId != null && !accountId.trim().equals("")) {
+			String[] roleIds = request.getParameterValues("roleId");
+			if (roleIds != null && roleIds.length > 0) {
+				service.assignRole(accountId, roleIds);
+			} else {
+				service.delAssignedRoles(accountId);
+			}
+		}
+		response.sendRedirect(request.getContextPath() + "/router?action=show&view=mgrAccount");
+		
 	}
 
 	private void addAccountAction(HttpServletRequest request,
@@ -390,6 +410,14 @@ public class Router extends HttpServlet {
 				request.setAttribute("role", service.findRoleById(id));
 				request.setAttribute("menus", service.findAllMenus());
 				path = viewPath + "mgrAssignMenu.jsp";
+			}
+		}
+		if ("mgrAssignRole".equalsIgnoreCase(view)) {
+			String id = request.getParameter("id");
+			if (id != null && !id.trim().equals("")) {
+				request.setAttribute("account", service.findAccountById(id));
+				request.setAttribute("roles", service.findAllRoles());
+				path = viewPath + "mgrAssignRole.jsp";
 			}
 		}
 		if ("mgrAccount".equalsIgnoreCase(view)) path = getPage(new AccountBean(), request, "mgrAccount.jsp");

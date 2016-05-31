@@ -77,7 +77,7 @@
 				}
 			}
 			
-			function doAssign() {
+			function doAssignMenu() {
 				var form = document.getElementById("assignMenuForm"), menuIds = document.getElementsByName("menuId"), isChecked = false;
 				for (var i = 0; i < menuIds.length; i++) {
 					if (menuIds[i].checked) {
@@ -89,6 +89,21 @@
 					confirm("确定清空用户分配菜单？") && form.submit();
 				} else {
 					confirm("确定分配菜单？") && form.submit();
+				}
+			}
+			
+			function doAssignRole() {
+				var form = document.getElementById("assignRoleForm"), menuIds = document.getElementsByName("roleId"), isChecked = false;
+				for (var i = 0; i < menuIds.length; i++) {
+					if (menuIds[i].checked) {
+						isChecked = true;
+						break;
+					}
+				}
+				if (isChecked == false) {
+					confirm("确定清空用户分配的角色？") && form.submit();
+				} else {
+					confirm("确定分配角色？") && form.submit();
 				}
 			}
 		</script>

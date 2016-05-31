@@ -8,10 +8,12 @@ import com.benqcz.utils.SHA1Utils;
 import service.BussinessService;
 
 import dao.AccountDao;
+import dao.AccountRoleDao;
 import dao.MenuDao;
 import dao.RoleDao;
 import dao.RoleMenuDao;
 import dao.impl.AccountDaoImpl;
+import dao.impl.AccountRoleDaoImpl;
 import dao.impl.MenuDaoImpl;
 import dao.impl.RoleDaoImpl;
 import dao.impl.RoleMenuDaoImpl;
@@ -27,6 +29,7 @@ public class BussinessServiceImpl implements BussinessService {
 	private RoleDao rDao = new RoleDaoImpl();
 	private RoleMenuDao rmDao = new RoleMenuDaoImpl();
 	private AccountDao aDao = new AccountDaoImpl();
+	private AccountRoleDao arDao = new AccountRoleDaoImpl();
 
 	@Override
 	public boolean addMenu(MenuBean menu) {
@@ -144,6 +147,29 @@ public class BussinessServiceImpl implements BussinessService {
 		account.setId(UUID.randomUUID().toString());
 		account.setPassword(SHA1Utils.encode(account.getPassword()));
 		return aDao.addAccount(account);
+	}
+
+	@Override
+	public AccountBean findAccountById(String id) {
+		return aDao.findAccountById(id);
+	}
+
+	@Override
+	public List<RoleBean> findAllRoles() {
+		return rDao.findAllRoles();
+	}
+
+	@Override
+	public boolean assignRole(String accountId, String[] roleIds) {
+		boolean result = false;
+		if (arDao.delRelationsByAccountId(accountId) && arDao.addRelations(accountId, roleIds))
+			result = true;
+		return result;
+	}
+
+	@Override
+	public boolean delAssignedRoles(String accountId) {
+		return arDao.delRelationsByAccountId(accountId);
 	}
 	
 }
