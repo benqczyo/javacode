@@ -23,6 +23,7 @@ import exception.DaoException;
 import formbean.impl.AddAccountFormBean;
 import formbean.impl.AddMenuFormBean;
 import formbean.impl.AddRoleFormBean;
+import formbean.impl.LoginFormBean;
 import formbean.impl.UpdateRoleFormBean;
 import formbean.impl.UpdateMenuFormBean;
 
@@ -102,7 +103,38 @@ public class Router extends HttpServlet {
 			addAccountAction(request, response);
 			return;
 		}
+		
+		if ("login".equalsIgnoreCase(action)) {
+			loginAction(request, response);
+			return;
+		}
 
+	}
+
+	private void loginAction(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		LoginFormBean formBean = null;
+		try {
+			formBean = FormBeanUtils.fill(request, LoginFormBean.class);
+			if (formBean.validate()) {
+				AccountBean account = new AccountBean();
+				BeanUtils.copyProperties(account, formBean);
+				if ((account = service.login(account.getName(), account.getPassword())) != null) {
+					request.getSession().setAttribute("account", account);
+					response.sendRedirect(request.getContextPath());
+				} else {
+					formBean.getMessages().put("result", "’À∫≈ªÚ’ﬂ√‹¬Î¥ÌŒÛ");
+					request.setAttribute("formBean", formBean);
+					request.getRequestDispatcher("/WEB-INF/pages/views/clientLogin.jsp").forward(request, response);
+				}
+			} else {
+				request.setAttribute("formBean", formBean);
+				request.getRequestDispatcher("/WEB-INF/pages/views/clientLogin.jsp").forward(request, response);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.sendRedirect(request.getContextPath() + "/router?action=show&view=messages");
+		}
 	}
 
 	private void assignRoleAction(HttpServletRequest request,
@@ -426,6 +458,7 @@ public class Router extends HttpServlet {
 			request.setAttribute("menus", service.findAllMenus());
 			path = viewPath + "clientIndex.jsp";
 		}
+		if ("login".equalsIgnoreCase(view)) path = viewPath + "clientLogin.jsp";
 		
 		request.getRequestDispatcher(path).forward(request, response);
 	}

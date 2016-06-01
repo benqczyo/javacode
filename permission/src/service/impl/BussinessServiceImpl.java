@@ -171,5 +171,16 @@ public class BussinessServiceImpl implements BussinessService {
 	public boolean delAssignedRoles(String accountId) {
 		return arDao.delRelationsByAccountId(accountId);
 	}
+
+	@Override
+	public AccountBean login(String name, String password) {
+		AccountBean result = aDao.findAccountByName(name);
+		if (result != null) {
+			if (!result.getPassword().equalsIgnoreCase(SHA1Utils.encode(password))) {
+				result = null;
+			}
+		}
+		return result;
+	}
 	
 }

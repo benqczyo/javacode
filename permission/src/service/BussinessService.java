@@ -32,4 +32,5 @@ public interface BussinessService {
 	AccountBean findAccountById(String id);
 	boolean assignRole(String accountId, String[] roleIds);
 	boolean delAssignedRoles(String accountId);
+	AccountBean login(String name, String password);
 }

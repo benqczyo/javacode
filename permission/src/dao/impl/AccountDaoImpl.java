@@ -27,6 +27,7 @@ public class AccountDaoImpl implements AccountDao {
 	private final String FIND_ACCOUNTS_BY_RANGE = "SELECT id, name, password, row_id FROM (SELECT a.*, ROWNUM as row_id FROM (SELECT id, name, password FROM account) a) WHERE row_id BETWEEN ? AND ?";
 	private final String FIND_ALL_ACCOUNTS = "SELECT id, name, password FROM account";
 	private final String FIND_ACCOUNT_BY_ID = "SELECT id, name, password FROM account WHERE id = ?";
+	private final String FIND_ACCOUNT_BY_NAME = "SELECT id, name, password FROM account WHERE name = ?";
 	
 	private QueryRunner qr = new QueryRunner();
 
@@ -90,6 +91,23 @@ public class AccountDaoImpl implements AccountDao {
 			result = qr.query(C3P0Utils.open(), FIND_ACCOUNT_BY_ID, new BeanHandler<AccountBean>(AccountBean.class), new Object[] {id});
 			if (result != null) {
 				List<RoleBean> roles = qr.query(C3P0Utils.open(), FIND_ROLES_BY_ACCOUNT_ID, new BeanListHandler<RoleBean>(RoleBean.class), new Object[] {id});
+				result.setRoles(roles);
+			}
+		} catch (SQLException e) {
+			throw new DaoException(e);
+		} finally {
+			C3P0Utils.close();
+		}
+		return result;
+	}
+
+	@Override
+	public AccountBean findAccountByName(String name) {
+		AccountBean result = null;
+		try {
+			result = qr.query(C3P0Utils.open(), FIND_ACCOUNT_BY_NAME, new BeanHandler<AccountBean>(AccountBean.class), new Object[] {name});
+			if (result != null) {
+				List<RoleBean> roles = qr.query(C3P0Utils.open(), FIND_ROLES_BY_ACCOUNT_ID, new BeanListHandler<RoleBean>(RoleBean.class), new Object[] {result.getId()});
 				result.setRoles(roles);
 			}
 		} catch (SQLException e) {
