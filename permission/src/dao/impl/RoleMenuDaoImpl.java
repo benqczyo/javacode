@@ -19,17 +19,6 @@ public class RoleMenuDaoImpl implements RoleMenuDao {
 	private QueryRunner qr = new QueryRunner();
 
 	@Override
-	public boolean delRelationsByRoleId(String id) {
-		try {
-			return qr.update(C3P0Utils.open(), DEL_RELATIONS_BY_ROLE_ID, id) >= 0;
-		} catch (SQLException e) {
-			throw new DaoException(e);
-		} finally {
-			C3P0Utils.close();
-		}
-	}
-
-	@Override
 	public boolean addRelations(String rId, String[] mIds) {
 		boolean result = false;
 		String[][] params = new String[mIds.length][];
@@ -52,6 +41,17 @@ public class RoleMenuDaoImpl implements RoleMenuDao {
 	public boolean delRelationsByMenuId(String id) {
 		try {
 			return qr.update(C3P0Utils.open(), DEL_RELATIONS_BY_MENU_ID, id) >= 0;
+		} catch (SQLException e) {
+			throw new DaoException(e);
+		} finally {
+			C3P0Utils.close();
+		}
+	}
+
+	@Override
+	public boolean delRelationsByRoleId(String id) {
+		try {
+			return qr.update(C3P0Utils.open(), DEL_RELATIONS_BY_ROLE_ID, id) >= 0;
 		} catch (SQLException e) {
 			throw new DaoException(e);
 		} finally {

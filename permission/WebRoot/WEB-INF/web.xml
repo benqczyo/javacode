@@ -14,17 +14,6 @@
 		<url-pattern>*</url-pattern>
 	</filter-mapping>
 	
-	<filter>
-		<filter-name>PermissionFilter</filter-name>
-		<filter-class>filter.PermissionFilter</filter-class>
-	</filter>
-	
-	<filter-mapping>
-		<filter-name>PermissionFilter</filter-name>
-		<url-pattern>/client/*</url-pattern>
-		<dispatcher>FORWARD</dispatcher>
-	</filter-mapping>
-
 	<servlet>
 		<servlet-name>Router</servlet-name>
 		<servlet-class>controller.Router</servlet-class>

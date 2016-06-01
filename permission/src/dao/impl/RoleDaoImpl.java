@@ -35,25 +35,6 @@ public class RoleDaoImpl implements RoleDao {
 	private QueryRunner qr = new QueryRunner();
 
 	@Override
-	public List<RoleBean> findAllRoles() {
-		List<RoleBean> result = null;
-		try {
-			result = qr.query(C3P0Utils.open(), FIND_ALL_ROLES, new BeanListHandler<RoleBean>(RoleBean.class));
-			if (result != null) {
-				for (RoleBean role : result) {
-					List<MenuBean> menus = qr.query(C3P0Utils.open(), FIND_MENUS_BY_ROLE_ID, new BeanListHandler<MenuBean>(MenuBean.class), new Object[] {role.getId()});
-					role.setMenus(menus);
-				}
-			}
-			return result;
-		} catch (SQLException e) {
-			throw new DaoException(e);
-		} finally {
-			C3P0Utils.close();
-		}
-	}
-
-	@Override
 	public boolean addRole(RoleBean role) {
 		boolean result = false;
 		List<Object> params = new LinkedList<Object>();
@@ -72,33 +53,48 @@ public class RoleDaoImpl implements RoleDao {
 		}
 		return result;
 	}
-	
-	@Override
-	public int getNumberOfRoles() {
-		try {
-			return ((Number) qr.query(C3P0Utils.open(), GET_NUMBER_OF_ROLES, new ScalarHandler(1))).intValue();
-		} catch (SQLException e) {
-			throw new DaoException(e);
-		} finally {
-			C3P0Utils.close();
-		}
-	}
-
-	@Override
-	public List findRolesByRange(int startRowId, int endRowId) {
-		try {
-			return qr.query(C3P0Utils.open(), FIND_ROLE_BY_RANGE, new BeanListHandler<RoleBean>(RoleBean.class), new Object[] {startRowId, endRowId});
-		} catch (SQLException e) {
-			throw new DaoException(e);
-		} finally {
-			C3P0Utils.close();
-		}
-	}
 
 	@Override
 	public boolean delRoleById(String id) {
 		try {
 			return qr.update(C3P0Utils.open(), DEL_ROLE_BY_ID, id) == 1;
+		} catch (SQLException e) {
+			throw new DaoException(e);
+		} finally {
+			C3P0Utils.close();
+		}
+	}
+	
+	@Override
+	public boolean delRolesByIds(String[] ids) {
+		boolean result = false;
+		List<Object[]> params = new LinkedList<Object[]>();
+		for (int i = 0; i < ids.length; i++) {
+			params.add(new Object[] {ids[i]});
+		}
+		try {
+			int[] status = qr.batch(C3P0Utils.open(), DEL_ROLE_BY_ID, params.toArray(new Object[0][0]));
+			for (int i = 0; i < status.length; i++) {
+				if (status[i] != 1) result = false; 
+			}
+		} catch (SQLException e) {
+			throw new DaoException(e);
+		}
+		return result;
+	}
+
+	@Override
+	public List<RoleBean> findAllRoles() {
+		List<RoleBean> result = null;
+		try {
+			result = qr.query(C3P0Utils.open(), FIND_ALL_ROLES, new BeanListHandler<RoleBean>(RoleBean.class));
+			if (result != null) {
+				for (RoleBean role : result) {
+					List<MenuBean> menus = qr.query(C3P0Utils.open(), FIND_MENUS_BY_ROLE_ID, new BeanListHandler<MenuBean>(MenuBean.class), new Object[] {role.getId()});
+					role.setMenus(menus);
+				}
+			}
+			return result;
 		} catch (SQLException e) {
 			throw new DaoException(e);
 		} finally {
@@ -124,6 +120,28 @@ public class RoleDaoImpl implements RoleDao {
 	}
 
 	@Override
+	public List findRolesByRange(int startRowId, int endRowId) {
+		try {
+			return qr.query(C3P0Utils.open(), FIND_ROLE_BY_RANGE, new BeanListHandler<RoleBean>(RoleBean.class), new Object[] {startRowId, endRowId});
+		} catch (SQLException e) {
+			throw new DaoException(e);
+		} finally {
+			C3P0Utils.close();
+		}
+	}
+
+	@Override
+	public int getNumberOfRoles() {
+		try {
+			return ((Number) qr.query(C3P0Utils.open(), GET_NUMBER_OF_ROLES, new ScalarHandler(1))).intValue();
+		} catch (SQLException e) {
+			throw new DaoException(e);
+		} finally {
+			C3P0Utils.close();
+		}
+	}
+
+	@Override
 	public boolean updateRole(RoleBean role) {
 		List<Object> params = null;
 		try {
@@ -140,24 +158,6 @@ public class RoleDaoImpl implements RoleDao {
 		} finally {
 			C3P0Utils.close();
 		}
-	}
-
-	@Override
-	public boolean delRolesByIds(String[] ids) {
-		boolean result = false;
-		List<Object[]> params = new LinkedList<Object[]>();
-		for (int i = 0; i < ids.length; i++) {
-			params.add(new Object[] {ids[i]});
-		}
-		try {
-			int[] status = qr.batch(C3P0Utils.open(), DEL_ROLE_BY_ID, params.toArray(new Object[0][0]));
-			for (int i = 0; i < status.length; i++) {
-				if (status[i] != 1) result = false; 
-			}
-		} catch (SQLException e) {
-			throw new DaoException(e);
-		}
-		return result;
 	}
 
 }

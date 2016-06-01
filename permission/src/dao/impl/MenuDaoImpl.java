@@ -63,6 +63,26 @@ public class MenuDaoImpl implements MenuDao {
 	}
 
 	@Override
+	public boolean delMenusByIds(String[] ids) {
+		boolean result = false;
+		List<Object[]> params = new LinkedList<Object[]>();
+		for (int i = 0; i < ids.length; i++) {
+			params.add(new Object[] {ids[i]});
+		}
+		try {
+			int[] status = qr.batch(C3P0Utils.open(), DEL_MENU_BY_ID, params.toArray(new Object[0][0]));
+			for (int i = 0; i < status.length; i++) {
+				if (status[i] != 1) result = false;
+			}
+		} catch (SQLException e) {
+			throw new DaoException(e);
+		} finally {
+			C3P0Utils.close();
+		}
+		return result;
+	}
+
+	@Override
 	public List<MenuBean> findAllMenus() {
 		try {
 			return qr.query(C3P0Utils.open(), FIND_ALL_MENUS, new BeanListHandler<MenuBean>(MenuBean.class));
@@ -86,44 +106,6 @@ public class MenuDaoImpl implements MenuDao {
 	}
 
 	@Override
-	public boolean updateMenu(MenuBean menu) {
-		List<Object> params = null;
-		try {
-			for (Field field : menu.getClass().getDeclaredFields()) {
-				if (params == null)
-					params = new ArrayList<Object>();
-				params.add(BeanUtils.getProperty(menu, field.getName()));
-			}
-			params.add(params.remove(0));
-			return qr.update(C3P0Utils.open(), UPDATE_MENU, params.toArray(new Object[0])) == 1;
-		} catch (Exception e) {
-			throw new DaoException(e);
-		} finally {
-			C3P0Utils.close();
-		}
-	}
-
-	@Override
-	public boolean delMenusByIds(String[] ids) {
-		boolean result = false;
-		List<Object[]> params = new LinkedList<Object[]>();
-		for (int i = 0; i < ids.length; i++) {
-			params.add(new Object[] {ids[i]});
-		}
-		try {
-			int[] status = qr.batch(C3P0Utils.open(), DEL_MENU_BY_ID, params.toArray(new Object[0][0]));
-			for (int i = 0; i < status.length; i++) {
-				if (status[i] != 1) result = false;
-			}
-		} catch (SQLException e) {
-			throw new DaoException(e);
-		} finally {
-			C3P0Utils.close();
-		}
-		return result;
-	}
-
-	@Override
 	public List<MenuBean> findMenusByRange(int startRowId, int endRowId) {
 		try {
 			return qr.query(C3P0Utils.open(), FIND_MENU_BY_RANGE, new BeanListHandler<MenuBean>(MenuBean.class), new Object[] {startRowId, endRowId});
@@ -139,6 +121,24 @@ public class MenuDaoImpl implements MenuDao {
 		try {
 			return ((Number) qr.query(C3P0Utils.open(), GET_NUMBER_OF_MENUS, new ScalarHandler(1))).intValue();
 		} catch (SQLException e) {
+			throw new DaoException(e);
+		} finally {
+			C3P0Utils.close();
+		}
+	}
+
+	@Override
+	public boolean updateMenu(MenuBean menu) {
+		List<Object> params = null;
+		try {
+			for (Field field : menu.getClass().getDeclaredFields()) {
+				if (params == null)
+					params = new ArrayList<Object>();
+				params.add(BeanUtils.getProperty(menu, field.getName()));
+			}
+			params.add(params.remove(0));
+			return qr.update(C3P0Utils.open(), UPDATE_MENU, params.toArray(new Object[0])) == 1;
+		} catch (Exception e) {
 			throw new DaoException(e);
 		} finally {
 			C3P0Utils.close();

@@ -32,14 +32,81 @@ public class BussinessServiceImpl implements BussinessService {
 	private AccountRoleDao arDao = new AccountRoleDaoImpl();
 
 	@Override
+	public boolean addAccount(AccountBean account) {
+		account.setId(UUID.randomUUID().toString());
+		account.setPassword(SHA1Utils.encode(account.getPassword()));
+		return aDao.addAccount(account);
+	}
+
+	@Override
 	public boolean addMenu(MenuBean menu) {
 		menu.setId(UUID.randomUUID().toString());
 		return mDao.addMenu(menu);
 	}
 
 	@Override
+	public boolean addRole(RoleBean role) {
+		role.setId(UUID.randomUUID().toString());
+		return rDao.addRole(role);
+	}
+
+	@Override
+	public boolean assignMenu(String roleId, String[] menuIds) {
+		boolean result = false;
+		if (rmDao.delRelationsByRoleId(roleId) && rmDao.addRelations(roleId, menuIds))
+			result = true;
+		return result;
+	}
+
+	@Override
+	public boolean assignRole(String accountId, String[] roleIds) {
+		boolean result = false;
+		if (arDao.delRelationsByAccountId(accountId) && arDao.addRelations(accountId, roleIds))
+			result = true;
+		return result;
+	}
+
+	@Override
+	public boolean delAssignedMenus(String roleId) {
+		return rmDao.delRelationsByRoleId(roleId);
+	}
+
+	@Override
+	public boolean delAssignedRoles(String accountId) {
+		return arDao.delRelationsByAccountId(accountId);
+	}
+	
+	@Override
 	public boolean delMenuById(String id) {
 		return mDao.delMenuById(id);
+	}
+	
+
+	@Override
+	public boolean delMenusByIds(String[] ids) {
+		return mDao.delMenusByIds(ids);
+	}
+
+
+	@Override
+	public boolean delRoleById(String id) {
+		return rDao.delRoleById(id);
+		
+	}
+
+	@Override
+	public boolean delRolesByIds(String[] ids) {
+		return rDao.delRolesByIds(ids);
+	}
+
+	@Override
+	public AccountBean findAccountById(String id) {
+		return aDao.findAccountById(id);
+	}
+
+	@Override
+	public List<AccountBean> findAllAccount() {
+		return aDao.findAllAccounts();
 	}
 
 	@Override
@@ -48,30 +115,34 @@ public class BussinessServiceImpl implements BussinessService {
 	}
 
 	@Override
+	public List<RoleBean> findAllRoles() {
+		return rDao.findAllRoles();
+	}
+
+	@Override
 	public MenuBean findMenuById(String id) {
 		return mDao.findMenuById(id);
 	}
 
 	@Override
-	public boolean updateMenu(MenuBean menu) {
-		return mDao.updateMenu(menu);
+	public RoleBean findRoleById(String id) {
+		return rDao.findRolesById(id);
 	}
 
 	@Override
-	public boolean delMenusByIds(String[] ids) {
-		return mDao.delMenusByIds(ids);
+	public int getNumberOfAccounts() {
+		return aDao.getNumberOfAccounts();
 	}
 
 	@Override
 	public int getNumberOfMenus() {
 		return mDao.getNumberOfMenus();
 	}
-	
+
 	@Override
 	public int getNumberOfRoles() {
 		return rDao.getNumberOfRoles();
 	}
-	
 
 	@Override
 	public Page getPage(Object target, int pageRange, int pageRecords, String currentPageId) {
@@ -91,90 +162,19 @@ public class BussinessServiceImpl implements BussinessService {
 		return result;
 	}
 
-
 	@Override
-	public boolean addRole(RoleBean role) {
-		role.setId(UUID.randomUUID().toString());
-		return rDao.addRole(role);
+	public AccountBean login(String name, String password) {
+		return aDao.findAccount(name, SHA1Utils.encode(password));
 	}
 
 	@Override
-	public boolean delRoleById(String id) {
-		return rDao.delRoleById(id);
-		
-	}
-
-	@Override
-	public RoleBean findRoleById(String id) {
-		return rDao.findRolesById(id);
+	public boolean updateMenu(MenuBean menu) {
+		return mDao.updateMenu(menu);
 	}
 
 	@Override
 	public boolean updateRole(RoleBean role) {
 		return rDao.updateRole(role);
-	}
-
-	@Override
-	public boolean delRolesByIds(String[] ids) {
-		return rDao.delRolesByIds(ids);
-	}
-
-	@Override
-	public boolean assignMenu(String roleId, String[] menuIds) {
-		boolean result = false;
-		if (rmDao.delRelationsByRoleId(roleId) && rmDao.addRelations(roleId, menuIds))
-			result = true;
-		return result;
-	}
-
-	@Override
-	public boolean delAssignedMenus(String roleId) {
-		return rmDao.delRelationsByRoleId(roleId);
-	}
-
-	@Override
-	public List<AccountBean> findAllAccount() {
-		return aDao.findAllAccounts();
-	}
-
-	@Override
-	public int getNumberOfAccounts() {
-		return aDao.getNumberOfAccounts();
-	}
-
-	@Override
-	public boolean addAccount(AccountBean account) {
-		account.setId(UUID.randomUUID().toString());
-		account.setPassword(SHA1Utils.encode(account.getPassword()));
-		return aDao.addAccount(account);
-	}
-
-	@Override
-	public AccountBean findAccountById(String id) {
-		return aDao.findAccountById(id);
-	}
-
-	@Override
-	public List<RoleBean> findAllRoles() {
-		return rDao.findAllRoles();
-	}
-
-	@Override
-	public boolean assignRole(String accountId, String[] roleIds) {
-		boolean result = false;
-		if (arDao.delRelationsByAccountId(accountId) && arDao.addRelations(accountId, roleIds))
-			result = true;
-		return result;
-	}
-
-	@Override
-	public boolean delAssignedRoles(String accountId) {
-		return arDao.delRelationsByAccountId(accountId);
-	}
-
-	@Override
-	public AccountBean login(String name, String password) {
-		return aDao.findAccount(name, SHA1Utils.encode(password));
 	}
 	
 }

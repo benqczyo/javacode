@@ -1,2 +1,2 @@
 <%@page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8"%>
-<jsp:forward page="/router?action=show&view=defaultIndex"/>
+<jsp:forward page="/front/index.jsp"/>
