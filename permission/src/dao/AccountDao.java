@@ -10,5 +10,5 @@ public interface AccountDao {
 	List<AccountBean> findAllAccounts();
 	List<AccountBean> findAccountsByRange(int startRowId, int endRowId);
 	AccountBean findAccountById(String id);
-	AccountBean findAccountByName(String name);
+	AccountBean findAccount(String name, String password);
 }

@@ -36,8 +36,16 @@ public class RoleDaoImpl implements RoleDao {
 
 	@Override
 	public List<RoleBean> findAllRoles() {
+		List<RoleBean> result = null;
 		try {
-			return qr.query(C3P0Utils.open(), FIND_ALL_ROLES, new BeanListHandler<RoleBean>(RoleBean.class));
+			result = qr.query(C3P0Utils.open(), FIND_ALL_ROLES, new BeanListHandler<RoleBean>(RoleBean.class));
+			if (result != null) {
+				for (RoleBean role : result) {
+					List<MenuBean> menus = qr.query(C3P0Utils.open(), FIND_MENUS_BY_ROLE_ID, new BeanListHandler<MenuBean>(MenuBean.class), new Object[] {role.getId()});
+					role.setMenus(menus);
+				}
+			}
+			return result;
 		} catch (SQLException e) {
 			throw new DaoException(e);
 		} finally {

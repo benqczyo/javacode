@@ -108,7 +108,19 @@ public class Router extends HttpServlet {
 			loginAction(request, response);
 			return;
 		}
+		
+		if ("logout".equalsIgnoreCase(action)) {
+			logoutAction(request, response);
+			return;
+		}
 
+	}
+
+	private void logoutAction(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		request.getSession().invalidate();
+		response.sendRedirect(request.getContextPath());
+		
 	}
 
 	private void loginAction(HttpServletRequest request,
@@ -456,9 +468,11 @@ public class Router extends HttpServlet {
 		if ("mgrAddAccount".equalsIgnoreCase(view)) path = viewPath + "mgrAddAccount.jsp";
 		if ("defaultIndex".equalsIgnoreCase(view)) {
 			request.setAttribute("menus", service.findAllMenus());
-			path = viewPath + "clientIndex.jsp";
+			path = "/client/clientIndex.jsp";
 		}
-		if ("login".equalsIgnoreCase(view)) path = viewPath + "clientLogin.jsp";
+		if ("login".equalsIgnoreCase(view)) path = "/client/clientLogin.jsp";
+		if ("addProduct".equalsIgnoreCase(view)) path = "/client/clientAddProduct.jsp";
+		if ("putInStorage".equalsIgnoreCase(view)) path = "/client/clientPutInStorage.jsp";
 		
 		request.getRequestDispatcher(path).forward(request, response);
 	}

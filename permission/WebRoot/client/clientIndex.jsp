@@ -14,7 +14,8 @@
 			<a href="${url}">登陆</a>
 		</c:if>
 		<c:if test="${sessionScope.account ne null}">
-			欢迎您  ${account.name}<a href="">注销</a>
+			<c:url value="/router?action=logout" var="url"/>
+			欢迎您  ${account.name}<a href="${url}">注销</a>
 		</c:if>
 		<c:forEach var="menu" items="${menus}">
 			<c:url value="${menu.uri}" var="url"/>
