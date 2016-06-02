@@ -77,6 +77,10 @@ public class BussinessServiceImpl implements BussinessService {
 		return mDao.delMenusByIds(ids);
 	}
 
+	public boolean delRelationsByMenuId(String id) {
+		return rmDao.delRelationsByMenuId(id);
+	}
+
 	public boolean delRoleById(String id) {
 		return rDao.delRoleById(id);
 	}

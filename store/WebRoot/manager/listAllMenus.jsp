@@ -3,7 +3,7 @@
 <div id="mgrMenu">
 	<form action="${pageContext.request.contextPath}/router?action=delMenus" method="post" id="delMenusForm">
 		<p>
-			<a href="">[<fmt:message key="menu.add" bundle="${bundle}" />]</a>
+			<a href="${pageContext.request.contextPath}/manager/addMenu.jsp">[<fmt:message key="menu.add" bundle="${bundle}" />]</a>
 			<a href="javascript: delMenus();">[<fmt:message key="menu.delMenus" bundle="${bundle}" />]</a>
 		</p>
 		<c:if test="${empty requestScope.page.records}">
@@ -25,7 +25,7 @@
 						<td>${menu.uri}</td>
 						<td>${menu.description}</td>
 						<td>
-							<a href="${pageContext.request.contextPath}/router?action=updateMenu&id=${menu.id}"><fmt:message key="ops.update" bundle="${bundle}" /></a>
+							<a href="${pageContext.request.contextPath}/router?action=changeMenu&id=${menu.id}"><fmt:message key="ops.update" bundle="${bundle}" /></a>
 							<a href="javascript: delMenu('${menu.id}')"><fmt:message key="ops.delete" bundle="${bundle}" /></a>
 						</td>
 					</tr>

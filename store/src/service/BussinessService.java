@@ -18,6 +18,7 @@ public interface BussinessService {
 	boolean delAssignedRoles(String accountId);
 	boolean delMenuById(String id);
 	boolean delMenusByIds(String[] ids);
+	boolean delRelationsByMenuId(String id);
 	boolean delRoleById(String id);
 	boolean delRolesByIds(String[] ids);
 	AccountBean findAccountById(String id);

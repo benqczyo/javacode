@@ -1,7 +1,7 @@
 <%@page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8"%>
 <%@include file="header.jsp"%>
 <div id="mgrUpdateMenu">
-	<form action="${uri}?action=updateMenu" method="post">
+	<form action="${pageContext.request.contextPath}/router?action=updateMenu" method="post">
 		<table>
 			<tr>
 				<td colspan="3">

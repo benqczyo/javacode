@@ -1,14 +1,14 @@
 package formbean.impl;
 
 
-public class UpdateMenuFormBean extends AbstractFormBean {
+public class ChangeMenuFormBean extends AbstractFormBean {
 	
 	private String id;
 	private String title;
 	private String uri;
 	private String description;
 
-	public UpdateMenuFormBean() {}
+	public ChangeMenuFormBean() {}
 	
 	public String getId() {
 		return id;
