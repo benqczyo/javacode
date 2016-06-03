@@ -1,12 +1,12 @@
 package formbean.impl;
 
-public class UpdateRoleFormBean extends AbstractFormBean {
+public class ChangeRoleFormBean extends AbstractFormBean {
 
 	private String id;
 	private String name;
 	private String description;
 
-	public UpdateRoleFormBean() {
+	public ChangeRoleFormBean() {
 	}
 
 	public String getId() {

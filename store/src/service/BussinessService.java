@@ -6,7 +6,7 @@ import domain.AccountBean;
 import domain.MenuBean;
 import domain.Page;
 import domain.RoleBean;
-import formbean.impl.UpdateRoleFormBean;
+import formbean.impl.ChangeRoleFormBean;
 
 public interface BussinessService {
 	boolean addAccount(AccountBean account);
@@ -34,4 +34,5 @@ public interface BussinessService {
 	AccountBean login(String name, String password);
 	boolean updateMenu(MenuBean menu);
 	boolean updateRole(RoleBean role);
+	boolean delRelationsByRoleId(String id);
 }

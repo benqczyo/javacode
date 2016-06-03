@@ -3,7 +3,7 @@
 <div id="mgrRole">
 	<form action="${uri}?action=delRoles" method="post" id="delRolesForm">
 		<p>
-			<a href="${uri}?action=show&view=mgrAddRole">[<fmt:message key="role.add" bundle="${bundle}" />]</a>
+			<a href="${pageContext.request.contextPath}/manager/addRole.jsp">[<fmt:message key="role.add" bundle="${bundle}" />]</a>
 			<a href="javascript: delRoles();">[<fmt:message key="role.delRoles" bundle="${bundle}" />]</a>
 		</p>
 		<c:if test="${empty requestScope.page.records}">
@@ -23,7 +23,7 @@
 						<td>${role.name}</td>
 						<td>${role.description}</td>
 						<td>
-							<a href="${uri}?action=show&view=mgrUpdateRole&id=${role.id}"><fmt:message key="ops.update" bundle="${bundle}" /></a>
+							<a href="${pageContext.request.contextPath}/router?action=changeRole&id=${role.id}"><fmt:message key="ops.update" bundle="${bundle}" /></a>
 							<a href="javascript: delRole('${role.id}')"><fmt:message key="ops.delete" bundle="${bundle}" /></a>
 							<a href="${uri}?action=show&view=mgrAssignMenu&id=${role.id}"><fmt:message key="ops.assignMenu" bundle="${bundle}" /></a>
 						</td>

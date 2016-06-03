@@ -21,7 +21,7 @@ import domain.AccountBean;
 import domain.MenuBean;
 import domain.Page;
 import domain.RoleBean;
-import formbean.impl.UpdateRoleFormBean;
+import formbean.impl.ChangeRoleFormBean;
 
 public class BussinessServiceImpl implements BussinessService {
 
@@ -153,6 +153,10 @@ public class BussinessServiceImpl implements BussinessService {
 
 	public boolean updateRole(RoleBean role) {
 		return rDao.updateRole(role);
+	}
+
+	public boolean delRelationsByRoleId(String id) {
+		return rmDao.delRelationsByRoleId(id) && arDao.delRelationsByRoleId(id);
 	}
 
 }

@@ -18,9 +18,12 @@ import utils.FormBeanUtils;
 
 import domain.MenuBean;
 import domain.Page;
+import domain.RoleBean;
 import exception.DaoException;
 import formbean.impl.AddMenuFormBean;
+import formbean.impl.AddRoleFormBean;
 import formbean.impl.ChangeMenuFormBean;
+import formbean.impl.ChangeRoleFormBean;
 
 public class Router extends HttpServlet {
 	
@@ -54,6 +57,134 @@ public class Router extends HttpServlet {
 			updateMenu(request, response);
 			return;
 		}
+		if ("listAllRoles".equalsIgnoreCase(action)) {
+			listAllRoles(request, response);
+			return;
+		}
+		if ("addRole".equalsIgnoreCase(action)) {
+			addRole(request, response);
+			return;
+		}
+		if ("delRoles".equalsIgnoreCase(action)) {
+			delRoles(request, response);
+			return;
+		}
+		if ("changeRole".equalsIgnoreCase(action)) {
+			changeRole(request, response);
+			return;
+		}
+		if ("updateRole".equalsIgnoreCase(action)) {
+			updateRole(request, response);
+			return;
+		}
+		if ("delRole".equalsIgnoreCase(action)) {
+			delRole(request, response);
+			return;
+		}
+	}
+
+	private void delRole(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		String id = request.getParameter("id");
+		if (id != null && !id.trim().isEmpty()) {
+			service.delRelationsByRoleId(id);
+			service.delRoleById(id);
+		}
+		response.sendRedirect(request.getContextPath() + "/router?action=listAllRoles");
+		
+	}
+
+	private void updateRole(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		ChangeRoleFormBean formBean = null;
+		try {
+			formBean = FormBeanUtils.fill(request, ChangeRoleFormBean.class);
+			if (formBean.validate() == true) {
+				RoleBean role = new RoleBean();
+				BeanUtils.copyProperties(role, formBean);
+				service.updateRole(role);
+				response.sendRedirect(request.getContextPath() + "/router?action=listAllRoles");
+			} else {
+				request.setAttribute("formBean", formBean);
+				request.getRequestDispatcher("/manager/changeRole.jsp").forward(request, response);
+			}
+		} catch (DaoException e) {
+			e.printStackTrace();
+			formBean.getMessages().put("result", "修改角色失败，可能是角色名重复");
+			request.setAttribute("formBean", formBean);
+			request.getRequestDispatcher("/manager/changeRole.jsp").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ServletException(e);
+		}
+	}
+
+	private void changeRole(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("id");
+		if (id != null && !id.trim().isEmpty()) {
+			RoleBean role = service.findRoleById(id);
+			if (role == null) {
+				response.sendRedirect(request.getContextPath() + "/router?action=showAllRoles");
+				return;
+			}
+			ChangeRoleFormBean formBean = new ChangeRoleFormBean();
+			try {
+				BeanUtils.copyProperties(formBean, role);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new ServletException(e);
+			}
+			request.setAttribute("formBean", formBean);
+			request.getRequestDispatcher("/manager/changeRole.jsp").forward(request, response);
+		} else {
+			response.sendRedirect(request.getContextPath() + "/router?action=showAllRoles");
+		}
+	}
+
+	private void delRoles(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		String[] ids = request.getParameterValues("ids");
+		if (ids != null && ids.length > 0) {
+			for (String id : ids) {
+				if (!id.trim().isEmpty()) {
+					service.delRelationsByRoleId(id);
+					service.delRoleById(id);
+				}
+			}
+		}
+		response.sendRedirect(request.getContextPath() + "/router?action=listAllRoles");
+	}
+
+	private void addRole(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		AddRoleFormBean formBean = null;
+		try {
+			formBean = FormBeanUtils.fill(request, AddRoleFormBean.class);
+			if (formBean.validate() == true) {
+				RoleBean role = new RoleBean();
+				BeanUtils.copyProperties(role, formBean);
+				service.addRole(role);
+				response.sendRedirect(request.getContextPath() + "/router?action=listAllRoles");
+			} else {
+				request.setAttribute("formBean", formBean);
+				request.getRequestDispatcher("/manager/addRole.jsp").forward(request, response);
+			}
+		} catch (DaoException e) {
+			e.printStackTrace();
+			formBean.getMessages().put("result", "添加角色失败，可能是角色名重复");
+			request.setAttribute("formBean", formBean);
+			request.getRequestDispatcher("/manager/addRole.jsp").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ServletException(e);
+		}
+	}
+
+	private void listAllRoles(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("page", getPage(new RoleBean(), request));
+		request.getRequestDispatcher("/manager/listAllRoles.jsp").forward(request, response);
 	}
 
 	private void changeMenu(HttpServletRequest request,
@@ -77,7 +208,6 @@ public class Router extends HttpServlet {
 		} else {
 			response.sendRedirect(request.getContextPath() + "/router?action=showAllMenus");
 		}
-		
 	}
 
 	private void listAllMenus(HttpServletRequest request,
@@ -114,7 +244,10 @@ public class Router extends HttpServlet {
 	private void delMenu(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		String id = request.getParameter("id");
-		if (id != null && !id.trim().isEmpty()) service.delMenuById(id);
+		if (id != null && !id.trim().isEmpty()) {
+			service.delRelationsByMenuId(id);
+			service.delMenuById(id);
+		}
 		response.sendRedirect(request.getContextPath() + "/router?action=listAllMenus");
 	}
 
@@ -156,7 +289,6 @@ public class Router extends HttpServlet {
 			e.printStackTrace();
 			throw new ServletException(e);
 		}
-		
 	}
 	
 	private Page getPage(Object target, HttpServletRequest request) {
