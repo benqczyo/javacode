@@ -26,7 +26,7 @@ public class Page {
 						/ this.pageRecords : this.totalRows / this.pageRecords
 						+ 1;
 		this.pageRange = pageRange;
-		this.currentPageId = currentPageId;
+		this.currentPageId = currentPageId < 0 ? 1 : currentPageId > this.totalPages ? this.totalPages : currentPageId;
 		this.prevPageId = this.currentPageId == 1 ? -1 : this.currentPageId - 1;
 		this.nextPageId = this.currentPageId == this.totalPages ? -1
 				: this.currentPageId + 1;

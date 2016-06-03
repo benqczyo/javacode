@@ -35,16 +35,16 @@
 					<fmt:message key="prevPage" bundle="${bundle}"/>
 				</c:if>
 				<c:if test="${requestScope.page.prevPageId ne -1}">
-					<a href="${uri}?action=show&view=mgrRole&pageId=${requestScope.page.prevPageId}"><fmt:message key="prevPage" bundle="${bundle}"/></a>
+					<a href="${pageContext.request.contextPath}/router?action=listAllRoles&pageId=${requestScope.page.prevPageId}"><fmt:message key="prevPage" bundle="${bundle}"/></a>
 				</c:if>
 				<c:forEach begin="${requestScope.page.startPageId}" end="${requestScope.page.endPageId}" var="pageId">
-					<a href="${uri}?action=show&view=mgrRole&pageId=${pageId}" ${requestScope.page.currentPageId eq pageId ? "class='selected'" : ""}>${pageId}</a>
+					<a href="${pageContext.request.contextPath}/router?action=listAllRoles&pageId=${pageId}" ${requestScope.page.currentPageId eq pageId ? "class='selected'" : ""}>${pageId}</a>
 				</c:forEach>
 				<c:if test="${requestScope.page.nextPageId eq -1}">
 					<fmt:message key="nextPage" bundle="${bundle}"/>
 				</c:if>
 				<c:if test="${requestScope.page.nextPageId ne -1}">
-					<a href="${uri}?action=show&view=mgrRole&pageId=${requestScope.page.nextPageId}"><fmt:message key="nextPage" bundle="${bundle}"/></a>
+					<a href=""${pageContext.request.contextPath}/router?action=listAllRoles&pageId=${requestScope.page.nextPageId}"><fmt:message key="nextPage" bundle="${bundle}"/></a>
 				</c:if>
 			</p>
 		</c:if>

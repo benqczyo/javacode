@@ -293,12 +293,13 @@ public class Router extends HttpServlet {
 	
 	private Page getPage(Object target, HttpServletRequest request) {
 		String pageId = request.getParameter("pageId");
-		if (pageId == null || pageId.trim().equals("") || !pageId.matches("[1-9]+")) pageId = "1";
+		if (pageId == null || pageId.trim().equals("") || !pageId.matches("^[1-9][0-9]*$")) pageId = "1";
 		ServletConfig config = getServletConfig();
 		String pageRange = config.getInitParameter("pageRange");
 		String pageRecords = config.getInitParameter("pageRecords");
-		if (pageRange == null || pageRange.trim().equals("") || !pageRange.matches("[1-9]+")) pageRange = "4";
-		if (pageRecords == null || pageRecords.trim().equals("") || !pageRecords.matches("[1-9]+")) pageRecords = "10";
+		if (pageRange == null || pageRange.trim().equals("") || !pageRange.matches("^[1-9][0-9]*$")) pageRange = "4";
+		if (pageRecords == null || pageRecords.trim().equals("") || !pageRecords.matches("^[1-9][0-9]*$")) pageRecords = "10";
+		System.out.println(pageId);
 		return service.getPage(target, Integer.parseInt(pageRange), Integer.parseInt(pageRecords), pageId);
 	}
 	
