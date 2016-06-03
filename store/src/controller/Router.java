@@ -81,6 +81,38 @@ public class Router extends HttpServlet {
 			delRole(request, response);
 			return;
 		}
+		if ("assignMenu".equalsIgnoreCase(action)) {
+			assignMenu(request, response);
+			return;
+		}
+		if ("doAssignMenu".equalsIgnoreCase(action)) {
+			doAssignMenu(request, response);
+			return;
+		}
+	}
+
+	private void doAssignMenu(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		String roleId = request.getParameter("roleId");
+		if (roleId != null && !roleId.trim().equals("")) {
+			String[] menuIds = request.getParameterValues("menuId");
+			if (menuIds != null && menuIds.length > 0) {
+				service.assignMenu(roleId, menuIds);
+			} else {
+				service.delAssignedMenus(roleId);
+			}
+		}
+		response.sendRedirect(request.getContextPath() + "/router?action=listAllRoles");
+	}
+
+	private void assignMenu(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("id");
+		if (id != null && !id.trim().equals("")) {
+			request.setAttribute("role", service.findRoleById(id));
+			request.setAttribute("menus", service.findAllMenus());
+			request.getRequestDispatcher("/manager/assignMenu.jsp").forward(request, response);
+		}
 	}
 
 	private void delRole(HttpServletRequest request,
@@ -299,7 +331,6 @@ public class Router extends HttpServlet {
 		String pageRecords = config.getInitParameter("pageRecords");
 		if (pageRange == null || pageRange.trim().equals("") || !pageRange.matches("^[1-9][0-9]*$")) pageRange = "4";
 		if (pageRecords == null || pageRecords.trim().equals("") || !pageRecords.matches("^[1-9][0-9]*$")) pageRecords = "10";
-		System.out.println(pageId);
 		return service.getPage(target, Integer.parseInt(pageRange), Integer.parseInt(pageRecords), pageId);
 	}
 	

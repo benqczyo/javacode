@@ -1,7 +1,7 @@
 <%@page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8"%>
 <%@include file="header.jsp"%>
 <div id="mgrAssignMenu">
-	<form action="${uri}?action=assignMenu" method="post" id="assignMenuForm">
+	<form action="${pageContext.request.contextPath}/router?action=doAssignMenu" method="post" id="assignMenuForm">
 		<input type="hidden" name="roleId" value="${role.id}" />
 		<table class="list">
 			<tr>

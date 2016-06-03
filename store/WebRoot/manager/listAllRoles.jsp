@@ -25,7 +25,7 @@
 						<td>
 							<a href="${pageContext.request.contextPath}/router?action=changeRole&id=${role.id}"><fmt:message key="ops.update" bundle="${bundle}" /></a>
 							<a href="javascript: delRole('${role.id}')"><fmt:message key="ops.delete" bundle="${bundle}" /></a>
-							<a href="${uri}?action=show&view=mgrAssignMenu&id=${role.id}"><fmt:message key="ops.assignMenu" bundle="${bundle}" /></a>
+							<a href="${pageContext.request.contextPath}/router?action=assignMenu&id=${role.id}"><fmt:message key="ops.assignMenu" bundle="${bundle}" /></a>
 						</td>
 					</tr>
 				</c:forEach>
