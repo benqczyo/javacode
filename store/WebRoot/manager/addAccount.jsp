@@ -1,7 +1,7 @@
 <%@page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8"%>
 <%@include file="header.jsp"%>
 <div id="mgrAddAccount">
-	<form action="${uri}?action=addAccount" method="post">
+	<form action="${pageContext.request.contextPath}/router?action=addAccount" method="post">
 		<table>
 			<tr>
 				<td colspan="3"><input type="hidden" name="id"/></td>

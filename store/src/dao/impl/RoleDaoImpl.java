@@ -115,7 +115,7 @@ public class RoleDaoImpl implements RoleDao {
 		return result;
 	}
 
-	public RoleBean findRolesById(String id) {
+	public RoleBean findRoleById(String id) {
 		RoleBean result = null;
 		try {
 			result = qr.query(FIND_ROLE_BY_ID, new BeanHandler<RoleBean>(RoleBean.class), new Object[] {id});

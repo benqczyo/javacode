@@ -3,7 +3,7 @@
 <div id="mgrAccount">
 	<form action="${uri}?action=delAccounts" method="post" id="delAccountForm">
 		<p>
-			<a href="${uri}?action=show&view=mgrAddAccount">[<fmt:message key="account.add" bundle="${bundle}" />]</a>
+			<a href="${pageContext.request.contextPath}/manager/addAccount.jsp">[<fmt:message key="account.add" bundle="${bundle}" />]</a>
 			<a href="javascript: delAccounts();">[<fmt:message key="account.delAccounts" bundle="${bundle}" />]</a>
 		</p>
 		<c:if test="${empty requestScope.page.records}">
@@ -21,9 +21,9 @@
 						<td><input type="checkbox" name="ids" value="${account.id}" />${vs.count}</td>
 						<td>${account.name}</td>
 						<td>
-							<a href="${uri}?action=show&view=mgrUpdateAccount&id=${account.id}"><fmt:message key="ops.update" bundle="${bundle}" /></a>
+							<a href="${pageContext.request.contextPath}/router?action=changeAccount&id=${account.id}"><fmt:message key="ops.update" bundle="${bundle}" /></a>
 							<a href="javascript: delAccount('${account.id}')"><fmt:message key="ops.delete" bundle="${bundle}" /></a>
-							<a href="${uri}?action=show&view=mgrAssignRole&id=${account.id}"><fmt:message key="ops.assignRole" bundle="${bundle}"/></a>
+							<a href="${pageContext.request.contextPath}/router?action=assignRole&id=${account.id}"><fmt:message key="ops.assignRole" bundle="${bundle}"/></a>
 						</td>
 					</tr>
 				</c:forEach>

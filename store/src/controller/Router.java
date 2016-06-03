@@ -16,14 +16,17 @@ import service.BussinessService;
 import service.impl.BussinessServiceImpl;
 import utils.FormBeanUtils;
 
+import domain.AccountBean;
 import domain.MenuBean;
 import domain.Page;
 import domain.RoleBean;
 import exception.DaoException;
+import formbean.impl.AddAccountFormBean;
 import formbean.impl.AddMenuFormBean;
 import formbean.impl.AddRoleFormBean;
 import formbean.impl.ChangeMenuFormBean;
 import formbean.impl.ChangeRoleFormBean;
+import formbean.impl.LoginFormBean;
 
 public class Router extends HttpServlet {
 	
@@ -89,6 +92,125 @@ public class Router extends HttpServlet {
 			doAssignMenu(request, response);
 			return;
 		}
+		if ("listAllAccounts".equalsIgnoreCase(action)) {
+			listAllAccounts(request, response);
+			return;
+		}
+		if ("addAccount".equalsIgnoreCase(action)) {
+			addAccount(request, response);
+			return;
+		}
+		if ("assignRole".equalsIgnoreCase(action)) {
+			assignRole(request, response);
+			return;
+		}
+		if ("doAssignRole".equalsIgnoreCase(action)) {
+			doAssignRole(request, response);
+			return;
+		}
+		if ("defaultPage".equalsIgnoreCase(action)) {
+			defaultPage(request, response);
+			return;
+		}
+		if ("login".equalsIgnoreCase(action)) {
+			login(request, response);
+			return;
+		}
+		if ("logout".equalsIgnoreCase(action)) {
+			logout(request, response);
+			return;
+		}
+	}
+
+	private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		request.getSession().invalidate();
+		response.sendRedirect(request.getContextPath());
+	}
+
+	private void login(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		LoginFormBean formBean = null;
+		try {
+			formBean = FormBeanUtils.fill(request, LoginFormBean.class);
+			if (formBean.validate()) {
+				AccountBean account = new AccountBean();
+				BeanUtils.copyProperties(account, formBean);
+				if ((account = service.login(account.getName(), account.getPassword())) != null) {
+					request.getSession().setAttribute("account", account);
+					response.sendRedirect(request.getContextPath());
+				} else {
+					formBean.getMessages().put("result", "账号或者密码错误");
+					request.setAttribute("formBean", formBean);
+					request.getRequestDispatcher("/front/login.jsp").forward(request, response);
+				}
+			} else {
+				request.setAttribute("formBean", formBean);
+				request.getRequestDispatcher("/front/login.jsp").forward(request, response);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ServletException(e);
+		}
+	}
+
+	private void defaultPage(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("menus", service.findAllMenus());
+		request.getRequestDispatcher("/front/").forward(request, response);
+	}
+
+	private void doAssignRole(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		String accountId = request.getParameter("accountId");
+		if (accountId != null && !accountId.trim().equals("")) {
+			String[] roleIds = request.getParameterValues("roleId");
+			if (roleIds != null && roleIds.length > 0) {
+				service.assignRole(accountId, roleIds);
+			} else {
+				service.delAssignedRoles(accountId);
+			}
+		}
+		response.sendRedirect(request.getContextPath() + "/router?action=listAllAccounts");
+	}
+
+	private void assignRole(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("id");
+		if (id != null && !id.trim().equals("")) {
+			request.setAttribute("account", service.findAccountById(id));
+			request.setAttribute("roles", service.findAllRoles());
+			request.getRequestDispatcher("/manager/assignRole.jsp").forward(request, response);
+		}
+	}
+
+	private void addAccount(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		AddAccountFormBean formBean = null;
+		try {
+			formBean = FormBeanUtils.fill(request, AddAccountFormBean.class);
+			if (formBean.validate() == true) {
+				AccountBean account = new AccountBean();
+				BeanUtils.copyProperties(account, formBean);
+				service.addAccount(account);
+				response.sendRedirect(request.getContextPath() + "/router?action=listAllAccounts");
+			} else {
+				request.setAttribute("formBean", formBean);
+				request.getRequestDispatcher("/manager/addAccount.jsp").forward(request, response);
+			}
+		} catch (DaoException e) {
+			e.printStackTrace();
+			formBean.getMessages().put("result", "添加角色失败，可能是角色名重复");
+			request.setAttribute("formBean", formBean);
+			request.getRequestDispatcher("/manager/addRole.jsp").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ServletException(e);
+		}
+	}
+
+	private void listAllAccounts(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("page", getPage(new AccountBean(), request));
+		request.getRequestDispatcher("/manager/listAllAccount.jsp").forward(request, response);
 	}
 
 	private void doAssignMenu(HttpServletRequest request,

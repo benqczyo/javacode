@@ -110,7 +110,7 @@ public class BussinessServiceImpl implements BussinessService {
 	}
 
 	public RoleBean findRoleById(String id) {
-		return rDao.findRolesById(id);
+		return rDao.findRoleById(id);
 	}
 
 	public int getNumberOfAccounts() {

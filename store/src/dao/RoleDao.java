@@ -11,6 +11,6 @@ public interface RoleDao {
 	boolean delRolesByIds(String[] ids);
 	boolean updateRole(RoleBean role);
 	List<RoleBean> findAllRoles();
-	RoleBean findRolesById(String id);
+	RoleBean findRoleById(String id);
 	List<RoleBean> findRolesByRange(int startRowId, int endRowId);
 }
