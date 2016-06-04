@@ -2,7 +2,7 @@
 <c3p0-config>
 	<default-config>
 		<property name="driverClass">oracle.jdbc.OracleDriver</property>
-		<property name="jdbcUrl">jdbc:oracle:thin:@localhost:1521:dev</property>
+		<property name="jdbcUrl">jdbc:oracle:thin:@localhost:1521:orcl</property>
 		<property name="user">scott</property>
 		<property name="password">sorry</property>
 		<property name="initialPoolSize">5</property>

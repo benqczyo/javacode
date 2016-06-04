@@ -24,6 +24,7 @@ import exception.DaoException;
 import formbean.impl.AddAccountFormBean;
 import formbean.impl.AddMenuFormBean;
 import formbean.impl.AddRoleFormBean;
+import formbean.impl.ChangeAccountFormBean;
 import formbean.impl.ChangeMenuFormBean;
 import formbean.impl.ChangeRoleFormBean;
 import formbean.impl.LoginFormBean;
@@ -100,6 +101,14 @@ public class Router extends HttpServlet {
 			addAccount(request, response);
 			return;
 		}
+		if ("changeAccount".equalsIgnoreCase(action)) {
+			changeAccount(request, response);
+			return;
+		}
+		if ("updateAccount".equalsIgnoreCase(action)) {
+			updateAccount(request, response);
+			return;
+		}
 		if ("assignRole".equalsIgnoreCase(action)) {
 			assignRole(request, response);
 			return;
@@ -119,6 +128,48 @@ public class Router extends HttpServlet {
 		if ("logout".equalsIgnoreCase(action)) {
 			logout(request, response);
 			return;
+		}
+	}
+
+	private void updateAccount(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		ChangeAccountFormBean formBean = null;
+		try {
+			formBean = FormBeanUtils.fill(request, ChangeAccountFormBean.class);
+			if (formBean.validate() == true) {
+				AccountBean account = service.findAccountById(formBean.getId());
+				if (service.checkAccount(account.getPassword(), formBean.getOldPassword())) {
+					account.setPassword(formBean.getNewPassword());
+					service.updateAccount(account);
+					
+				}
+			} else {
+				request.setAttribute("formBean", formBean);
+				request.getRequestDispatcher("/manager/changeAccount.jsp").forward(request, response);
+			}
+		} catch (DaoException e) {
+			e.printStackTrace();
+			formBean.getMessages().put("result", "–ﬁ∏ƒ’À∫≈ ß∞‹");
+			request.setAttribute("formBean", formBean);
+			request.getRequestDispatcher("/manager/changeAccount.jsp").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ServletException(e);
+		}
+	}
+
+	private void changeAccount(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("id");
+		if (id != null && !id.trim().equals("")) {
+			AccountBean account = service.findAccountById(id);
+			if (account != null) {
+				ChangeAccountFormBean formBean = new ChangeAccountFormBean();
+				formBean.setId(id);
+				formBean.setName(account.getName());
+				request.setAttribute("formBean", formBean);
+				request.getRequestDispatcher("/manager/changeAccount.jsp").forward(request, response);
+			}
 		}
 	}
 
