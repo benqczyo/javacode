@@ -127,4 +127,26 @@ public class UserDaoImpl implements UserDao {
 		return false;
 	}
 
+	@Override
+	public UserBean findUserByName(String name) {
+		UserBean result = null;
+		try {
+			//查找指定id的用户
+			Document doc = XmlUtils.open();
+			String xPath = String.format("//user[@name='%s']", name);
+			Node node = doc.selectSingleNode(xPath);
+			if (node != null) {
+				result = new UserBean();
+				Field[] fields = UserBean.class.getDeclaredFields();
+				for (Field field : fields) {
+					field.setAccessible(true);
+					field.set(result, node.valueOf("@" + field.getName()));
+				}
+			}
+		} catch (Exception e) {
+			throw new DaoException(e);
+		}
+		return result;
+	}
+
 }
