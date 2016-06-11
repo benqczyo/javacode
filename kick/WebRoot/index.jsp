@@ -20,7 +20,7 @@
 				<ul>
 					<c:forEach var="session" items="${applicationScope.sessions}">
 						<c:if test="${session.key.name ne sessionScope.user.name}">
-							<li>${session.key.name}<a href="${pageContext.request.contextPath}/router?action=kick&name=${session.key.name}">踢掉</a></li>
+							<li>${session.key.name}<a href="${pageContext.request.contextPath}/router?action=kick&id=${session.key.id}">踢掉</a></li>
 						</c:if>
 					</c:forEach>
 				</ul>

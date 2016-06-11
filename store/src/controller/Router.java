@@ -138,11 +138,11 @@ public class Router extends HttpServlet {
 			formBean = FormBeanUtils.fill(request, ChangeAccountFormBean.class);
 			if (formBean.validate() == true) {
 				AccountBean account = service.findAccountById(formBean.getId());
-				if (service.checkAccount(account.getPassword(), formBean.getOldPassword())) {
+				/*if (service.checkAccount(account.getPassword(), formBean.getOldPassword())) {
 					account.setPassword(formBean.getNewPassword());
 					service.updateAccount(account);
 					
-				}
+				}*/
 			} else {
 				request.setAttribute("formBean", formBean);
 				request.getRequestDispatcher("/manager/changeAccount.jsp").forward(request, response);

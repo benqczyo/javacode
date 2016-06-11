@@ -50,12 +50,12 @@ public class Router extends HttpServlet {
 	}
 
 	private void kick(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String name = request.getParameter("name");
-		if (name != null && !name.trim().equals("")) {
+		String id = request.getParameter("id");
+		if (id != null && !id.trim().equals("")) {
 			Map<UserBean, HttpSession> sessions = (Map<UserBean, HttpSession>) getServletContext().getAttribute("sessions");
 			if (sessions != null) {
 				for (Entry<UserBean, HttpSession> entry : sessions.entrySet()) {
-					if (entry.getKey().getName().equalsIgnoreCase(name))
+					if (entry.getKey().getId().equalsIgnoreCase(id))
 						entry.getValue().removeAttribute("user");
 				}
 				response.sendRedirect(request.getContextPath());

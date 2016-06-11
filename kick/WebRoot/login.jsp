@@ -16,7 +16,7 @@
 				</tr>
 				<tr>
 					<td>密码：</td>
-					<td><input type="text" name="password" value="${formBean.password}"/></td>
+					<td><input type="password" name="password" value="${formBean.password}"/></td>
 					<td><span>${requestScope.formBean.messages.password}</span></td>
 				</tr>
 				<tr>
