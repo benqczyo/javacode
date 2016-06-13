@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="bmall"
+  id="myeclipse.1465784489202"
+  context-root="/bmall"
+  j2ee-spec="6.0"
+  archive="bmall.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
