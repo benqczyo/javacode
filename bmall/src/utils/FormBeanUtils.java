@@ -8,7 +8,7 @@ import org.apache.commons.beanutils.BeanUtils;
 
 import exception.FormBeanUtilsException;
 
-public class FormBeanUtils {
+public abstract class FormBeanUtils {
 	public static <T> T fill(Class<T> clazz, HttpServletRequest request) {
 		T result = null;
 		try {

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.dbutils.QueryRunner;
 
 import utils.DBCPUtils;
+import utils.IdUtils;
 
 import dao.BookDao;
 import domain.impl.BookBean;
@@ -12,17 +13,17 @@ import exception.DaoException;
 
 public class BookDaoImpl implements BookDao {
 
-	private final String ADD_BOOK = "INSERT INTO book (id, name, author, picId, description, categoryId) VALUES (?, ?, ?, ?, ?, ?)";
+	private final String ADD_BOOK = "INSERT INTO book (id, name, author, description, picId, categoryId) VALUES (?, ?, ?, ?, ?, ?)";
 
 	private QueryRunner qr = new QueryRunner();
-
+	
 	@Override
 	public boolean addBook(BookBean book) {
 		boolean result = false;
 		try {
 			result = qr.update(DBCPUtils.open(), ADD_BOOK, book.getId(),
-					book.getName(), book.getAuthor(), book.getPicId(),
-					book.getDescription(), book.getCategoryId()) == 1;
+					book.getName(), book.getAuthor(), book.getDescription(),
+					book.getPicId(), book.getCategoryId()) == 1;
 		} catch (Exception e) {
 			throw new DaoException(e);
 		} finally {

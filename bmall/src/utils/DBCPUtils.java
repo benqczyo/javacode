@@ -13,7 +13,7 @@ import org.apache.commons.dbcp.BasicDataSourceFactory;
 
 import exception.DBCPException;
 
-public class DBCPUtils {
+public abstract class DBCPUtils {
 
 	private static final String CONFIG_FILE = "dbcp.cfg";
 

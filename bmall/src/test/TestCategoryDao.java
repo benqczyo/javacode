@@ -8,6 +8,8 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
+import utils.IdUtils;
+
 import dao.CategoryDao;
 import dao.impl.CategoryDaoImpl;
 import domain.impl.CategoryBean;
@@ -19,7 +21,7 @@ public class TestCategoryDao {
 	@Test
 	public void testAddCategory() {
 		CategoryBean category = new CategoryBean();
-		category.setId(UUID.randomUUID().toString());
+		category.setId(IdUtils.generateId());
 		category.setName("外国文学");
 		category.setDescription("国外名家大作");
 		Assert.assertTrue(dao.addCategory(category));

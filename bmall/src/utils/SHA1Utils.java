@@ -5,7 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 import sun.misc.BASE64Encoder;
 
-public class SHA1Utils {
+public abstract class SHA1Utils {
 	public static String encoding(String str) {
 		try {
 			return new BASE64Encoder().encode(MessageDigest.getInstance("SHA1").digest(str.getBytes()));

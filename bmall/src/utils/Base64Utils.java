@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 
 import sun.misc.BASE64Encoder;
 
-public class Base64Utils {
+public abstract class Base64Utils {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String str = br.readLine();

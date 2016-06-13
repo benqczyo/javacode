@@ -8,6 +8,7 @@ import dao.impl.CategoryDaoImpl;
 import domain.impl.CategoryBean;
 import service.Service;
 import utils.DBCPUtils;
+import utils.IdUtils;
 
 public class ServiceImpl implements Service {
 	
@@ -17,7 +18,7 @@ public class ServiceImpl implements Service {
 
 	@Override
 	public boolean addCategory(CategoryBean category) {
-		category.setId(UUID.randomUUID().toString());
+		category.setId(IdUtils.generateId());
 		return cDao.addCategory(category);
 	}
 

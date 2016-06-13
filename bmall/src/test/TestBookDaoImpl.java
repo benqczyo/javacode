@@ -8,6 +8,8 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
+import utils.IdUtils;
+
 import dao.BookDao;
 import dao.impl.BookDaoImpl;
 import domain.impl.BookBean;
@@ -19,12 +21,12 @@ public class TestBookDaoImpl {
 	@Test
 	public void testAddBook() {
 		BookBean book = new BookBean();
-		book.setId(UUID.randomUUID().toString());
+		book.setId(IdUtils.generateId());
 		book.setName("老人与海");
 		book.setAuthor("海明威");
-		book.setPicId("8dd87369-ad9c-4c73-ac0c-0206b12e64eb");
 		book.setDescription("海明威经典名著");
-		book.setCategoryId("8dd87369-ad9c-4c73-ac0c-0206b12e64eb");
+		book.setPicId("1000");
+		book.setCategoryId("a60516c0793e4bc485a694bd7358da9c");
 		Assert.assertTrue(dao.addBook(book));
 	}
 
