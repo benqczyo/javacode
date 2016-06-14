@@ -5,11 +5,14 @@ import java.util.List;
 import domain.impl.CategoryBean;
 
 public interface CategoryDao {
+	int getNumberOfCategories();
 	boolean addCategory(CategoryBean category);
 	boolean delCategoryById(String id);
 	boolean delCategoryByName(String name);
 	boolean updateCategory(CategoryBean category);
-	List<CategoryBean> findAllCategory();
+	List<CategoryBean> findAllCategories();
+	List<CategoryBean> findCategoriesByRange(int startRecordId, int endRecordId);
 	CategoryBean findCategoryById(String id);
 	CategoryBean findCategoryByName(String name);
+	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import domain.impl.BookBean;
 
 public interface BookDao {
+	int getNumberOfBooks();
 	boolean addBook(BookBean book);
 	boolean delBookById(String id);
 	boolean updateBook(BookBean book);

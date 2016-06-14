@@ -47,10 +47,16 @@ public class TestCategoryDao {
 	}
 
 	@Test
-	public void testFindAllCategory() {
-		Assert.assertNotNull(dao.findAllCategory());
+	public void testFindAllCategories() {
+		Assert.assertNotNull(dao.findAllCategories());
 	}
 
+	@Test
+	public void testFindCategoriesByRange() {
+		System.out.println(dao.findCategoriesByRange(1, 2));
+	}
+	
+	
 	@Test
 	public void testFindCategoryById() {
 		Assert.assertNotNull(dao.findCategoryById("8dd87369-ad9c-4c73-ac0c-0206b12e64eb"));

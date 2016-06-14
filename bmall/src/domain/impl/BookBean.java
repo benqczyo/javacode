@@ -4,12 +4,14 @@ import domain.Bean;
 
 public class BookBean implements Bean {
 	
-	private String id;
+	private String id; 
 	private String name;
 	private String author;
-	private String picId;
+	private double price;
 	private String description;
+	private String picId;
 	private String categoryId;
+	private CategoryBean category;
 	
 	public BookBean() {
 		
@@ -39,22 +41,30 @@ public class BookBean implements Bean {
 		this.author = author;
 	}
 
-	public String getPicId() {
-		return picId;
+	public double getPrice() {
+		return price;
 	}
 
-	public void setPicId(String picId) {
-		this.picId = picId;
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
 	public String getDescription() {
 		return description;
 	}
-
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
+	public String getPicId() {
+		return picId;
+	}
+	
+	public void setPicId(String picId) {
+		this.picId = picId;
+	}
+	
 	public String getCategoryId() {
 		return categoryId;
 	}
@@ -63,11 +73,20 @@ public class BookBean implements Bean {
 		this.categoryId = categoryId;
 	}
 
+	public CategoryBean getCategory() {
+		return category;
+	}
+
+	public void setCategory(CategoryBean category) {
+		this.category = category;
+	}
+
 	@Override
 	public String toString() {
 		return String
-				.format("BookBean [id=%s, name=%s, author=%s, picId=%s, description=%s, categoryId=%s]",
-						id, name, author, picId, description, categoryId);
+				.format("BookBean [id=%s, name=%s, author=%s, price=%s, description=%s, picId=%s, categoryId=%s, category=%s]",
+						id, name, author, price, description, picId,
+						categoryId, category);
 	}
-	
+
 }

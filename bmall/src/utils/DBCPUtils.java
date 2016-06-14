@@ -59,7 +59,7 @@ public abstract class DBCPUtils {
 	
 	public static void startTransaction() {
 		try {
-			Connection conn = getSafeConnection();
+			Connection conn = open();
 			conn.setAutoCommit(false);
 		} catch (SQLException e) {
 			throw new DBCPException(e);
