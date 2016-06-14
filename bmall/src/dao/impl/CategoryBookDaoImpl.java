@@ -17,13 +17,16 @@ public class CategoryBookDaoImpl implements CategoryBookDao {
 
 	@Override
 	public boolean delRelationshipByCategoryId(String id) {
-		boolean result = false;
 		try {
-			result = qr.update(DBCPUtils.open(), DEL_RELATIONSHIP_BY_CATEGORY_ID, id) >= 0 ;
+			return qr.update(DBCPUtils.open(), DEL_RELATIONSHIP_BY_CATEGORY_ID, id) >= 0 ;
 		} catch (SQLException e) {
 			throw new DaoException(e);
 		}
-		return result;
+	}
+
+	@Override
+	public boolean delRelationshipByCategoryName(String name) {
+		return false;
 	}
 
 }

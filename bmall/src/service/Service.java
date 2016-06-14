@@ -9,8 +9,8 @@ import domain.impl.CategoryBean;
 
 public interface Service {
 	boolean addCategory(CategoryBean category);
-	boolean delCategoryById(String id);
-	boolean delCategoryByName(String name);
+	void delCategoryById(String id);
+	void delCategoryByName(String name);
 	boolean updateCategory(CategoryBean category);
 	List<CategoryBean> findAllCategory();
 	CategoryBean findCategoryById(String id);

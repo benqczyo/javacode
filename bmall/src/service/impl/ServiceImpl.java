@@ -11,8 +11,9 @@ import dao.impl.CategoryBookDaoImpl;
 import dao.impl.CategoryDaoImpl;
 import domain.Bean;
 import domain.impl.CategoryBean;
-import exception.CategoryExistsException;
+import exception.AddCategoryException;
 import exception.DeleteCategoryException;
+import exception.UpdateCategoryException;
 import service.Service;
 import utils.DBCPUtils;
 import utils.IdUtils;
@@ -34,12 +35,12 @@ public class ServiceImpl implements Service {
 		try {
 			return cDao.addCategory(category);
 		} catch (Exception e) {
-			throw new CategoryExistsException(e);
+			throw new AddCategoryException(e);
 		}
 	}
 
 	@Override
-	public boolean delCategoryById(String id) {
+	public void delCategoryById(String id) {
 		DBCPUtils.startTransaction();
 		try {
 			cbDao.delRelationshipByCategoryId(id);
@@ -52,12 +53,11 @@ public class ServiceImpl implements Service {
 			DBCPUtils.commit();
 			DBCPUtils.close();
 		}
-		return false;
 	}
 
 	@Override
-	public boolean delCategoryByName(String name) {
-		/*DBCPUtils.startTransaction();
+	public void delCategoryByName(String name) {
+		DBCPUtils.startTransaction();
 		try {
 			cbDao.delRelationshipByCategoryName(name);
 			cDao.delCategoryByName(name);
@@ -67,13 +67,17 @@ public class ServiceImpl implements Service {
 		} finally {
 			DBCPUtils.commit();
 			DBCPUtils.close();
-		}*/
-		return false;
+		}
 	}
 
 	@Override
 	public boolean updateCategory(CategoryBean category) {
-		return cDao.updateCategory(category);
+		try {
+			return cDao.updateCategory(category);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UpdateCategoryException(e);
+		}
 	}
 
 	@Override

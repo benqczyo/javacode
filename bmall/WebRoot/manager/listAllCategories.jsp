@@ -23,8 +23,8 @@
 						<td>${category.name}</td>
 						<td>${category.description}</td>
 						<td>
-							<a href=""><fmt:message key="ops.update" bundle="${bundle}" /></a>
-							<a href="javascript: delCategory('${category.id}')"><fmt:message key="ops.delete" bundle="${bundle}" /></a>
+							<a href="${pageContext.request.contextPath}/router?action=showUpdateCategoryPage&id=${category.id}"><fmt:message key="ops.update" bundle="${bundle}" /></a>
+							<a href="javascript: delCategory('${category.id}')"><fmt:message key="ops.delete" bundle="${bundle}"/></a>
 						</td>
 					</tr>
 				</c:forEach>

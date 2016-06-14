@@ -21,9 +21,9 @@ public class CategoryDaoImpl implements dao.CategoryDao {
 
 	private static final String GET_NUMBER_OF_CATEGORIES = "SELECT count(*) FROM category";
 	private static final String ADD_CATEGORY = "INSERT INTO category (id, name, description) VALUES (?, ?, ?)";
-	private static final String DEL_CATEGORY_ID = "DELETE FROM category WHERE id = ?";
+	private static final String DEL_CATEGORY_BY_ID = "DELETE FROM category WHERE id = ?";
 	private static final String DEL_CATEGORY_BY_NAME = "DELETE FROM category WHERE name = ?";
-	private static final String UPDATE_CATEGORY = "UPDATE category name = ?, description = ? WHERE id = ?";
+	private static final String UPDATE_CATEGORY = "UPDATE category SET name = ?, description = ? WHERE id = ?";
 	private static final String FIND_ALL_CATEGORIES = "SELECT id, name, description FROM category";
 	private static final String FIND_CATEGORIES_BY_RANGE = "SELECT id, name, description, row_id FROM (SELECT c.*, ROWNUM as row_id FROM (SELECT id, name, description FROM category) c) WHERE row_id BETWEEN ? AND ?";
 	private static final String FIND_CATEGORY_BY_ID = "SELECT id, name, description FROM category WHERE id = ?";
@@ -60,11 +60,9 @@ public class CategoryDaoImpl implements dao.CategoryDao {
 	@Override
 	public boolean delCategoryById(String id) {
 		try {
-			return qr.update(DBCPUtils.open(), DEL_CATEGORY_ID, id) == 1;
+			return qr.update(DBCPUtils.open(), DEL_CATEGORY_BY_ID, id) == 1;
 		} catch (SQLException e) {
 			throw new DaoException(e);
-		} finally {
-			DBCPUtils.close();
 		}
 	}
 
@@ -74,8 +72,6 @@ public class CategoryDaoImpl implements dao.CategoryDao {
 			return qr.update(DBCPUtils.open(), DEL_CATEGORY_BY_NAME, name) == 1;
 		} catch (SQLException e) {
 			throw new DaoException(e);
-		} finally {
-			DBCPUtils.close();
 		}
 	}
 
