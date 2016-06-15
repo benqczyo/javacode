@@ -1,28 +1,25 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.soap.AddressingFeature;
 
 import org.apache.commons.beanutils.BeanUtils;
-
-import domain.impl.CategoryBean;
-import exception.AddCategoryException;
-import exception.DeleteCategoryException;
-import exception.InvalidIdException;
-import formbean.impl.AddCategoryFormBean;
-import formbean.impl.UpdateCategoryFormBean;
 
 import service.Service;
 import service.impl.ServiceImpl;
 import utils.FormBeanUtils;
+import domain.impl.BookBean;
+import domain.impl.CategoryBean;
+import exception.AddCategoryException;
+import formbean.impl.AddBookFormBean;
+import formbean.impl.AddCategoryFormBean;
+import formbean.impl.UpdateCategoryFormBean;
 
 public class Router extends HttpServlet {
 	
@@ -52,6 +49,37 @@ public class Router extends HttpServlet {
 			updateCategory(request, response);
 			return;
 		}
+		if ("listAllBooks".equalsIgnoreCase(action)) {
+			listAllBooks(request, response);
+			return;
+		}
+		if ("addBook".equalsIgnoreCase(action)) {
+			addBook(request, response);
+			return;
+		}
+	}
+
+	private void addBook(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException {
+		try {
+			AddBookFormBean formBean = new AddBookFormBean();
+			formBean.setCategories(service.findAllCategory());
+			request.setAttribute("formBean", formBean);
+			request.getRequestDispatcher("/manager/addBook.jsp").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ServletException(e);
+		}
+	}
+
+	private void listAllBooks(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		String pageId = request.getParameter("pageId");
+		ServletConfig config = getServletConfig();
+		String recordsOfSinglePage = config.getInitParameter("recordsOfSinglePage");
+		String buttonsOfSinglePage = config.getInitParameter("buttonsOfSinglePage");
+		request.setAttribute("page", service.getPage(new BookBean(), recordsOfSinglePage, buttonsOfSinglePage, pageId));
+		request.getRequestDispatcher("/manager/listAllBooks.jsp").forward(request, response);
 	}
 
 	private void showUpdateCategoryPage(HttpServletRequest request,
@@ -124,7 +152,7 @@ public class Router extends HttpServlet {
 			CategoryBean category = new CategoryBean();
 			BeanUtils.copyProperties(category, formBean);
 			service.addCategory(category);
-			response.sendRedirect(request.getContextPath() + "/router?action=listAllCategories");
+			response.sendRedirect(request.getContextPath() + "/manager/addCategory.jsp");
 		} catch (AddCategoryException e) {
 			e.printStackTrace();
 			formBean.getMessages().put("result", "添加分类失败,可能的原因是分类已存在");

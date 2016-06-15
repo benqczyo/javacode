@@ -11,7 +11,7 @@ CREATE TABLE book (
 	price NUMBER(12, 2) NOT NULL,
 	description VARCHAR2(100 CHAR) NOT NULL,
 	picId VARCHAR2(32 CHAR) NOT NULL,
-	categoryId VARCHAR2(32 CHAR) NOT NULL
+	categoryId VARCHAR2(32 CHAR)
 );
 
 ALTER TABLE book ADD CONSTRAINTS fk_book_categoryId FOREIGN KEY (categoryId) REFERENCES category(id);

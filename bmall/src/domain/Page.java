@@ -29,7 +29,7 @@ public class Page {
 		this.buttonsOfSinglePage = buttonsOfSinglePage;
 		this.currentPageId = (currentPageId < 1 || currentPageId > this.totalPages) ? -1 : currentPageId;
 		this.prevPageId = this.currentPageId <= 1 ? -1 : this.currentPageId - 1;
-		this.nextPageId = this.currentPageId >= this.totalPages ? -1 : this.totalPages + 1;
+		this.nextPageId = this.currentPageId >= this.totalPages ? -1 : this.currentPageId + 1;
 		this.startRecordId = (this.currentPageId - 1) * this.recordsOfSinglePage + 1;
 		this.endRecordId = this.startRecordId + this.recordsOfSinglePage - 1;
 		if (this.totalPages <= this.buttonsOfSinglePage) {
@@ -43,7 +43,7 @@ public class Page {
 				this.endPageId = this.buttonsOfSinglePage;
 			}
 			if (this.endPageId > this.totalPages) {
-				this.startPageId = this.endPageId - this.buttonsOfSinglePage - 2;
+				this.startPageId = this.endPageId - this.buttonsOfSinglePage - 1;
 				this.endPageId = this.totalPages;
 			}
 		}

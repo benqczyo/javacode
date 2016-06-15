@@ -10,6 +10,8 @@ import dao.impl.BookDaoImpl;
 import dao.impl.CategoryBookDaoImpl;
 import dao.impl.CategoryDaoImpl;
 import domain.Bean;
+import domain.Page;
+import domain.impl.BookBean;
 import domain.impl.CategoryBean;
 import exception.AddCategoryException;
 import exception.DeleteCategoryException;
@@ -17,7 +19,6 @@ import exception.UpdateCategoryException;
 import service.Service;
 import utils.DBCPUtils;
 import utils.IdUtils;
-import utils.Page;
 
 public class ServiceImpl implements Service {
 	
@@ -104,7 +105,15 @@ public class ServiceImpl implements Service {
 		if (bean instanceof CategoryBean) {
 			result = new Page(cDao.getNumberOfCategories(), 
 					Integer.parseInt(recordsOfSinglePage), Integer.parseInt(buttonsOfSinglePage), Integer.parseInt(pageId));
-			result.setPageRecords(cDao.findAllCategories());
+			result.setPageRecords(cDao.findCategoriesByRange(result.getStartRecordId(), result.getEndRecordId()));
+		}
+		if (bean instanceof BookBean) {
+			result = new Page(bDao.getNumberOfBooks(), 
+					Integer.parseInt(recordsOfSinglePage), Integer.parseInt(buttonsOfSinglePage), Integer.parseInt(pageId));
+			List<BookBean> books = bDao.findBooksByRange(result.getStartRecordId(), result.getEndRecordId());
+			for (BookBean book : books)
+				book.setCategory(cDao.findCategoryById(book.getCategoryId()));
+			result.setPageRecords(books);
 		}
 		return result;
 	}

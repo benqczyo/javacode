@@ -34,16 +34,16 @@
 					<fmt:message key="prevPage" bundle="${bundle}"/>
 				</c:if>
 				<c:if test="${requestScope.page.prevPageId ne -1}">
-					<a href=""><fmt:message key="prevPage" bundle="${bundle}"/></a>
+					<a href="${pageContext.request.contextPath}/router?action=listAllCategories&pageId=${requestScope.page.prevPageId}"><fmt:message key="prevPage" bundle="${bundle}"/></a>
 				</c:if>
 				<c:forEach begin="${requestScope.page.startPageId}" end="${requestScope.page.endPageId}" var="pageId">
-					<a href="">${pageId}</a>
+					<a href="${pageContext.request.contextPath}/router?action=listAllCategories&pageId=${pageId}">${pageId}</a>
 				</c:forEach>
 				<c:if test="${requestScope.page.nextPageId eq -1}">
 					<fmt:message key="nextPage" bundle="${bundle}"/>
 				</c:if>
 				<c:if test="${requestScope.page.nextPageId ne -1}">
-					<a href=""><fmt:message key="nextPage" bundle="${bundle}"/></a>
+					<a href="${pageContext.request.contextPath}/router?action=listAllCategories&pageId=${requestScope.page.nextPageId}"><fmt:message key="nextPage" bundle="${bundle}"/></a>
 				</c:if>
 			</p>
 		</c:if>

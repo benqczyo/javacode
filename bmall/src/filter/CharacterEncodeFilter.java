@@ -24,6 +24,7 @@ public class CharacterEncodeFilter implements Filter {
 		String encode = filterConfig.getInitParameter("encode");
 		encode = (encode == null) ? "UTF-8" : encode;
 		request.setCharacterEncoding(encode);
+		response.setCharacterEncoding(encode);
 		response.setContentType("text/html;charset=" + encode);
 		chain.doFilter(request, response);
 	}

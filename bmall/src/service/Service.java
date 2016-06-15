@@ -2,9 +2,8 @@ package service;
 
 import java.util.List;
 
-import utils.Page;
-
 import domain.Bean;
+import domain.Page;
 import domain.impl.CategoryBean;
 
 public interface Service {

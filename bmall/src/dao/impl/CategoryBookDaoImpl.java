@@ -11,7 +11,7 @@ import exception.DaoException;
 
 public class CategoryBookDaoImpl implements CategoryBookDao {
 	
-	private static final String DEL_RELATIONSHIP_BY_CATEGORY_ID = "UPDATE book SET categoryId = '00000000000000000000000000000000' WHERE categoryId = ?";
+	private static final String DEL_RELATIONSHIP_BY_CATEGORY_ID = "UPDATE book SET categoryId = '' WHERE categoryId = ?";
 	
 	private QueryRunner qr = new QueryRunner();
 

@@ -35,7 +35,7 @@ public class TestBookDaoImpl {
 		book.setDescription("The Old Man and the Sea is a novel written by the American author Ernest Hemingway in 1951 in Cuba.");
 		book.setPicId(IdUtils.generateId());
 		CategoryBean category = new CategoryBean();
-		category.setId("320f7651a3544ad980c88d0bbb03eb70");
+		category.setId("fca60254828c4a70a5e7c179a3b8e987");
 		book.setCategory(category);
 		Assert.assertTrue(dao.addBook(book));
 	}
