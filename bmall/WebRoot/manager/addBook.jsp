@@ -1,7 +1,7 @@
 <%@page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8"%>
 <%@include file="header.jsp"%>
 <div id="mgrAddBook">
-	<form action="${pageContext.request.contextPath}/router?action=addBook" method="post" enctype="multipart/form-data">
+	<form action="${pageContext.request.contextPath}/router?action=doAddBook" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>*<fmt:message key="book.name" bundle="${bundle}"/>:</td>
@@ -25,7 +25,7 @@
 			</tr>
 			<tr>
 				<td>*<fmt:message key="book.description" bundle="${bundle}"/>:</td>
-				<td><input type="text" name="description"/></td>
+				<td><input type="text" name="description" value="${formBean.description}"/></td>
 				<td><span>${formBean.messages.description}</span></td>
 			</tr>
 			<tr>
@@ -39,7 +39,7 @@
 						</c:forEach>
 					</select>
 				</td>
-				<td><span>${formBean.messages.category}</span></td>	
+				<td><span>${formBean.messages.categoryId}</span></td>	
 			</tr>
 			<tr>
 				<td colspan="3">

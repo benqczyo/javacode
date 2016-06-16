@@ -48,7 +48,7 @@ public class BookDaoImpl implements BookDao {
 		try {
 			result = qr.update(DBCPUtils.open(), ADD_BOOK, book.getId(), book
 					.getName(), book.getAuthor(), book.getPrice(), book
-					.getDescription(), book.getPicId(), book.getCategory()
+					.getDescription(), book.getPic(), book.getCategory()
 					.getId()) == 1;
 		} catch (Exception e) {
 			throw new DaoException(e);
@@ -75,7 +75,7 @@ public class BookDaoImpl implements BookDao {
 		try {
 			return qr.update(DBCPUtils.open(), UPDATE_BOOK, book.getName(),
 					book.getAuthor(), book.getPrice(), book.getDescription(),
-					book.getPicId(), book.getCategory().getId()) == 1;
+					book.getPic(), book.getCategory().getId()) == 1;
 		} catch (SQLException e) {
 			throw new DaoException(e);
 		} finally {

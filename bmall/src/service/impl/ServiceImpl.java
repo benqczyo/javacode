@@ -13,6 +13,7 @@ import domain.Bean;
 import domain.Page;
 import domain.impl.BookBean;
 import domain.impl.CategoryBean;
+import exception.AddBookException;
 import exception.AddCategoryException;
 import exception.DeleteCategoryException;
 import exception.UpdateCategoryException;
@@ -27,7 +28,7 @@ public class ServiceImpl implements Service {
 	private CategoryBookDao cbDao = new CategoryBookDaoImpl();
 	
 	private String getSafeNumber(String number) {
-		return (number == null || number.trim().isEmpty() || number.matches("^[1-9][0-9]+$")) ? "1" : number;
+		return (number == null || number.trim().isEmpty() || !number.matches("^[1-9][0-9]*$")) ? "1" : number;
 	}
 
 	@Override
@@ -47,7 +48,6 @@ public class ServiceImpl implements Service {
 			cbDao.delRelationshipByCategoryId(id);
 			cDao.delCategoryById(id);
 		} catch (Exception e) {
-			e.printStackTrace();
 			DBCPUtils.rollback();
 			throw new DeleteCategoryException(e);
 		} finally {
@@ -63,7 +63,6 @@ public class ServiceImpl implements Service {
 			cbDao.delRelationshipByCategoryName(name);
 			cDao.delCategoryByName(name);
 		} catch (Exception e) {
-			e.printStackTrace();
 			DBCPUtils.rollback();
 		} finally {
 			DBCPUtils.commit();
@@ -76,7 +75,6 @@ public class ServiceImpl implements Service {
 		try {
 			return cDao.updateCategory(category);
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new UpdateCategoryException(e);
 		}
 	}
@@ -115,7 +113,18 @@ public class ServiceImpl implements Service {
 				book.setCategory(cDao.findCategoryById(book.getCategoryId()));
 			result.setPageRecords(books);
 		}
+		System.out.println(result);
 		return result;
+	}
+
+	@Override
+	public boolean addBook(BookBean book) {
+		try {
+			book.setId(IdUtils.generateId());
+			return bDao.addBook(book);
+		} catch (Exception e) {
+			throw new AddBookException(e);
+		}
 	}
 	
 }

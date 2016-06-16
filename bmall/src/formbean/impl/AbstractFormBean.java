@@ -8,6 +8,10 @@ import formbean.FormBean;
 public abstract class AbstractFormBean implements FormBean {
 	
 	protected Map<String, String> messages = new HashMap<String, String>();
+	
+	public boolean isValidated() {
+		return messages.isEmpty();
+	}
 
 	public Map<String, String> getMessages() {
 		return messages;
@@ -16,5 +20,4 @@ public abstract class AbstractFormBean implements FormBean {
 	public void setMessages(Map<String, String> messages) {
 		this.messages = messages;
 	}
-	
 }

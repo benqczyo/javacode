@@ -37,7 +37,7 @@ public class AddCategoryFormBean extends AbstractFormBean {
 	public boolean isValidated() {
 		if (name == null || name.trim().isEmpty()) messages.put("name", "请输入分类名称");
 		if (description == null || description.trim().isEmpty()) messages.put("description", "请输入分类描述");
-		return messages.isEmpty();
+		return super.isValidated();
 	}
 
 	@Override

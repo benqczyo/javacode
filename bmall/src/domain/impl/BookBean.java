@@ -3,18 +3,18 @@ package domain.impl;
 import domain.Bean;
 
 public class BookBean implements Bean {
-	
-	private String id; 
+
+	private String id;
 	private String name;
 	private String author;
 	private double price;
 	private String description;
-	private String picId;
+	private String pic;
 	private String categoryId;
 	private CategoryBean category;
-	
+
 	public BookBean() {
-		
+
 	}
 
 	public String getId() {
@@ -52,19 +52,19 @@ public class BookBean implements Bean {
 	public String getDescription() {
 		return description;
 	}
-	
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	public String getPicId() {
-		return picId;
+	public String getPic() {
+		return pic;
 	}
-	
-	public void setPicId(String picId) {
-		this.picId = picId;
+
+	public void setPic(String pic) {
+		this.pic = pic;
 	}
-	
+
 	public String getCategoryId() {
 		return categoryId;
 	}
@@ -85,8 +85,8 @@ public class BookBean implements Bean {
 	public String toString() {
 		return String
 				.format("BookBean [id=%s, name=%s, author=%s, price=%s, description=%s, picId=%s, categoryId=%s, category=%s]",
-						id, name, author, price, description, picId,
-						categoryId, category);
+						id, name, author, price, description, pic, categoryId,
+						category);
 	}
 
 }

@@ -3,7 +3,7 @@
 <div id="mgrBook">
 	<form action="${pageContext.request.contextPath}/router?action=delBooks" method="post" id="delBooksForm">
 		<p>
-			<a href="${pageContext.request.contextPath}/router?action=addBook">[<fmt:message key="book.add" bundle="${bundle}" />]</a>
+			<a href="${pageContext.request.contextPath}/router?action=showAddBookPage">[<fmt:message key="book.add" bundle="${bundle}" />]</a>
 			<a href="javascript: delBooks();">[<fmt:message key="book.delBooks" bundle="${bundle}" />]</a>
 		</p>
 		<c:if test="${empty requestScope.page.pageRecords}">

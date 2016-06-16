@@ -10,7 +10,7 @@ public class AddBookFormBean extends AbstractFormBean {
 	private String author;
 	private String price;
 	private String description;
-	private String picId;
+	private String pic;
 	private String categoryId;
 	private List<CategoryBean> categories;
 
@@ -46,12 +46,12 @@ public class AddBookFormBean extends AbstractFormBean {
 		this.description = description;
 	}
 	
-	public String getPicId() {
-		return picId;
+	public String getPic() {
+		return pic;
 	}
 	
-	public void setPicId(String picId) {
-		this.picId = picId;
+	public void setPic(String pic) {
+		this.pic = pic;
 	}
 
 	public String getCategoryId() {
@@ -72,15 +72,19 @@ public class AddBookFormBean extends AbstractFormBean {
 
 	@Override
 	public boolean isValidated() {
-		// TODO Auto-generated method stub
-		return false;
+		if (name == null || name.trim().isEmpty()) messages.put("name", "请输入书名");
+		if (author == null || author.trim().isEmpty()) messages.put("author", "请输入作者");
+		if (price == null || price.trim().isEmpty()) messages.put("price", "请输入价格");
+		if (description == null || description.trim().isEmpty()) messages.put("description", "请输入描述");
+		if (pic == null || pic.trim().isEmpty()) messages.put("pic", "请选择上传文件");
+		return super.isValidated();
 	}
 
 	@Override
 	public String toString() {
 		return String
 				.format("AddBookFormBean [name=%s, author=%s, price=%s, picId=%s, description=%s, categoryId=%s, categories=%s]",
-						name, author, price, picId, description, categoryId,
+						name, author, price, pic, description, categoryId,
 						categories);
 	}
 
