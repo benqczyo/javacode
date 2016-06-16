@@ -33,7 +33,7 @@
 				<td>
 					<select name="categoryId">
 						<c:forEach var="item" items="${formBean.categories}">
-							<option value="${item.id}" ${item.id eq formBean ? "'selected='true'" : ""}>
+							<option value="${item.id}" ${item.id eq formBean.categoryId ? "selected='true'" : ""}>
 								${item.name}
 							</option>
 						</c:forEach>

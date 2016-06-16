@@ -96,9 +96,16 @@ public class Router extends HttpServlet {
 						fileName = String.format("%s_%s", fileNamePrefix,
 								fileName.substring(fileName.lastIndexOf("\\") + 1));
 						formBean.setPic(fileName);
+						int hashCode = fileName.hashCode();
+						String dir1 = Integer.toString(hashCode & 0x0f);
+						String dir2 = Integer.toString((hashCode & 0xf0) >> 4);
+						String path = String.format("%s\\%s\\%s", uploadPath, dir1, dir2);
+						File file = new File(path);
+						if (!file.exists())
+							file.mkdirs();
 						InputStream in = item.getInputStream();
 						OutputStream out = new FileOutputStream(new File(
-								String.format("%s/%s", uploadPath, fileName)));
+								String.format("%s\\%s", path, fileName)));
 						int len = -1;
 						byte[] data = new byte[1024];
 						while ((len = in.read(data)) != -1)
