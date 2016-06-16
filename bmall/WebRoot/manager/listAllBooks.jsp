@@ -27,7 +27,14 @@
 						<td>${book.author}</td>
 						<td><span>${book.price}</span></td>
 						<td>${book.description}</td>
-						<td>${book.category.name}</td>
+						<td>
+							<c:if test="${book.category eq null}">
+								<fmt:message key="book.missingCategory" bundle="${bundle}"/>
+							</c:if>
+							<c:if test="${book.category ne null}">
+								${book.category.name}
+							</c:if>
+						</td>
 						<td>
 							<a href=""><fmt:message key="ops.update" bundle="${bundle}" /></a>
 							<a href="javascript: delRole('${role.id}')"><fmt:message key="ops.delete" bundle="${bundle}" /></a>

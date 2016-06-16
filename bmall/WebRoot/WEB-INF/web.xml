@@ -20,7 +20,7 @@
     <servlet-class>controller.Router</servlet-class>
   	<init-param>
   		<param-name>recordsOfSinglePage</param-name>
-  		<param-value>2</param-value>
+  		<param-value>10</param-value>
   	</init-param>
   	<init-param>
   		<param-name>buttonsOfSinglePage</param-name>

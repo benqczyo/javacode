@@ -113,7 +113,6 @@ public class ServiceImpl implements Service {
 				book.setCategory(cDao.findCategoryById(book.getCategoryId()));
 			result.setPageRecords(books);
 		}
-		System.out.println(result);
 		return result;
 	}
 

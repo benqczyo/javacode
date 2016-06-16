@@ -76,7 +76,7 @@ public class AddBookFormBean extends AbstractFormBean {
 		if (author == null || author.trim().isEmpty()) messages.put("author", "请输入作者");
 		if (price == null || price.trim().isEmpty()) messages.put("price", "请输入价格");
 		if (description == null || description.trim().isEmpty()) messages.put("description", "请输入描述");
-		if (pic == null || pic.trim().isEmpty()) messages.put("pic", "请选择上传文件");
+		if (pic == null || pic.trim().isEmpty()) messages.put("pic", "请选择要上传的图片文件");
 		return super.isValidated();
 	}
 

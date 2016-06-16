@@ -91,7 +91,7 @@ public class Router extends HttpServlet {
 							item.getString(request.getCharacterEncoding()));
 				} else {
 					String fileName = item.getName();
-					if (!fileName.trim().isEmpty()) {
+					if (!fileName.trim().isEmpty() && item.getContentType().startsWith("image")) {
 						String fileNamePrefix = IdUtils.generateId();
 						fileName = String.format("%s_%s", fileNamePrefix,
 								fileName.substring(fileName.lastIndexOf("\\") + 1));
@@ -103,6 +103,9 @@ public class Router extends HttpServlet {
 						byte[] data = new byte[1024];
 						while ((len = in.read(data)) != -1)
 							out.write(data, 0, len);
+						out.close();
+						in.close();
+						item.delete();
 					}
 				}
 			}
