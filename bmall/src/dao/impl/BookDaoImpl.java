@@ -19,13 +19,13 @@ import exception.DaoException;
 public class BookDaoImpl implements BookDao {
 
 	private static final String GET_NUMBER_OF_BOOKS = "SELECT count(*) FROM book";
-	private static final String ADD_BOOK = "INSERT INTO book (id, name, author, price, description, picId, categoryId) VALUES (?, ?, ?, ?, ?, ?, ?)";
+	private static final String ADD_BOOK = "INSERT INTO book (id, name, author, price, description, pic, categoryId) VALUES (?, ?, ?, ?, ?, ?, ?)";
 	private static final String DEL_BOOK_BY_ID = "DELETE FROM book WHERE id = ?";
-	private static final String UPDATE_BOOK = "UPDATE book SET name = ?, author = ?, price = ?, description = ?, picId = ?, categoryId = ? WHERE id = ?";
+	private static final String UPDATE_BOOK = "UPDATE book SET name = ?, author = ?, price = ?, description = ?, pic = ?, categoryId = ? WHERE id = ?";
 	private static final String FIND_ALL_BOOKS = "SELECT id, name, author, price, description, picID, categoryId FROM book";
-	private static final String FIND_BOOKS_BY_RANGE = "SELECT id, name, author, price, description, picId, categoryId, row_id FROM (SELECT b.*, ROWNUM as row_id FROM (SELECT id, name, author, price, description, picId, categoryId FROM book) b) WHERE row_id BETWEEN ? AND ?";
-	private static final String FIND_BOOK_BY_ID = "SELECT id, name, author, price, description, picID, categoryId FROM book WHERE id = ?";
-	private static final String FIND_BOOK_BY_NAME = "SELECT id, name, author, price, description, picID, categoryId FROM book WHERE name = ?";
+	private static final String FIND_BOOKS_BY_RANGE = "SELECT id, name, author, price, description, pic, categoryId, row_id FROM (SELECT b.*, ROWNUM as row_id FROM (SELECT id, name, author, price, description, pic, categoryId FROM book) b) WHERE row_id BETWEEN ? AND ?";
+	private static final String FIND_BOOK_BY_ID = "SELECT id, name, author, price, description, pic, categoryId FROM book WHERE id = ?";
+	private static final String FIND_BOOK_BY_NAME = "SELECT id, name, author, price, description, pic, categoryId FROM book WHERE name = ?";
 	private static final String FIND_BOOKS_BY_NAME = FIND_BOOK_BY_NAME;
 
 	private QueryRunner qr = new QueryRunner();

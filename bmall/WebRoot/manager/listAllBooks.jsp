@@ -16,6 +16,7 @@
 					<th><fmt:message key="book.name" bundle="${bundle}"/></th>
 					<th><fmt:message key="book.author" bundle="${bundle}"/></th>
 					<th><fmt:message key="book.price" bundle="${bundle}"/></th>
+					<th><fmt:message key="book.image" bundle="${bundle}"/></th>
 					<th><fmt:message key="book.description" bundle="${bundle}"/></th>
 					<th><fmt:message key="book.category" bundle="${bundle}"/></th>
 					<th><fmt:message key="ops" bundle="${bundle}" /></th>
@@ -26,6 +27,7 @@
 						<td>${book.name}</td>
 						<td>${book.author}</td>
 						<td><span>${book.price}</span></td>
+						<td><img style="" src="${pageContext.request.contextPath}/router?action=showCover&pic=${book.pic}"/></td>
 						<td>${book.description}</td>
 						<td>
 							<c:if test="${book.category eq null}">

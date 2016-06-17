@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -72,6 +74,32 @@ public class Router extends HttpServlet {
 		if ("doAddBook".equalsIgnoreCase(action)) {
 			doAddBook(request, response);
 			return;
+		}
+		if ("showCover".equalsIgnoreCase(action)) {
+			showCover(request, response);
+			return;
+		}
+	}
+
+	private void showCover(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException {
+		try {
+			String uploadPath = getServletContext().getRealPath("/WEB-INF//upload");
+			String fileName = request.getParameter("pic");
+			int hashCode = fileName.hashCode();
+			String dir1 = Integer.toString(hashCode & 0x0f);
+			String dir2 = Integer.toString((hashCode & 0xf0) >> 4);
+			String path = String.format("%s\\%s\\%s\\%s", uploadPath, dir1, dir2, fileName);
+			System.out.println(path);
+			InputStream in = new FileInputStream(path);
+			OutputStream out = response.getOutputStream();
+			int len = -1;
+			byte[] data = new byte[1024];
+			while ((len = in.read(data)) != -1)
+				out.write(data, 0, len);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ServletException(e);
 		}
 	}
 
