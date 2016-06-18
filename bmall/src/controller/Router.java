@@ -90,7 +90,6 @@ public class Router extends HttpServlet {
 			String dir1 = Integer.toString(hashCode & 0x0f);
 			String dir2 = Integer.toString((hashCode & 0xf0) >> 4);
 			String path = String.format("%s\\%s\\%s\\%s", uploadPath, dir1, dir2, fileName);
-			System.out.println(path);
 			InputStream in = new FileInputStream(path);
 			OutputStream out = response.getOutputStream();
 			int len = -1;
