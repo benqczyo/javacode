@@ -17,5 +17,5 @@ public interface Service {
 	CategoryBean findCategoryById(String id);
 	CategoryBean findCategoryByName(String name);
 	boolean addBook(BookBean book);
-	Page getPage(Page page);
+	Page getPage(String currentPageId, String recordsOfSinglePage, String buttonsOfSinglePage, Bean target);
 }

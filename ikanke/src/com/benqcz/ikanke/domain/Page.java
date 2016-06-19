@@ -18,10 +18,10 @@ public class Page {
 
 	private List pageRecords; 
 	
-	public Page(int totalRecords, int recordOfSinglePage,
+	public Page(int totalRecords, int recordsOfSinglePage,
 			int buttonsOfSinglePage, int currentPageId) {
 		this.totalRecords = totalRecords;
-		this.recordsOfSinglePage = recordOfSinglePage;
+		this.recordsOfSinglePage = recordsOfSinglePage;
 		this.totalPages = this.totalRecords < this.recordsOfSinglePage ? 1
 				: this.totalRecords % this.recordsOfSinglePage == 0 ? this.totalRecords
 						/ this.recordsOfSinglePage

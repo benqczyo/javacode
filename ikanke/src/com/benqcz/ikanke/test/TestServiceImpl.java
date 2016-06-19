@@ -38,7 +38,7 @@ public class TestServiceImpl {
 
 	@Test
 	public void testFindAllCategory() {
-		fail("Not yet implemented");
+		System.out.println(service.findAllCategory());
 	}
 
 	@Test

@@ -1,4 +1,4 @@
-package com.benqcz.ikanke.formbean;
+package com.benqcz.ikanke.web.formbean;
 
 import java.io.Serializable;
 import java.util.Map;

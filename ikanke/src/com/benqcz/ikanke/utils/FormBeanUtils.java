@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.beanutils.BeanUtils;
 
 import com.benqcz.ikanke.exception.FormBeanUtilsException;
-import com.benqcz.ikanke.formbean.FormBean;
+import com.benqcz.ikanke.web.formbean.FormBean;
 
 public abstract class FormBeanUtils {
 	public static <T extends FormBean> T fill(Class<T> clazz, HttpServletRequest request) {
