@@ -13,7 +13,7 @@ public interface Service {
 	void delCategoryById(String id);
 	void delCategoryByName(String name);
 	boolean updateCategory(CategoryBean category);
-	List<CategoryBean> findAllCategory();
+	List<CategoryBean> findAllCategories();
 	CategoryBean findCategoryById(String id);
 	CategoryBean findCategoryByName(String name);
 	boolean addBook(BookBean book);

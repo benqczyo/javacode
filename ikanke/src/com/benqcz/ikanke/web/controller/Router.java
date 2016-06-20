@@ -86,6 +86,26 @@ public class Router extends HttpServlet {
 			showUpdateBookPage(request, response);
 			return;
 		}
+		if ("updateBook".equalsIgnoreCase(action)) {
+			updateBook(request, response);
+			return;
+		}
+		if ("listHomePage".equalsIgnoreCase(action)) {
+			listHomePage(request, response);
+			return;
+		}
+	}
+
+	private void listHomePage(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		request.getSession().setAttribute("categories", service.findAllCategories());
+		request.getRequestDispatcher("/client/").forward(request, response);
+	}
+
+	private void updateBook(HttpServletRequest request,
+			HttpServletResponse response) {
+		//如果没有上传文件，保留原文件
+		//如果上传了文件，得到文件名，删除原来文件，用原来文件名写入新文件
 	}
 
 	private void showUpdateBookPage(HttpServletRequest request,
@@ -94,7 +114,7 @@ public class Router extends HttpServlet {
 			BookBean book = service.findBookById(request.getParameter("id"));
 			UpdateBookFormBean formBean = new UpdateBookFormBean();
 			BeanUtils.copyProperties(formBean, book);
-			formBean.setCategories(service.findAllCategory());
+			formBean.setCategories(service.findAllCategories());
 			request.setAttribute("formBean", formBean);
 			request.getRequestDispatcher("/manager/updateBook.jsp")
 					.forward(request, response);
@@ -108,6 +128,7 @@ public class Router extends HttpServlet {
 			HttpServletResponse response) throws IOException {
 		try {
 			service.delBookById(request.getParameter("id"));
+			//删除上传的封面文件，暂时略
 			response.sendRedirect(request.getContextPath()
 					+ "/router?action=listAllBooks");
 		} catch (Exception e) {
@@ -184,7 +205,7 @@ public class Router extends HttpServlet {
 					}
 				}
 			}
-			formBean.setCategories(service.findAllCategory());
+			formBean.setCategories(service.findAllCategories());
 			if (!formBean.isValidated()) {
 				request.setAttribute("formBean", formBean);
 				request.getRequestDispatcher("/manager/addBook.jsp").forward(
@@ -213,7 +234,7 @@ public class Router extends HttpServlet {
 	private void showAddBookPage(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		AddBookFormBean formBean = new AddBookFormBean();
-		formBean.setCategories(service.findAllCategory());
+		formBean.setCategories(service.findAllCategories());
 		request.setAttribute("formBean", formBean);
 		request.getRequestDispatcher("/manager/addBook.jsp").forward(request,
 				response);

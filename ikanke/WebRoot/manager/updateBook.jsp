@@ -48,7 +48,7 @@
 			</tr>
 			<tr>
 				<td colspan="3">
-					<input type="submit" value="<fmt:message key='book.btn.update' bundle='${bundle}'/>"/>
+					<input type="submit" value="<fmt:message key='ops.update' bundle='${bundle}'/>"/>
 				</td>
 			</tr>
 		</table>

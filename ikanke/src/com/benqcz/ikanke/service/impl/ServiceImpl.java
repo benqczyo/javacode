@@ -48,7 +48,7 @@ public class ServiceImpl implements Service {
 	}
 
 	@Override
-	public List<CategoryBean> findAllCategory() {
+	public List<CategoryBean> findAllCategories() {
 		return DaoFactory.getDaoInstance(CategoryDaoImpl.class)
 				.findAllCategories();
 	}
