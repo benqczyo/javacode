@@ -31,6 +31,7 @@ import com.benqcz.ikanke.utils.FormBeanUtils;
 import com.benqcz.ikanke.utils.IdUtils;
 import com.benqcz.ikanke.web.formbean.impl.AddBookFormBean;
 import com.benqcz.ikanke.web.formbean.impl.AddCategoryFormBean;
+import com.benqcz.ikanke.web.formbean.impl.UpdateBookFormBean;
 import com.benqcz.ikanke.web.formbean.impl.UpdateCategoryFormBean;
 
 public class Router extends HttpServlet {
@@ -76,6 +77,42 @@ public class Router extends HttpServlet {
 		if ("showCover".equalsIgnoreCase(action)) {
 			showCover(request, response);
 			return;
+		}
+		if ("delBook".equalsIgnoreCase(action)) {
+			delBook(request, response);
+			return;
+		}
+		if ("showUpdateBookPage".equalsIgnoreCase(action)) {
+			showUpdateBookPage(request, response);
+			return;
+		}
+	}
+
+	private void showUpdateBookPage(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		try {
+			BookBean book = service.findBookById(request.getParameter("id"));
+			UpdateBookFormBean formBean = new UpdateBookFormBean();
+			BeanUtils.copyProperties(formBean, book);
+			formBean.setCategories(service.findAllCategory());
+			request.setAttribute("formBean", formBean);
+			request.getRequestDispatcher("/manager/updateBook.jsp")
+					.forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.sendRedirect(request.getContextPath() + "/messages.jsp");
+		}
+	}
+
+	private void delBook(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		try {
+			service.delBookById(request.getParameter("id"));
+			response.sendRedirect(request.getContextPath()
+					+ "/router?action=listAllBooks");
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.sendRedirect(request.getContextPath() + "/messages.jsp");
 		}
 	}
 

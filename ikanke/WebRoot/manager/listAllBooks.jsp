@@ -38,8 +38,8 @@
 							</c:if>
 						</td>
 						<td>
-							<a href=""><fmt:message key="ops.update" bundle="${bundle}" /></a>
-							<a href="javascript: delRole('${role.id}')"><fmt:message key="ops.delete" bundle="${bundle}" /></a>
+							<a href="${pageContext.request.contextPath}/router?action=showUpdateBookPage&id=${book.id}"><fmt:message key="ops.update" bundle="${bundle}" /></a>
+							<a href="javascript: delBook('${book.id}')"><fmt:message key="ops.delete" bundle="${bundle}" /></a>
 							<a href=""><fmt:message key="ops.assignCategory" bundle="${bundle}" /></a>
 						</td>
 					</tr>

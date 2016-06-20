@@ -6,6 +6,7 @@ import com.benqcz.ikanke.dao.AbstractDao;
 import com.benqcz.ikanke.dao.BookDao;
 import com.benqcz.ikanke.dao.CategoryDao;
 import com.benqcz.ikanke.dao.impl.BookDaoImpl;
+import com.benqcz.ikanke.dao.impl.CategoryBookDaoImpl;
 import com.benqcz.ikanke.dao.impl.CategoryDaoImpl;
 import com.benqcz.ikanke.domain.Bean;
 import com.benqcz.ikanke.domain.Page;
@@ -31,7 +32,8 @@ public class ServiceImpl implements Service {
 
 	@Override
 	public void delCategoryById(String id) {
-		
+		DaoFactory.getDaoInstance(CategoryBookDaoImpl.class).delRelationshipByCategoryId(id);
+		DaoFactory.getDaoInstance(CategoryDaoImpl.class).delCategoryById(id);
 	}
 
 	@Override
@@ -90,5 +92,16 @@ public class ServiceImpl implements Service {
 			result.setPageRecords(books);
 		}
 		return result;
+	}
+
+	@Override
+	public void delBookById(String id) {
+		// ¹ØÁªÉ¾³ý
+		DaoFactory.getDaoInstance(BookDaoImpl.class).delBookById(id);
+	}
+
+	@Override
+	public BookBean findBookById(String id) {
+		return DaoFactory.getDaoInstance(BookDaoImpl.class).findBookById(id);
 	}
 }

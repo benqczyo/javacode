@@ -3,7 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<fmt:setBundle basename="resource.ui" var="bundle"/>
+<fmt:setBundle basename="com.benqcz.ikanke.resource.ui" var="bundle"/>
 
 <!DOCTYPE html>
 <html>
@@ -28,6 +28,11 @@
 				}
 				isChecked == false ? 
 					alert("没有选择要删除的分类") : confirm("确定删除所选的分类？") && form.submit();
+			}
+			
+			function delBook(id) {
+				if (confirm("删除本书？"))
+					window.location = "${pageContext.request.contextPath}/router?action=delBook&id=" + id;
 			}
 		</script>
 	</head>
