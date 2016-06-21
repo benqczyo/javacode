@@ -18,6 +18,7 @@ public interface Service {
 	CategoryBean findCategoryByName(String name);
 	boolean addBook(BookBean book);
 	void delBookById(String id);
+	List<BookBean> findAllBooks();
 	BookBean findBookById(String id);
 	Page getPage(String currentPageId, String recordsOfSinglePage, String buttonsOfSinglePage, Bean target);
 }

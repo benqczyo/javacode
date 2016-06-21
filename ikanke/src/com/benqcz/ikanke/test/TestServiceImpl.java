@@ -38,7 +38,7 @@ public class TestServiceImpl {
 
 	@Test
 	public void testFindAllCategory() {
-		System.out.println(service.findAllCategory());
+		System.out.println(service.findAllCategories());
 	}
 
 	@Test

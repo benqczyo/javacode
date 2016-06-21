@@ -38,7 +38,7 @@ public class TestCategoryDaoImpl {
 
 	@Test
 	public void testFindAllCategories() {
-		System.out.println(service.findAllCategory());
+		System.out.println(service.findAllCategories());
 	}
 
 	@Test

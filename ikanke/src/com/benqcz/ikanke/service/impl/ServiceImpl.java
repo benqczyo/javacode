@@ -104,4 +104,9 @@ public class ServiceImpl implements Service {
 	public BookBean findBookById(String id) {
 		return DaoFactory.getDaoInstance(BookDaoImpl.class).findBookById(id);
 	}
+
+	@Override
+	public List<BookBean> findAllBooks() {
+		return DaoFactory.getDaoInstance(BookDaoImpl.class).findAllBooks();
+	}
 }

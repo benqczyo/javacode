@@ -99,6 +99,12 @@ public class Router extends HttpServlet {
 	private void listHomePage(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.getSession().setAttribute("categories", service.findAllCategories());
+		String currentPageId = request.getParameter("pageId");
+		ServletConfig config = getServletConfig();
+		String recordsOfSinglePage = config.getInitParameter("recordsOfSinglePage");
+		String buttonsOfSinglePage = config.getInitParameter("buttonsOfSinglePage");
+		request.setAttribute("page", service.getPage(currentPageId,
+				recordsOfSinglePage, buttonsOfSinglePage, new BookBean()));
 		request.getRequestDispatcher("/client/").forward(request, response);
 	}
 
