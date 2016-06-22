@@ -5,11 +5,15 @@
 		<c:forEach var="book" items="${requestScope.page.pageRecords}">
 			<li class="book">
 				<div>
-					<img src="${pageContext.request.contextPath}/router?action=showCover&pic=${book.pic}"/>
-					<p>${book.name}</p>
-					<p>${book.author}</p>
-					<p>${book.description}</p>
-					<p><span>${book.price}</span>&nbsp;<a href="">购买</a></p>
+					<div>
+						<img src="${pageContext.request.contextPath}/router?action=showCover&pic=${book.pic}"/>
+					</div>
+					<ul>
+						<li>${book.name}</li>
+						<li>${book.author}</li>
+						<li><span>${book.price}</span></li>
+						<li><a href="">加入购物车</a>&nbsp;<a href="">购买</a></li>
+					</ul>
 				</div>
 			</li>
 		</c:forEach>
@@ -30,6 +34,6 @@
 				<c:if test="${requestScope.page.nextPageId ne -1}">
 					<a href="${pageContext.request.contextPath}/router?action=listAllBooks&pageId=${requestScope.page.nextPageId}"><fmt:message key="nextPage" bundle="${bundle}"/></a>
 				</c:if>
-			</p>
+		</p>
 </div>
 <%@include file="footer.jsp"%>
