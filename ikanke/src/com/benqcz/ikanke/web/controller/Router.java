@@ -94,6 +94,23 @@ public class Router extends HttpServlet {
 			listHomePage(request, response);
 			return;
 		}
+		if ("listBooksByCategoryId".equalsIgnoreCase(action)) {
+			listBooksByCategroyId(request, response);
+			return;
+		}
+	}
+
+	private void listBooksByCategroyId(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		String categoryId = request.getParameter("categoryId");
+		String currentPageId = request.getParameter("pageId");
+		ServletConfig config = getServletConfig();
+		String recordsOfSinglePage = config.getInitParameter("recordsOfSinglePage");
+		String buttonsOfSinglePage = config.getInitParameter("buttonsOfSinglePage");
+		request.setAttribute("page", service.getPageByCategoryId(currentPageId,
+				recordsOfSinglePage, buttonsOfSinglePage, categoryId));
+		request.getRequestDispatcher("/client/").forward(request, response);
+		
 	}
 
 	private void listHomePage(HttpServletRequest request,

@@ -109,4 +109,18 @@ public class ServiceImpl implements Service {
 	public List<BookBean> findAllBooks() {
 		return DaoFactory.getDaoInstance(BookDaoImpl.class).findAllBooks();
 	}
+
+	@Override
+	public Page getPageByCategoryId(String currentPageId,
+			String recordsOfSinglePage, String buttonsOfSinglePage, String categoryId) {
+		Page result = null;
+		int pageId = checkPageParams(currentPageId, 1);
+		int records = checkPageParams(recordsOfSinglePage, 10);
+		int buttons = checkPageParams(buttonsOfSinglePage, 4);
+		BookDao dao = DaoFactory.getDaoInstance(BookDaoImpl.class);
+		result = new Page(dao.getNumberOfBooksByCategoryId(categoryId), records, buttons, pageId);
+		List<BookBean> books = dao.findBooksByRangeWithCategoryId(result.getStartRecordId(), result.getEndRecordId(), categoryId);
+		result.setPageRecords(books);
+		return result;
+	}
 }

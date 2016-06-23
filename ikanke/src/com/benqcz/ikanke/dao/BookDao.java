@@ -14,4 +14,7 @@ public interface BookDao {
 	BookBean findBookById(String id);
 	BookBean findBookByName(String name);
 	List<BookBean> findBooksByName(String name);
+	List<BookBean> findBooksByRangeWithCategoryId(int startRecordId,
+			int endRecordId, String categoryId);
+	int getNumberOfBooksByCategoryId(String categoryId);
 }

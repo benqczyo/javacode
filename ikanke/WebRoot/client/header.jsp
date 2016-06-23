@@ -24,7 +24,7 @@
 			<div id="main_menu">
 				<ul class="clear">
 					<c:forEach var="category" items="${sessionScope.categories}">
-						<li><a>${category.name}</a></li>
+						<li><a href="${pageContext.request.contextPath}/router?action=listBooksByCategoryId&categoryId=${category.id}">${category.name}</a></li>
 					</c:forEach>
 				</ul>
 			</div>

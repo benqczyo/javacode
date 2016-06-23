@@ -20,5 +20,8 @@ public interface Service {
 	void delBookById(String id);
 	List<BookBean> findAllBooks();
 	BookBean findBookById(String id);
-	Page getPage(String currentPageId, String recordsOfSinglePage, String buttonsOfSinglePage, Bean target);
+	Page getPage(String currentPageId, String recordsOfSinglePage, 
+			String buttonsOfSinglePage, Bean target);
+	Page getPageByCategoryId(String currentPageId,
+			String recordsOfSinglePage, String buttonsOfSinglePage, String categoryId);
 }

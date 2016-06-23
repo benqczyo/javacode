@@ -56,7 +56,7 @@ body {
 
 #box {
 	margin: 20px auto;
-	width: 800px;
+	width: 70%;
 }
 
 #header {
@@ -84,7 +84,7 @@ body {
 
 .book {
 	float: left;
-	
+	padding: 10px;
 }
 
 .book p {
