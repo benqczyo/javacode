@@ -1,6 +1,7 @@
 <%@page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8"%>
 <%@include file="header.jsp"%>
 <div id="clientIndex">
+	${requestScope.hint}
 	<c:if test="${empty requestScope.page.pageRecords}">
 		<span><fmt:message key="book.empty" bundle="${bundle}"/></span>
 	</c:if>

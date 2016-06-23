@@ -117,10 +117,10 @@ public class Router extends HttpServlet {
 			cart = new CartImpl();
 			session.setAttribute("cart", cart);
 		}
-		service.putIntoCart(book);
-		String hint = "<script>function() {alert('添加购物车成功')}</script>";
+		service.putIntoCart(cart, book);
+		String hint = "<script>(function() {alert('" + cart + "添加购物车成功')})();</script>";
 		request.setAttribute("hint", hint);
-		request.getRequestDispatcher("/client/").forward(request, response);
+		request.getRequestDispatcher("/router?action=listHomePage").forward(request, response);
 	}
 
 	private void listBooksByCategroyId(HttpServletRequest request,

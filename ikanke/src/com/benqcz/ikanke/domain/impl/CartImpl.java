@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.benqcz.ikanke.domain.Cart;
+import com.benqcz.ikanke.utils.IdUtils;
 
 public class CartImpl implements Cart {
 	
@@ -31,15 +32,21 @@ public class CartImpl implements Cart {
 	}
 	
 	@Override
-	public void putIntoCart(CartItem item) {
-		if (!items.containsValue(item))
+	public void putIntoCart(BookBean book) {
+		if (!items.containsValue(book)) {
+			CartItem item = new CartItem();
+			item.setId(book.getId());
+			item.setBook(book);
+			item.setNumberOfBooks(1);
 			items.put(item.getId(), item);
-		CartItem existItem = items.get(item.getId());
-		existItem.setNumberOfBooks(existItem.getNumberOfBooks() + item.getNumberOfBooks());
+		} else {
+			CartItem item = items.get(book.getId());
+			item.setNumberOfBooks(item.getNumberOfBooks() + 1);
+		}
 	}
 
 	@Override
-	public void delItem(CartItem item) {
+	public void delItem(BookBean book) {
 		// TODO Auto-generated method stub
 
 	}
@@ -59,8 +66,8 @@ public class CartImpl implements Cart {
 	@Override
 	public String toString() {
 		return String.format(
-				"Cart [items=%s, numberOfItems=%s, totalPrice=%s]", items,
-				numberOfItems, totalPrice);
+				"Cart [items=%s, numberOfBooks=%s, totalPrice=%s]", items,
+				numberOfBooks, totalPrice);
 	}
 
 }

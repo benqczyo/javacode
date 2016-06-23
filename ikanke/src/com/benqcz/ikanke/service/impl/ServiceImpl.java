@@ -9,6 +9,7 @@ import com.benqcz.ikanke.dao.impl.BookDaoImpl;
 import com.benqcz.ikanke.dao.impl.CategoryBookDaoImpl;
 import com.benqcz.ikanke.dao.impl.CategoryDaoImpl;
 import com.benqcz.ikanke.domain.Bean;
+import com.benqcz.ikanke.domain.Cart;
 import com.benqcz.ikanke.domain.impl.BookBean;
 import com.benqcz.ikanke.domain.impl.CategoryBean;
 import com.benqcz.ikanke.domain.impl.Page;
@@ -125,8 +126,7 @@ public class ServiceImpl implements Service {
 	}
 
 	@Override
-	public void putIntoCart(BookBean book) {
-		// TODO Auto-generated method stub
-		
+	public void putIntoCart(Cart cart, BookBean book) {
+		cart.putIntoCart(book);
 	}
 }
