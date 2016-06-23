@@ -1,4 +1,4 @@
-package com.benqcz.ikanke.domain;
+package com.benqcz.ikanke.domain.impl;
 
 import java.util.List;
 

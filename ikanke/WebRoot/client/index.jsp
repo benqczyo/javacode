@@ -16,7 +16,7 @@
 							<li>${book.name}</li>
 							<li>${book.author}</li>
 							<li><span>${book.price}</span></li>
-							<li><a href="">加入购物车</a>&nbsp;<a href="">购买</a></li>
+							<li><a href="${pageContext.request.contextPath}/router?action=buyBook&bookId=${book.id}">购买</a></li>
 						</ul>
 					</div>
 				</li>

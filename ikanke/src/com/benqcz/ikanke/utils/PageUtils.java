@@ -3,7 +3,7 @@
  */
 package com.benqcz.ikanke.utils;
 
-import com.benqcz.ikanke.domain.Page;
+import com.benqcz.ikanke.domain.impl.Page;
 
 public abstract class PageUtils {
 	

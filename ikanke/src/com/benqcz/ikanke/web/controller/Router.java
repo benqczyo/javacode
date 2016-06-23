@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.fileupload.FileItem;
@@ -20,9 +21,11 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import com.benqcz.ikanke.domain.Page;
 import com.benqcz.ikanke.domain.impl.BookBean;
+import com.benqcz.ikanke.domain.Cart;
+import com.benqcz.ikanke.domain.impl.CartImpl;
 import com.benqcz.ikanke.domain.impl.CategoryBean;
+import com.benqcz.ikanke.domain.impl.Page;
 import com.benqcz.ikanke.exception.AddBookException;
 import com.benqcz.ikanke.exception.AddCategoryException;
 import com.benqcz.ikanke.proxy.ServiceProxy;
@@ -98,6 +101,26 @@ public class Router extends HttpServlet {
 			listBooksByCategroyId(request, response);
 			return;
 		}
+		if ("buyBook".equalsIgnoreCase(action)) {
+			buyBook(request, response);
+			return;
+		}
+	}
+
+	private void buyBook(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		String bookId = request.getParameter("bookId");
+		BookBean book = service.findBookById(bookId);
+		HttpSession session = request.getSession();
+		Cart cart = (Cart) session.getAttribute("cart");
+		if (cart == null) {
+			cart = new CartImpl();
+			session.setAttribute("cart", cart);
+		}
+		service.putIntoCart(book);
+		String hint = "<script>function() {alert('添加购物车成功')}</script>";
+		request.setAttribute("hint", hint);
+		request.getRequestDispatcher("/client/").forward(request, response);
 	}
 
 	private void listBooksByCategroyId(HttpServletRequest request,

@@ -9,9 +9,9 @@ import com.benqcz.ikanke.dao.impl.BookDaoImpl;
 import com.benqcz.ikanke.dao.impl.CategoryBookDaoImpl;
 import com.benqcz.ikanke.dao.impl.CategoryDaoImpl;
 import com.benqcz.ikanke.domain.Bean;
-import com.benqcz.ikanke.domain.Page;
 import com.benqcz.ikanke.domain.impl.BookBean;
 import com.benqcz.ikanke.domain.impl.CategoryBean;
+import com.benqcz.ikanke.domain.impl.Page;
 import com.benqcz.ikanke.factory.DaoFactory;
 import com.benqcz.ikanke.service.Service;
 import com.benqcz.ikanke.utils.IdUtils;
@@ -122,5 +122,11 @@ public class ServiceImpl implements Service {
 		List<BookBean> books = dao.findBooksByRangeWithCategoryId(result.getStartRecordId(), result.getEndRecordId(), categoryId);
 		result.setPageRecords(books);
 		return result;
+	}
+
+	@Override
+	public void putIntoCart(BookBean book) {
+		// TODO Auto-generated method stub
+		
 	}
 }
