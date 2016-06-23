@@ -9,13 +9,13 @@ public class CartImpl implements Cart {
 	
 	private Map<String, CartItem> items = new HashMap<String, CartItem>();
 	private int numberOfItems;
-	private double totalPrice;
+	private float totalPrice;
 	
 	public int getNumberOfItems() {
 		return items.size();
 	}
 
-	public double getTotalPrice() {
+	public float getTotalPrice() {
 		return totalPrice;
 	}
 
@@ -25,11 +25,10 @@ public class CartImpl implements Cart {
 	
 	@Override
 	public void putIntoCart(CartItem item) {
-		//没有项目项目添加进去
-		//有了项目中书本数量加
 		if (!items.containsValue(item))
 			items.put(item.getId(), item);
-		
+		CartItem existItem = items.get(item.getId());
+		existItem.setNumberOfBooks(existItem.getNumberOfBooks() + item.getNumberOfBooks());
 	}
 
 	@Override
