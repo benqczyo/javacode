@@ -33,11 +33,12 @@ public class CartImpl implements Cart {
 	
 	@Override
 	public void putIntoCart(BookBean book) {
-		if (!items.containsValue(book)) {
+		if (!items.containsKey(book.getId())) {
 			CartItem item = new CartItem();
 			item.setId(book.getId());
 			item.setBook(book);
 			item.setNumberOfBooks(1);
+			System.out.println(item);
 			items.put(item.getId(), item);
 		} else {
 			CartItem item = items.get(book.getId());
@@ -67,7 +68,7 @@ public class CartImpl implements Cart {
 	public String toString() {
 		return String.format(
 				"Cart [items=%s, numberOfBooks=%s, totalPrice=%s]", items,
-				numberOfBooks, totalPrice);
+				this.getNumberOfBooks(), this.getTotalPrice());
 	}
 
 }
