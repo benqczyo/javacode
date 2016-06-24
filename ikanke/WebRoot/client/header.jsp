@@ -18,7 +18,7 @@
 				<ul id="top_nav">
 					<li><a href="">注册</a></li>
 					<li><a href="">登陆</a></li>
-					<li><a href="">购物车</a></li>
+					<li><a href="${pageContext.request.contextPath}/router?action=showCart">购物车</a></li>
 				</ul>
 			</div>
 			<div id="main_menu">

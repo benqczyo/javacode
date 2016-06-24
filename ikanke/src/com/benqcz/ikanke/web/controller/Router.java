@@ -105,6 +105,16 @@ public class Router extends HttpServlet {
 			buyBook(request, response);
 			return;
 		}
+		if ("showCart".equalsIgnoreCase(action)) {
+			showCart(request, response);
+			return;
+		}
+	}
+
+	private void showCart(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("cart", request.getSession().getAttribute("cart"));
+		request.getRequestDispatcher("/client/showCart.jsp").forward(request, response);
 	}
 
 	private void buyBook(HttpServletRequest request,
@@ -118,9 +128,7 @@ public class Router extends HttpServlet {
 			session.setAttribute("cart", cart);
 		}
 		service.putIntoCart(cart, book);
-		String hint = "<script>(function() {alert('" + cart + "添加购物车成功')})();</script>";
-		request.setAttribute("hint", hint);
-		request.getRequestDispatcher("/router?action=listHomePage").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/router?action=listHomePage");
 	}
 
 	private void listBooksByCategroyId(HttpServletRequest request,

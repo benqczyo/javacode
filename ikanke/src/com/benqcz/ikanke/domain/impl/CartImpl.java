@@ -38,7 +38,6 @@ public class CartImpl implements Cart {
 			item.setId(book.getId());
 			item.setBook(book);
 			item.setNumberOfBooks(1);
-			System.out.println(item);
 			items.put(item.getId(), item);
 		} else {
 			CartItem item = items.get(book.getId());
