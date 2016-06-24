@@ -35,7 +35,7 @@
 				总价：<span>￥${requestScope.cart.totalPrice}</span>
 			</div>
 			<div style="float: right;">
-				<a href="">结账</a>
+				<a href="">生成订单</a>
 			</div>
 		</div>
 	</c:if>
