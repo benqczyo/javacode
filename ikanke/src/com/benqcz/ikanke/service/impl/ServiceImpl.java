@@ -3,19 +3,23 @@ package com.benqcz.ikanke.service.impl;
 import java.util.List;
 
 import com.benqcz.ikanke.dao.AbstractDao;
+import com.benqcz.ikanke.dao.AccountDao;
 import com.benqcz.ikanke.dao.BookDao;
 import com.benqcz.ikanke.dao.CategoryDao;
+import com.benqcz.ikanke.dao.impl.AccountDaoImpl;
 import com.benqcz.ikanke.dao.impl.BookDaoImpl;
 import com.benqcz.ikanke.dao.impl.CategoryBookDaoImpl;
 import com.benqcz.ikanke.dao.impl.CategoryDaoImpl;
 import com.benqcz.ikanke.domain.Bean;
 import com.benqcz.ikanke.domain.Cart;
+import com.benqcz.ikanke.domain.impl.AccountBean;
 import com.benqcz.ikanke.domain.impl.BookBean;
 import com.benqcz.ikanke.domain.impl.CategoryBean;
 import com.benqcz.ikanke.domain.impl.Page;
 import com.benqcz.ikanke.factory.DaoFactory;
 import com.benqcz.ikanke.service.Service;
 import com.benqcz.ikanke.utils.IdUtils;
+import com.benqcz.ikanke.utils.SHA1Utils;
 
 public class ServiceImpl implements Service {
 
@@ -128,5 +132,13 @@ public class ServiceImpl implements Service {
 	@Override
 	public void putIntoCart(Cart cart, BookBean book) {
 		cart.putIntoCart(book);
+	}
+
+	@Override
+	public void register(AccountBean account) {
+		account.setId(IdUtils.generateId());
+		account.setCode(IdUtils.generateId());
+		account.setPassword(SHA1Utils.encoding(account.getPassword()));
+		DaoFactory.getDaoInstance(AccountDaoImpl.class).addAccount(account);
 	}
 }

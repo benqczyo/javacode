@@ -1,22 +1,22 @@
 package com.benqcz.ikanke.exception;
 
-public class AccountExistException extends RuntimeException {
+public class AccountExistsException extends RuntimeException {
 
-	public AccountExistException() {
+	public AccountExistsException() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AccountExistException(String message) {
+	public AccountExistsException(String message) {
 		super(message);
 		// TODO Auto-generated constructor stub
 	}
 
-	public AccountExistException(Throwable cause) {
+	public AccountExistsException(Throwable cause) {
 		super(cause);
 		// TODO Auto-generated constructor stub
 	}
 
-	public AccountExistException(String message, Throwable cause) {
+	public AccountExistsException(String message, Throwable cause) {
 		super(message, cause);
 		// TODO Auto-generated constructor stub
 	}

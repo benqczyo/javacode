@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.benqcz.ikanke.domain.Bean;
 import com.benqcz.ikanke.domain.Cart;
+import com.benqcz.ikanke.domain.impl.AccountBean;
 import com.benqcz.ikanke.domain.impl.BookBean;
 import com.benqcz.ikanke.domain.impl.CategoryBean;
 import com.benqcz.ikanke.domain.impl.Page;
@@ -26,4 +27,5 @@ public interface Service {
 	Page getPageByCategoryId(String currentPageId,
 			String recordsOfSinglePage, String buttonsOfSinglePage, String categoryId);
 	void putIntoCart(Cart cart, BookBean book);
+	void register(AccountBean account);
 }

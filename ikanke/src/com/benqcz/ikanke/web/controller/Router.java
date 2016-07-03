@@ -23,17 +23,22 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.benqcz.ikanke.domain.impl.BookBean;
 import com.benqcz.ikanke.domain.Cart;
+import com.benqcz.ikanke.domain.impl.AccountBean;
 import com.benqcz.ikanke.domain.impl.CartImpl;
 import com.benqcz.ikanke.domain.impl.CategoryBean;
 import com.benqcz.ikanke.domain.impl.Page;
+import com.benqcz.ikanke.exception.AccountExistsException;
+import com.benqcz.ikanke.exception.AccountRegisterFailedException;
 import com.benqcz.ikanke.exception.AddBookException;
 import com.benqcz.ikanke.exception.AddCategoryException;
+import com.benqcz.ikanke.exception.ServiceException;
 import com.benqcz.ikanke.proxy.ServiceProxy;
 import com.benqcz.ikanke.service.Service;
 import com.benqcz.ikanke.utils.FormBeanUtils;
 import com.benqcz.ikanke.utils.IdUtils;
 import com.benqcz.ikanke.web.formbean.impl.AddBookFormBean;
 import com.benqcz.ikanke.web.formbean.impl.AddCategoryFormBean;
+import com.benqcz.ikanke.web.formbean.impl.RegisterFormBean;
 import com.benqcz.ikanke.web.formbean.impl.UpdateBookFormBean;
 import com.benqcz.ikanke.web.formbean.impl.UpdateCategoryFormBean;
 
@@ -108,6 +113,35 @@ public class Router extends HttpServlet {
 		if ("showCart".equalsIgnoreCase(action)) {
 			showCart(request, response);
 			return;
+		}
+		if ("doRegister".equalsIgnoreCase(action)) {
+			doRegister(request, response);
+			return;
+		}
+	}
+
+	private void doRegister(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		RegisterFormBean formBean = FormBeanUtils.fill(RegisterFormBean.class, request);
+		if (formBean == null) {
+			response.sendRedirect(request.getContextPath() + "/messages.jsp");
+			return;
+		}
+		if (!formBean.isValidated()) {
+			request.setAttribute("formBean", formBean);
+			request.getRequestDispatcher("/client/register.jsp").forward(request, response);
+			return;
+		}
+		try {
+			AccountBean account = new AccountBean();
+			BeanUtils.copyProperties(account, formBean);
+			service.register(account);
+			response.sendRedirect(request.getContextPath());
+		} catch (Exception e) {
+			e.printStackTrace();
+			formBean.getMessages().put("result", "◊¢≤· ß∞‹£¨«ÎºÏ≤È ‰»ÎœÓ");
+			request.setAttribute("formBean", formBean);
+			request.getRequestDispatcher("/client/register.jsp").forward(request, response);
 		}
 	}
 
