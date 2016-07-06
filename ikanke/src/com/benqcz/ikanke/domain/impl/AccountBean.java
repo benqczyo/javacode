@@ -11,6 +11,7 @@ public class AccountBean implements Bean {
 	private String cellphone;
 	private String email;
 	private String address;
+	private int status;
 	
 	public AccountBean() {
 		
@@ -72,11 +73,20 @@ public class AccountBean implements Bean {
 		this.address = address;
 	}
 
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
-		return "AccountBean [id=" + id + ", code=" + code + ", name=" + name
-				+ ", password=" + password + ", cellphone=" + cellphone
-				+ ", email=" + email + ", address=" + address + "]";
+		return String
+				.format("AccountBean [id=%s, code=%s, name=%s, password=%s, cellphone=%s, email=%s, address=%s, status=%s]",
+						id, code, name, password, cellphone, email, address,
+						status);
 	}
 	
 }

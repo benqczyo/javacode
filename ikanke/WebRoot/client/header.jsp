@@ -16,7 +16,7 @@
 			<div id="header" class="clear">
 				<h3><fmt:message key="client.title" bundle="${bundle}"/></h3>
 				<ul id="top_nav">
-					<li><a href="">注册</a></li>
+					<li><a href="${pageContext.request.contextPath}/client/register.jsp">注册</a></li>
 					<li><a href="">登陆</a></li>
 					<li><a href="${pageContext.request.contextPath}/router?action=showCart">购物车</a></li>
 				</ul>

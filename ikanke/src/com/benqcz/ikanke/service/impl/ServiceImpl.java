@@ -139,6 +139,7 @@ public class ServiceImpl implements Service {
 		account.setId(IdUtils.generateId());
 		account.setCode(IdUtils.generateId());
 		account.setPassword(SHA1Utils.encoding(account.getPassword()));
+		account.setStatus(0);
 		DaoFactory.getDaoInstance(AccountDaoImpl.class).addAccount(account);
 	}
 }
