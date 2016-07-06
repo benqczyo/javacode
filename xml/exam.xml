@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><exam>
+	<student>
+		<sid>201630200</sid>
+		<name>张三</name>
+		<location>大连</location>
+		<eid>30</eid>
+		<grade>89</grade>
+	</student>
+	<student>
+		<sid>10001</sid>
+		<name>benjamin</name>
+		<location>beijing</location>
+		<eid>8900</eid>
+		<grade>98</grade>
+	</student>
+</exam>

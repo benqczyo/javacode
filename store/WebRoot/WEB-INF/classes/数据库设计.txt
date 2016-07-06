@@ -1,0 +1,36 @@
+CREATE TABLE menu (
+	id VARCHAR2(36 CHAR) PRIMARY KEY,
+	title VARCHAR2(10 CHAR) UNIQUE NOT NULL,
+	uri VARCHAR2(50 CHAR) NOT NULL,
+	description VARCHAR2(100 CHAR) NOT NULL
+);
+	
+CREATE TABLE role (
+	id VARCHAR2(36 CHAR) PRIMARY KEY,
+	name VARCHAR2(10 CHAR) UNIQUE NOT NULL,
+	description VARCHAR2(100 CHAR) NOT NULL
+);
+
+CREATE TABLE role_menu (
+	r_id VARCHAR2(36 CHAR),
+	m_id VARCHAR2(36 CHAR)
+);
+
+ALTER TABLE role_menu ADD CONSTRAINTS pk_role_menu_union_key PRIMARY KEY (r_id, m_id);
+ALTER TABLE role_menu ADD CONSTRAINTS fk_role_menu_r_id FOREIGN KEY (r_id) REFERENCES role(id);
+ALTER TABLE role_menu ADD CONSTRAINTS fk_role_menu_m_id FOREIGN KEY (m_id) REFERENCES menu(id);
+
+CREATE TABLE account (
+	id VARCHAR2(36 CHAR) PRIMARY KEY,
+	name VARCHAR2(20 CHAR) UNIQUE NOT NULL,
+	password VARCHAR2(100 CHAR) NOT NULL
+);
+
+CREATE TABLE account_role (
+	a_id VARCHAR2(36 CHAR),
+	r_id VARCHAR2(36 CHAR)
+);
+
+ALTER TABLE account_role ADD CONSTRAINTS pk_account_role_union_key PRIMARY KEY (a_id, r_id);
+ALTER TABLE account_role ADD CONSTRAINTS fk_account_role_a_id FOREIGN KEY (a_id) REFERENCES account(id);
+ALTER TABLE account_role ADD CONSTRAINTS fk_account_role_r_id FOREIGN KEY (r_id) REFERENCES role(id);

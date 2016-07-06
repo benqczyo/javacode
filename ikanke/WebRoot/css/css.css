@@ -1,0 +1,140 @@
+body,h3,ul,p {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+img {
+		
+}
+
+.clear {
+	zoom: 1;
+}
+
+.clear:after {
+	display: block;
+	content: "";
+	clear: both;
+}
+
+.l {
+	float: left;
+}
+
+.r {
+	float: right;
+}
+
+a,a:visited {
+	color: #000;
+}
+
+a:hover {
+	color: #e11515;
+}
+
+a.selected,a.selected:visited {
+	color: red;
+}
+
+span {
+	color: red;
+}
+
+body {
+	font-family: "Î¢ÈíÑÅºÚ";
+	font-size: 14px;
+}
+
+#box {
+	margin: 20px auto;
+	width: 70%;
+}
+
+#header {
+	font-size: 16px;
+	border-bottom: solid 1px #000;
+}
+
+#header h3 {
+	float: left;
+}
+
+#header ul {
+	float: right;
+}
+
+#header li, #main_menu li {
+	float: left;
+}
+
+#header a, #main_menu a {
+	display: block;
+	padding: 4px 4px 4px 0px;
+	cursor: pointer;
+}
+
+.book {
+	float: left;
+	padding: 10px;
+}
+
+.book p {
+	
+}
+
+.book img {
+	width: 100px;
+	height: 100px;
+}
+
+.book {
+	font-size: 12px;
+}
+
+#content {
+	margin-top: 10px;
+}
+
+
+
+table.list {
+	margin-top: 10px;
+	border-collapse: collapse;
+	width: 100%;
+	text-align: center;
+}
+
+table.list tr:hover {
+	cursor: pointer;
+}
+
+table.list tr:nth-of-type(even) {
+	background: #F7FAFF;
+}
+
+table.list th,table.list td {
+	padding: 4px;
+}
+
+table.list th {
+	background: #CEEBEF;
+	color: #697279;
+}
+
+#page {
+	text-align: center;
+}
+
+#mgrBook img {
+	width : 30px;
+	height: 50px;
+}

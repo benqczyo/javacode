@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="ikanke"
+  id="myeclipse.1466243245226"
+  context-root="/ikanke"
+  j2ee-spec="6.0"
+  archive="ikanke.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

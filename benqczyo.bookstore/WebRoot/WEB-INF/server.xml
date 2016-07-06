@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server>
+	<fregments>
+		<fregment>
+			<fregment-name>list</fregment-name>
+			<fregment-class>yo.benqczyo.bookstore.web.controller.fregment.book.Impl.ListBookControllerFregment</fregment-class>
+		</fregment>
+		<fregment>
+			<fregment-name>buy</fregment-name>
+			<fregment-class>yo.benqczyo.bookstore.web.controller.fregment.book.Impl.BuyBookControllerFregment</fregment-class>
+		</fregment>
+		<fregment>
+			<fregment-name>cart</fregment-name>
+			<fregment-class>yo.benqczyo.bookstore.web.controller.fregment.book.Impl.CartBookControllerFregment</fregment-class>
+		</fregment>
+		<fregment>
+			<fregment-name>clear</fregment-name>
+			<fregment-class>yo.benqczyo.bookstore.web.controller.fregment.book.Impl.ClearBookControllerFregment</fregment-class>
+		</fregment>
+		<fregment>
+			<fregment-name>change</fregment-name>
+			<fregment-class>yo.benqczyo.bookstore.web.controller.fregment.book.Impl.ChangeBookControllerFregment</fregment-class>
+		</fregment>
+		<fregment>
+			<fregment-name>delete</fregment-name>
+			<fregment-class>yo.benqczyo.bookstore.web.controller.fregment.book.Impl.DeleteBookControllerFregment</fregment-class>
+		</fregment>
+	</fregments>
+</server>

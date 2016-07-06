@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="kick"
+  id="myeclipse.1465302407562"
+  context-root="/kick"
+  j2ee-spec="5.0"
+  archive="kick.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
